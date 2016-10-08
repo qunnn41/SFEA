@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FeatureModel" nsURI="www.example.com/featuremodel" nsPrefix="featuremodel">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraints"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subFeatures" upperBound="-1"
+        eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureCardinality" eType="#//FeatureCardinality"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrFeature" eSuperTypes="#//Feature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variants" lowerBound="2"
+        upperBound="-1" eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupCardinality" eType="#//GroupCardinality"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XorFeature" eSuperTypes="#//OrFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cardinality">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureCardinality" eSuperTypes="#//Cardinality"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupCardinality" eSuperTypes="#//Cardinality"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraints"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanConstraint" eSuperTypes="#//Constraints">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Feature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImpliesConstraints" eSuperTypes="#//BooleanConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Excludes" eSuperTypes="#//BooleanConstraint"/>
+</ecore:EPackage>
