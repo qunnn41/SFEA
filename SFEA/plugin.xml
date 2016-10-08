@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated fm_mm -->
+      <package
+            uri="www.example.com/fm"
+            class="moon.nju.edu.cn.fm.model.SFEAPackage"
+            genModel="model/fm_mm.genmodel"/>
+   </extension>
+
+</plugin>
