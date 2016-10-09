@@ -31,6 +31,7 @@ public class ConstraintsImpl extends MinimalEObjectImpl.Container implements Con
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.CONSTRAINTS;
 	}

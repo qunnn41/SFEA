@@ -29,6 +29,7 @@ public class GroupCardinalityImpl extends CardinalityImpl implements GroupCardin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.GROUP_CARDINALITY;
 	}

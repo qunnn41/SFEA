@@ -53,6 +53,7 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SFEAPackage.FEATURE_MODEL: return createFeatureModel();
@@ -207,6 +208,7 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static SFEAPackage getPackage() {
 		return SFEAPackage.eINSTANCE;
 	}

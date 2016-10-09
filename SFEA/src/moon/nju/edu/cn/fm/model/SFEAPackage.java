@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference;
  * <ul>
  *   <li>each class,</li>
  *   <li>each feature of each class,</li>
+ *   <li>each operation of each class,</li>
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
@@ -93,6 +94,15 @@ public interface SFEAPackage extends EPackage {
 	int FEATURE_MODEL_FEATURE_COUNT = 2;
 
 	/**
+	 * The number of operations of the '<em>Feature Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_MODEL_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.FeatureImpl <em>Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,6 +156,15 @@ public interface SFEAPackage extends EPackage {
 	 * @ordered
 	 */
 	int FEATURE_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.OrFeatureImpl <em>Or Feature</em>}' class.
@@ -221,6 +240,15 @@ public interface SFEAPackage extends EPackage {
 	int OR_FEATURE_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 2;
 
 	/**
+	 * The number of operations of the '<em>Or Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR_FEATURE_OPERATION_COUNT = FEATURE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.XorFeatureImpl <em>Xor Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,6 +322,15 @@ public interface SFEAPackage extends EPackage {
 	int XOR_FEATURE_FEATURE_COUNT = OR_FEATURE_FEATURE_COUNT + 0;
 
 	/**
+	 * The number of operations of the '<em>Xor Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XOR_FEATURE_OPERATION_COUNT = OR_FEATURE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.CardinalityImpl <em>Cardinality</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -329,6 +366,15 @@ public interface SFEAPackage extends EPackage {
 	 * @ordered
 	 */
 	int CARDINALITY_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Cardinality</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARDINALITY_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.FeatureCardinalityImpl <em>Feature Cardinality</em>}' class.
@@ -368,6 +414,15 @@ public interface SFEAPackage extends EPackage {
 	int FEATURE_CARDINALITY_FEATURE_COUNT = CARDINALITY_FEATURE_COUNT + 0;
 
 	/**
+	 * The number of operations of the '<em>Feature Cardinality</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CARDINALITY_OPERATION_COUNT = CARDINALITY_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.GroupCardinalityImpl <em>Group Cardinality</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,6 +458,15 @@ public interface SFEAPackage extends EPackage {
 	 * @ordered
 	 */
 	int GROUP_CARDINALITY_FEATURE_COUNT = CARDINALITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Group Cardinality</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP_CARDINALITY_OPERATION_COUNT = CARDINALITY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -442,6 +506,15 @@ public interface SFEAPackage extends EPackage {
 	int ATTRIBUTE_FEATURE_COUNT = 2;
 
 	/**
+	 * The number of operations of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ConstraintsImpl <em>Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -459,6 +532,15 @@ public interface SFEAPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINTS_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Constraints</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINTS_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl <em>Boolean Constraint</em>}' class.
@@ -498,6 +580,15 @@ public interface SFEAPackage extends EPackage {
 	int BOOLEAN_CONSTRAINT_FEATURE_COUNT = CONSTRAINTS_FEATURE_COUNT + 2;
 
 	/**
+	 * The number of operations of the '<em>Boolean Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_CONSTRAINT_OPERATION_COUNT = CONSTRAINTS_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl <em>Implies Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -535,6 +626,15 @@ public interface SFEAPackage extends EPackage {
 	int IMPLIES_CONSTRAINTS_FEATURE_COUNT = BOOLEAN_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
+	 * The number of operations of the '<em>Implies Constraints</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPLIES_CONSTRAINTS_OPERATION_COUNT = BOOLEAN_CONSTRAINT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesImpl <em>Excludes</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -570,6 +670,15 @@ public interface SFEAPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXCLUDES_FEATURE_COUNT = BOOLEAN_CONSTRAINT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Excludes</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXCLUDES_OPERATION_COUNT = BOOLEAN_CONSTRAINT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -861,6 +970,7 @@ public interface SFEAPackage extends EPackage {
 	 * <ul>
 	 *   <li>each class,</li>
 	 *   <li>each feature of each class,</li>
+	 *   <li>each operation of each class,</li>
 	 *   <li>each enum,</li>
 	 *   <li>and each data type</li>
 	 * </ul>

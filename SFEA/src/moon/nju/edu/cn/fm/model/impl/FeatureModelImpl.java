@@ -56,7 +56,7 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * @generated
 	 * @ordered
 	 */
-	protected EList constraints;
+	protected EList<Constraints> constraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,6 +72,7 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.FEATURE_MODEL;
 	}
@@ -124,9 +125,9 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getConstraints() {
+	public EList<Constraints> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentEList(Constraints.class, this, SFEAPackage.FEATURE_MODEL__CONSTRAINTS);
+			constraints = new EObjectContainmentEList<Constraints>(Constraints.class, this, SFEAPackage.FEATURE_MODEL__CONSTRAINTS);
 		}
 		return constraints;
 	}
@@ -136,12 +137,13 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE_MODEL__ROOT:
 				return basicSetRoot(null, msgs);
 			case SFEAPackage.FEATURE_MODEL__CONSTRAINTS:
-				return ((InternalEList)getConstraints()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -151,6 +153,7 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE_MODEL__ROOT:
@@ -166,6 +169,8 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE_MODEL__ROOT:
@@ -173,7 +178,7 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 				return;
 			case SFEAPackage.FEATURE_MODEL__CONSTRAINTS:
 				getConstraints().clear();
-				getConstraints().addAll((Collection)newValue);
+				getConstraints().addAll((Collection<? extends Constraints>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,6 +189,7 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE_MODEL__ROOT:
@@ -201,6 +207,7 @@ public class FeatureModelImpl extends MinimalEObjectImpl.Container implements Fe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE_MODEL__ROOT:

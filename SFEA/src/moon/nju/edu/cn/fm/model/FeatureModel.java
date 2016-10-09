@@ -61,9 +61,9 @@ public interface FeatureModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constraints</em>' containment reference list.
 	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getFeatureModel_Constraints()
-	 * @model type="moon.nju.edu.cn.fm.model.Constraints" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getConstraints();
+	EList<Constraints> getConstraints();
 
 } // FeatureModel

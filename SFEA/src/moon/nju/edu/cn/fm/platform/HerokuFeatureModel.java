@@ -93,30 +93,30 @@ public class HerokuFeatureModel {
 	public static void main(String[] args) {
 		Resource.Factory.Registry registry = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> map = registry.getExtensionToFactoryMap();
-		map.put("fm", new XMIResourceFactoryImpl());
+		map.put("sfea", new XMIResourceFactoryImpl());
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
-		Resource resource = resourceSet.createResource(URI.createURI("feature_model/heroku.fm"));
-		HerokuFeatureModel heroku = new HerokuFeatureModel(resource);
-		resource.getContents().add(heroku.herokuFeatureModel);
-		System.out.println(heroku.herokuFeatureModel.getRoot().getName());
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-//		SFEAPackage.eINSTANCE.eClass();
-//		Resource resource = resourceSet.getResource(URI.createURI("feature_model/heroku.fm"), true);
-//		FeatureModel heroku = (FeatureModel) resource.getContents().get(0);
-//		for (Object obj : heroku.getRoot().getSubFeatures()) {
-//			Feature feature = (Feature)obj;
-//			System.out.println(feature.getName());
-//			if (obj instanceof OrFeature) {
-//				OrFeature orFeature = (OrFeature) obj;
-//				System.out.println(orFeature.getGroupCardinality().getMax() + "\t" + orFeature.getGroupCardinality().getMin());
-//			}
+//		Resource resource = resourceSet.createResource(URI.createURI("feature_model/heroku.fm"));
+//		HerokuFeatureModel heroku = new HerokuFeatureModel(resource);
+//		resource.getContents().add(heroku.herokuFeatureModel);
+//		System.out.println(heroku.herokuFeatureModel.getRoot().getName());
+//		try {
+//			resource.save(Collections.EMPTY_MAP);
+//		} catch (IOException e) {
+//			e.printStackTrace();
 //		}
+		
+		SFEAPackage.eINSTANCE.eClass();
+		Resource resource = resourceSet.getResource(URI.createURI("feature_model/heroku.sfea"), true);
+		FeatureModel heroku = (FeatureModel) resource.getContents().get(0);
+		for (Object obj : heroku.getRoot().getSubFeatures()) {
+			Feature feature = (Feature)obj;
+			System.out.println(feature.getName());
+			if (obj instanceof OrFeature) {
+				OrFeature orFeature = (OrFeature) obj;
+				System.out.println(orFeature.getGroupCardinality().getMax() + "\t" + orFeature.getGroupCardinality().getMin());
+			}
+		}
 	}
 }

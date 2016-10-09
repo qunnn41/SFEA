@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fm:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="www.example.com/fm">
+  <root name="Heroku">
+    <subFeatures name="Dyno">
+      <featureCardinality max="10"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:OrFeature" name="Language">
+      <featureCardinality min="1" max="1"/>
+      <variants name="Java"/>
+      <variants name="Python"/>
+      <variants name="Ruby"/>
+      <variants name="Javascript"/>
+      <groupCardinality min="1" max="4"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:OrFeature" name="Framework">
+      <featureCardinality max="1"/>
+      <variants name="Spring"/>
+      <variants name="Rails"/>
+      <variants name="Play"/>
+      <variants name="Node.js"/>
+      <groupCardinality min="1" max="4"/>
+    </subFeatures>
+    <subFeatures name="Service"/>
+    <subFeatures xsi:type="fm:XorFeature" name="Location">
+      <featureCardinality min="1" max="1"/>
+      <variants name="US"/>
+      <variants name="EU"/>
+      <groupCardinality min="1" max="1"/>
+    </subFeatures>
+  </root>
+</fm:FeatureModel>

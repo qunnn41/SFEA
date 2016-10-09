@@ -45,7 +45,7 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList variants;
+	protected EList<Feature> variants;
 
 	/**
 	 * The cached value of the '{@link #getGroupCardinality() <em>Group Cardinality</em>}' containment reference.
@@ -71,6 +71,7 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.OR_FEATURE;
 	}
@@ -80,9 +81,9 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getVariants() {
+	public EList<Feature> getVariants() {
 		if (variants == null) {
-			variants = new EObjectContainmentEList(Feature.class, this, SFEAPackage.OR_FEATURE__VARIANTS);
+			variants = new EObjectContainmentEList<Feature>(Feature.class, this, SFEAPackage.OR_FEATURE__VARIANTS);
 		}
 		return variants;
 	}
@@ -135,10 +136,11 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SFEAPackage.OR_FEATURE__VARIANTS:
-				return ((InternalEList)getVariants()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getVariants()).basicRemove(otherEnd, msgs);
 			case SFEAPackage.OR_FEATURE__GROUP_CARDINALITY:
 				return basicSetGroupCardinality(null, msgs);
 		}
@@ -150,6 +152,7 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SFEAPackage.OR_FEATURE__VARIANTS:
@@ -165,11 +168,13 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SFEAPackage.OR_FEATURE__VARIANTS:
 				getVariants().clear();
-				getVariants().addAll((Collection)newValue);
+				getVariants().addAll((Collection<? extends Feature>)newValue);
 				return;
 			case SFEAPackage.OR_FEATURE__GROUP_CARDINALITY:
 				setGroupCardinality((GroupCardinality)newValue);
@@ -183,6 +188,7 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.OR_FEATURE__VARIANTS:
@@ -200,6 +206,7 @@ public class OrFeatureImpl extends FeatureImpl implements OrFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.OR_FEATURE__VARIANTS:

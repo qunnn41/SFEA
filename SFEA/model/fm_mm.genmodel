@@ -2,25 +2,25 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/SFEA/src" modelPluginID="SFEA" modelName="Fm_mm"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    copyrightFields="false" importOrganizing="true">
+    complianceLevel="5.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>fm_mm.ecore</foreignModel>
   <genPackages prefix="SFEA" basePackage="moon.nju.edu.cn" disposableProviderFactory="true"
       interfacePackageSuffix="model" metaDataPackageSuffix="model" classPackageSuffix="model.impl"
       utilityPackageSuffix="model.util" providerPackageSuffix="model.provider" presentationPackageSuffix="model.presentation"
       testsPackageSuffix="model.tests" ecorePackage="fm_mm.ecore#/">
     <genClasses ecoreClass="fm_mm.ecore#//FeatureModel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//FeatureModel/root"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//FeatureModel/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//FeatureModel/root"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//FeatureModel/constraints"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//Feature">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Feature/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Feature/subFeatures"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Feature/featureCardinality"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Feature/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Feature/subFeatures"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Feature/featureCardinality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Feature/attributes"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//OrFeature">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//OrFeature/variants"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//OrFeature/groupCardinality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//OrFeature/variants"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//OrFeature/groupCardinality"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//XorFeature"/>
     <genClasses ecoreClass="fm_mm.ecore#//Cardinality">

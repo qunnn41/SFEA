@@ -33,10 +33,10 @@ public interface OrFeature extends Feature {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variants</em>' containment reference list.
 	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getOrFeature_Variants()
-	 * @model type="moon.nju.edu.cn.fm.model.Feature" containment="true" lower="2"
+	 * @model containment="true" lower="2"
 	 * @generated
 	 */
-	EList getVariants();
+	EList<Feature> getVariants();
 
 	/**
 	 * Returns the value of the '<em><b>Group Cardinality</b></em>' containment reference.

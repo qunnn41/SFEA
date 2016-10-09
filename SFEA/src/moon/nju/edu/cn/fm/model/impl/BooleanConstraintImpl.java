@@ -62,6 +62,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.BOOLEAN_CONSTRAINT;
 	}
@@ -147,6 +148,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
@@ -164,6 +166,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
@@ -181,6 +184,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
@@ -198,6 +202,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:

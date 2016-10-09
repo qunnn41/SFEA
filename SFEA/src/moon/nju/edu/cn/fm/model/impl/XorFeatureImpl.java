@@ -29,6 +29,7 @@ public class XorFeatureImpl extends OrFeatureImpl implements XorFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.XOR_FEATURE;
 	}

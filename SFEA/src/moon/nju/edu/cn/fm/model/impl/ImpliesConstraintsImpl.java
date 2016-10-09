@@ -29,6 +29,7 @@ public class ImpliesConstraintsImpl extends BooleanConstraintImpl implements Imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.IMPLIES_CONSTRAINTS;
 	}

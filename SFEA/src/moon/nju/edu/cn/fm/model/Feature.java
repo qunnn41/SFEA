@@ -63,10 +63,10 @@ public interface Feature extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub Features</em>' containment reference list.
 	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getFeature_SubFeatures()
-	 * @model type="moon.nju.edu.cn.fm.model.Feature" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getSubFeatures();
+	EList<Feature> getSubFeatures();
 
 	/**
 	 * Returns the value of the '<em><b>Feature Cardinality</b></em>' containment reference.
@@ -105,9 +105,9 @@ public interface Feature extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Attributes</em>' containment reference list.
 	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getFeature_Attributes()
-	 * @model type="moon.nju.edu.cn.fm.model.Attribute" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getAttributes();
+	EList<Attribute> getAttributes();
 
 } // Feature

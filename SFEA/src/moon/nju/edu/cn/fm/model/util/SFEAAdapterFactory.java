@@ -48,6 +48,7 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -64,45 +65,58 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SFEASwitch modelSwitch =
-		new SFEASwitch() {
-			public Object caseFeatureModel(FeatureModel object) {
+	protected SFEASwitch<Adapter> modelSwitch =
+		new SFEASwitch<Adapter>() {
+			@Override
+			public Adapter caseFeatureModel(FeatureModel object) {
 				return createFeatureModelAdapter();
 			}
-			public Object caseFeature(Feature object) {
+			@Override
+			public Adapter caseFeature(Feature object) {
 				return createFeatureAdapter();
 			}
-			public Object caseOrFeature(OrFeature object) {
+			@Override
+			public Adapter caseOrFeature(OrFeature object) {
 				return createOrFeatureAdapter();
 			}
-			public Object caseXorFeature(XorFeature object) {
+			@Override
+			public Adapter caseXorFeature(XorFeature object) {
 				return createXorFeatureAdapter();
 			}
-			public Object caseCardinality(Cardinality object) {
+			@Override
+			public Adapter caseCardinality(Cardinality object) {
 				return createCardinalityAdapter();
 			}
-			public Object caseFeatureCardinality(FeatureCardinality object) {
+			@Override
+			public Adapter caseFeatureCardinality(FeatureCardinality object) {
 				return createFeatureCardinalityAdapter();
 			}
-			public Object caseGroupCardinality(GroupCardinality object) {
+			@Override
+			public Adapter caseGroupCardinality(GroupCardinality object) {
 				return createGroupCardinalityAdapter();
 			}
-			public Object caseAttribute(Attribute object) {
+			@Override
+			public Adapter caseAttribute(Attribute object) {
 				return createAttributeAdapter();
 			}
-			public Object caseConstraints(Constraints object) {
+			@Override
+			public Adapter caseConstraints(Constraints object) {
 				return createConstraintsAdapter();
 			}
-			public Object caseBooleanConstraint(BooleanConstraint object) {
+			@Override
+			public Adapter caseBooleanConstraint(BooleanConstraint object) {
 				return createBooleanConstraintAdapter();
 			}
-			public Object caseImpliesConstraints(ImpliesConstraints object) {
+			@Override
+			public Adapter caseImpliesConstraints(ImpliesConstraints object) {
 				return createImpliesConstraintsAdapter();
 			}
-			public Object caseExcludes(Excludes object) {
+			@Override
+			public Adapter caseExcludes(Excludes object) {
 				return createExcludesAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -115,8 +129,9 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

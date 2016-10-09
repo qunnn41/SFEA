@@ -81,6 +81,7 @@ public class CardinalityImpl extends MinimalEObjectImpl.Container implements Car
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.CARDINALITY;
 	}
@@ -132,12 +133,13 @@ public class CardinalityImpl extends MinimalEObjectImpl.Container implements Car
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SFEAPackage.CARDINALITY__MIN:
-				return new Integer(getMin());
+				return getMin();
 			case SFEAPackage.CARDINALITY__MAX:
-				return new Integer(getMax());
+				return getMax();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -147,13 +149,14 @@ public class CardinalityImpl extends MinimalEObjectImpl.Container implements Car
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SFEAPackage.CARDINALITY__MIN:
-				setMin(((Integer)newValue).intValue());
+				setMin((Integer)newValue);
 				return;
 			case SFEAPackage.CARDINALITY__MAX:
-				setMax(((Integer)newValue).intValue());
+				setMax((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -164,6 +167,7 @@ public class CardinalityImpl extends MinimalEObjectImpl.Container implements Car
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.CARDINALITY__MIN:
@@ -181,6 +185,7 @@ public class CardinalityImpl extends MinimalEObjectImpl.Container implements Car
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.CARDINALITY__MIN:
@@ -196,6 +201,7 @@ public class CardinalityImpl extends MinimalEObjectImpl.Container implements Car
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

@@ -68,7 +68,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * @generated
 	 * @ordered
 	 */
-	protected EList subFeatures;
+	protected EList<Feature> subFeatures;
 
 	/**
 	 * The cached value of the '{@link #getFeatureCardinality() <em>Feature Cardinality</em>}' containment reference.
@@ -88,7 +88,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * @generated
 	 * @ordered
 	 */
-	protected EList attributes;
+	protected EList<Attribute> attributes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,6 +104,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.FEATURE;
 	}
@@ -134,9 +135,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getSubFeatures() {
+	public EList<Feature> getSubFeatures() {
 		if (subFeatures == null) {
-			subFeatures = new EObjectContainmentEList(Feature.class, this, SFEAPackage.FEATURE__SUB_FEATURES);
+			subFeatures = new EObjectContainmentEList<Feature>(Feature.class, this, SFEAPackage.FEATURE__SUB_FEATURES);
 		}
 		return subFeatures;
 	}
@@ -189,9 +190,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getAttributes() {
+	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectContainmentEList(Attribute.class, this, SFEAPackage.FEATURE__ATTRIBUTES);
+			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, SFEAPackage.FEATURE__ATTRIBUTES);
 		}
 		return attributes;
 	}
@@ -201,14 +202,15 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE__SUB_FEATURES:
-				return ((InternalEList)getSubFeatures()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getSubFeatures()).basicRemove(otherEnd, msgs);
 			case SFEAPackage.FEATURE__FEATURE_CARDINALITY:
 				return basicSetFeatureCardinality(null, msgs);
 			case SFEAPackage.FEATURE__ATTRIBUTES:
-				return ((InternalEList)getAttributes()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -218,6 +220,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE__NAME:
@@ -237,6 +240,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE__NAME:
@@ -244,14 +249,14 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 				return;
 			case SFEAPackage.FEATURE__SUB_FEATURES:
 				getSubFeatures().clear();
-				getSubFeatures().addAll((Collection)newValue);
+				getSubFeatures().addAll((Collection<? extends Feature>)newValue);
 				return;
 			case SFEAPackage.FEATURE__FEATURE_CARDINALITY:
 				setFeatureCardinality((FeatureCardinality)newValue);
 				return;
 			case SFEAPackage.FEATURE__ATTRIBUTES:
 				getAttributes().clear();
-				getAttributes().addAll((Collection)newValue);
+				getAttributes().addAll((Collection<? extends Attribute>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -262,6 +267,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE__NAME:
@@ -285,6 +291,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SFEAPackage.FEATURE__NAME:
@@ -304,6 +311,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

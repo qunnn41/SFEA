@@ -29,6 +29,7 @@ public class ExcludesImpl extends BooleanConstraintImpl implements Excludes {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return SFEAPackage.Literals.EXCLUDES;
 	}
