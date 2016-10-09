@@ -11,11 +11,13 @@ sig Name {}
 sig Relation {
 	parent: Name,
 	child: set Name,
-	type: Type
+	type: Type,
+	min: Int,
+	max: Int
 }
 
 abstract sig Type {}
-one sig Optional, Mandatory, OrFeature, XorFeature extends Type {}
+one sig Optional, Mandatory, OrFeature, XorFeature extends Type{}
 
 abstract sig Formula {
 	satisfy: Configuration -> Bool,
@@ -83,8 +85,8 @@ pred satisfyRelations(fm: FeatureModel, c: Configuration) {
 	all r: fm.relations | {
 		r.type = Optional implies (r.child in c.value implies r.parent in c.value)
 		r.type = Mandatory implies (r.child in c.value <=> r.parent in c.value)
-		r.type = OrFeature implies (r.parent in c.value implies (some n: r.child | n in c.value))
-		r.type = XorFeature implies (r.parent in c.value implies (one n: r.child | n in c.value))
+		r.type = OrFeature implies (r.parent in c.value implies #{n: r.child | n in c.value} >= r.min and #{n: r.child | n in c.value} <= r.max)
+		r.type = XorFeature implies (r.parent in c.value implies #{n: r.child | n in c.value} >= r.min and #{n: r.child | n in c.value} <= r.max)
 	}
 }
 
@@ -139,6 +141,8 @@ fact relations{
 	r2.type = OrFeature
 	r2.parent = mobilephone
 	r2.child = mp3+camera
+	r2.min = 1
+	r2.max = 2
 }
 
 one sig f2, f3 extends NameF{}
@@ -156,7 +160,7 @@ fact formulas {
 }
 
 one sig Config1 extends Configuration{} {
-	value = mobilephone+camera
+	value = mobilephone+mp3+earphone
 }
 
 assert validConfig {
