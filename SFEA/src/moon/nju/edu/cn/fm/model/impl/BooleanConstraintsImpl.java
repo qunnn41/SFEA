@@ -2,7 +2,7 @@
  */
 package moon.nju.edu.cn.fm.model.impl;
 
-import moon.nju.edu.cn.fm.model.BooleanConstraint;
+import moon.nju.edu.cn.fm.model.BooleanConstraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 
@@ -15,19 +15,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Boolean Constraint</b></em>'.
+ * An implementation of the model object '<em><b>Boolean Constraints</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl#getFrom <em>From</em>}</li>
- *   <li>{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl#getTo <em>To</em>}</li>
+ *   <li>{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl#getFrom <em>From</em>}</li>
+ *   <li>{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl#getTo <em>To</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanConstraint {
+public class BooleanConstraintsImpl extends ConstraintsImpl implements BooleanConstraints {
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -53,7 +53,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BooleanConstraintImpl() {
+	protected BooleanConstraintsImpl() {
 		super();
 	}
 
@@ -64,7 +64,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SFEAPackage.Literals.BOOLEAN_CONSTRAINT;
+		return SFEAPackage.Literals.BOOLEAN_CONSTRAINTS;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 			from = (Feature)eResolveProxy(oldFrom);
 			if (from != oldFrom) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SFEAPackage.BOOLEAN_CONSTRAINT__FROM, oldFrom, from));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SFEAPackage.BOOLEAN_CONSTRAINTS__FROM, oldFrom, from));
 			}
 		}
 		return from;
@@ -102,7 +102,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 		Feature oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SFEAPackage.BOOLEAN_CONSTRAINT__FROM, oldFrom, from));
+			eNotify(new ENotificationImpl(this, Notification.SET, SFEAPackage.BOOLEAN_CONSTRAINTS__FROM, oldFrom, from));
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 			to = (Feature)eResolveProxy(oldTo);
 			if (to != oldTo) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SFEAPackage.BOOLEAN_CONSTRAINT__TO, oldTo, to));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SFEAPackage.BOOLEAN_CONSTRAINTS__TO, oldTo, to));
 			}
 		}
 		return to;
@@ -140,7 +140,7 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 		Feature oldTo = to;
 		to = newTo;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SFEAPackage.BOOLEAN_CONSTRAINT__TO, oldTo, to));
+			eNotify(new ENotificationImpl(this, Notification.SET, SFEAPackage.BOOLEAN_CONSTRAINTS__TO, oldTo, to));
 	}
 
 	/**
@@ -151,10 +151,10 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__FROM:
 				if (resolve) return getFrom();
 				return basicGetFrom();
-			case SFEAPackage.BOOLEAN_CONSTRAINT__TO:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__TO:
 				if (resolve) return getTo();
 				return basicGetTo();
 		}
@@ -169,10 +169,10 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__FROM:
 				setFrom((Feature)newValue);
 				return;
-			case SFEAPackage.BOOLEAN_CONSTRAINT__TO:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__TO:
 				setTo((Feature)newValue);
 				return;
 		}
@@ -187,10 +187,10 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__FROM:
 				setFrom((Feature)null);
 				return;
-			case SFEAPackage.BOOLEAN_CONSTRAINT__TO:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__TO:
 				setTo((Feature)null);
 				return;
 		}
@@ -205,12 +205,12 @@ public class BooleanConstraintImpl extends ConstraintsImpl implements BooleanCon
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SFEAPackage.BOOLEAN_CONSTRAINT__FROM:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__FROM:
 				return from != null;
-			case SFEAPackage.BOOLEAN_CONSTRAINT__TO:
+			case SFEAPackage.BOOLEAN_CONSTRAINTS__TO:
 				return to != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //BooleanConstraintImpl
+} //BooleanConstraintsImpl

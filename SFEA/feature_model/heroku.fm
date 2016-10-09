@@ -3,6 +3,8 @@
   <root name="Heroku">
     <subFeatures name="Dyno">
       <featureCardinality max="10"/>
+      <attributes name="dynoMemorySize" value="512,1024"/>
+      <attributes name="dynoSize" value="1X,2X"/>
     </subFeatures>
     <subFeatures xsi:type="fm:OrFeature" name="Language">
       <featureCardinality min="1" max="1"/>
@@ -20,7 +22,17 @@
       <variants name="Node.js"/>
       <groupCardinality min="1" max="4"/>
     </subFeatures>
-    <subFeatures name="Service"/>
+    <subFeatures name="Service">
+      <subFeatures name="Database">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="SearchEngine">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Caching">
+        <featureCardinality max="1"/>
+      </subFeatures>
+    </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Location">
       <featureCardinality min="1" max="1"/>
       <variants name="US"/>
@@ -28,4 +40,8 @@
       <groupCardinality min="1" max="1"/>
     </subFeatures>
   </root>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.0" to="//@root/@subFeatures.1/@variants.0"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.2" to="//@root/@subFeatures.1/@variants.0"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.3"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.1" to="//@root/@subFeatures.1/@variants.2"/>
 </fm:FeatureModel>

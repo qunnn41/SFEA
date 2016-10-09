@@ -65,9 +65,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 			case SFEAPackage.GROUP_CARDINALITY: return createGroupCardinality();
 			case SFEAPackage.ATTRIBUTE: return createAttribute();
 			case SFEAPackage.CONSTRAINTS: return createConstraints();
-			case SFEAPackage.BOOLEAN_CONSTRAINT: return createBooleanConstraint();
+			case SFEAPackage.BOOLEAN_CONSTRAINTS: return createBooleanConstraints();
 			case SFEAPackage.IMPLIES_CONSTRAINTS: return createImpliesConstraints();
-			case SFEAPackage.EXCLUDES: return createExcludes();
+			case SFEAPackage.EXCLUDES_CONSTRAINTS: return createExcludesConstraints();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -168,9 +168,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BooleanConstraint createBooleanConstraint() {
-		BooleanConstraintImpl booleanConstraint = new BooleanConstraintImpl();
-		return booleanConstraint;
+	public BooleanConstraints createBooleanConstraints() {
+		BooleanConstraintsImpl booleanConstraints = new BooleanConstraintsImpl();
+		return booleanConstraints;
 	}
 
 	/**
@@ -188,9 +188,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Excludes createExcludes() {
-		ExcludesImpl excludes = new ExcludesImpl();
-		return excludes;
+	public ExcludesConstraints createExcludesConstraints() {
+		ExcludesConstraintsImpl excludesConstraints = new ExcludesConstraintsImpl();
+		return excludesConstraints;
 	}
 
 	/**

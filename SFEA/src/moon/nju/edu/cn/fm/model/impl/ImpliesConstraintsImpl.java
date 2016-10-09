@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ImpliesConstraintsImpl extends BooleanConstraintImpl implements ImpliesConstraints {
+public class ImpliesConstraintsImpl extends BooleanConstraintsImpl implements ImpliesConstraints {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

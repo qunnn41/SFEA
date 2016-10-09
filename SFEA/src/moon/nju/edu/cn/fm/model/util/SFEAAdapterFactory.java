@@ -104,16 +104,16 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 				return createConstraintsAdapter();
 			}
 			@Override
-			public Adapter caseBooleanConstraint(BooleanConstraint object) {
-				return createBooleanConstraintAdapter();
+			public Adapter caseBooleanConstraints(BooleanConstraints object) {
+				return createBooleanConstraintsAdapter();
 			}
 			@Override
 			public Adapter caseImpliesConstraints(ImpliesConstraints object) {
 				return createImpliesConstraintsAdapter();
 			}
 			@Override
-			public Adapter caseExcludes(Excludes object) {
-				return createExcludesAdapter();
+			public Adapter caseExcludesConstraints(ExcludesConstraints object) {
+				return createExcludesConstraintsAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -262,16 +262,16 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.BooleanConstraint <em>Boolean Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.BooleanConstraints <em>Boolean Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see moon.nju.edu.cn.fm.model.BooleanConstraint
+	 * @see moon.nju.edu.cn.fm.model.BooleanConstraints
 	 * @generated
 	 */
-	public Adapter createBooleanConstraintAdapter() {
+	public Adapter createBooleanConstraintsAdapter() {
 		return null;
 	}
 
@@ -290,16 +290,16 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.Excludes <em>Excludes</em>}'.
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.ExcludesConstraints <em>Excludes Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see moon.nju.edu.cn.fm.model.Excludes
+	 * @see moon.nju.edu.cn.fm.model.ExcludesConstraints
 	 * @generated
 	 */
-	public Adapter createExcludesAdapter() {
+	public Adapter createExcludesConstraintsAdapter() {
 		return null;
 	}
 

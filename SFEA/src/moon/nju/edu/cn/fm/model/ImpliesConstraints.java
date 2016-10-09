@@ -13,5 +13,5 @@ package moon.nju.edu.cn.fm.model;
  * @model
  * @generated
  */
-public interface ImpliesConstraints extends BooleanConstraint {
+public interface ImpliesConstraints extends BooleanConstraints {
 } // ImpliesConstraints

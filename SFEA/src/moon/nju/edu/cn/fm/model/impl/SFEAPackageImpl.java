@@ -3,10 +3,10 @@
 package moon.nju.edu.cn.fm.model.impl;
 
 import moon.nju.edu.cn.fm.model.Attribute;
-import moon.nju.edu.cn.fm.model.BooleanConstraint;
+import moon.nju.edu.cn.fm.model.BooleanConstraints;
 import moon.nju.edu.cn.fm.model.Cardinality;
 import moon.nju.edu.cn.fm.model.Constraints;
-import moon.nju.edu.cn.fm.model.Excludes;
+import moon.nju.edu.cn.fm.model.ExcludesConstraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureCardinality;
 import moon.nju.edu.cn.fm.model.FeatureModel;
@@ -99,7 +99,7 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass booleanConstraintEClass = null;
+	private EClass booleanConstraintsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,7 +113,7 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass excludesEClass = null;
+	private EClass excludesConstraintsEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -370,8 +370,8 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBooleanConstraint() {
-		return booleanConstraintEClass;
+	public EClass getBooleanConstraints() {
+		return booleanConstraintsEClass;
 	}
 
 	/**
@@ -379,8 +379,8 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBooleanConstraint_From() {
-		return (EReference)booleanConstraintEClass.getEStructuralFeatures().get(0);
+	public EReference getBooleanConstraints_From() {
+		return (EReference)booleanConstraintsEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -388,8 +388,8 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBooleanConstraint_To() {
-		return (EReference)booleanConstraintEClass.getEStructuralFeatures().get(1);
+	public EReference getBooleanConstraints_To() {
+		return (EReference)booleanConstraintsEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -406,8 +406,8 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getExcludes() {
-		return excludesEClass;
+	public EClass getExcludesConstraints() {
+		return excludesConstraintsEClass;
 	}
 
 	/**
@@ -468,13 +468,13 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		constraintsEClass = createEClass(CONSTRAINTS);
 
-		booleanConstraintEClass = createEClass(BOOLEAN_CONSTRAINT);
-		createEReference(booleanConstraintEClass, BOOLEAN_CONSTRAINT__FROM);
-		createEReference(booleanConstraintEClass, BOOLEAN_CONSTRAINT__TO);
+		booleanConstraintsEClass = createEClass(BOOLEAN_CONSTRAINTS);
+		createEReference(booleanConstraintsEClass, BOOLEAN_CONSTRAINTS__FROM);
+		createEReference(booleanConstraintsEClass, BOOLEAN_CONSTRAINTS__TO);
 
 		impliesConstraintsEClass = createEClass(IMPLIES_CONSTRAINTS);
 
-		excludesEClass = createEClass(EXCLUDES);
+		excludesConstraintsEClass = createEClass(EXCLUDES_CONSTRAINTS);
 	}
 
 	/**
@@ -509,9 +509,9 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 		xorFeatureEClass.getESuperTypes().add(this.getOrFeature());
 		featureCardinalityEClass.getESuperTypes().add(this.getCardinality());
 		groupCardinalityEClass.getESuperTypes().add(this.getCardinality());
-		booleanConstraintEClass.getESuperTypes().add(this.getConstraints());
-		impliesConstraintsEClass.getESuperTypes().add(this.getBooleanConstraint());
-		excludesEClass.getESuperTypes().add(this.getBooleanConstraint());
+		booleanConstraintsEClass.getESuperTypes().add(this.getConstraints());
+		impliesConstraintsEClass.getESuperTypes().add(this.getBooleanConstraints());
+		excludesConstraintsEClass.getESuperTypes().add(this.getBooleanConstraints());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(featureModelEClass, FeatureModel.class, "FeatureModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -544,13 +544,13 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		initEClass(constraintsEClass, Constraints.class, "Constraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(booleanConstraintEClass, BooleanConstraint.class, "BooleanConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBooleanConstraint_From(), this.getFeature(), null, "from", null, 1, 1, BooleanConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBooleanConstraint_To(), this.getFeature(), null, "to", null, 1, 1, BooleanConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(booleanConstraintsEClass, BooleanConstraints.class, "BooleanConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBooleanConstraints_From(), this.getFeature(), null, "from", null, 1, 1, BooleanConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBooleanConstraints_To(), this.getFeature(), null, "to", null, 1, 1, BooleanConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(impliesConstraintsEClass, ImpliesConstraints.class, "ImpliesConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(excludesEClass, Excludes.class, "Excludes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(excludesConstraintsEClass, ExcludesConstraints.class, "ExcludesConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

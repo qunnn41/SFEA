@@ -34,11 +34,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Attribute/value"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//Constraints"/>
-    <genClasses ecoreClass="fm_mm.ecore#//BooleanConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraint/from"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraint/to"/>
+    <genClasses ecoreClass="fm_mm.ecore#//BooleanConstraints">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/to"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//ImpliesConstraints"/>
-    <genClasses ecoreClass="fm_mm.ecore#//Excludes"/>
+    <genClasses ecoreClass="fm_mm.ecore#//ExcludesConstraints"/>
   </genPackages>
 </genmodel:GenModel>

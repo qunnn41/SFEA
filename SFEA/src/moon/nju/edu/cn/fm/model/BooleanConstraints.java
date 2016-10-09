@@ -5,22 +5,22 @@ package moon.nju.edu.cn.fm.model;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Boolean Constraint</b></em>'.
+ * A representation of the model object '<em><b>Boolean Constraints</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link moon.nju.edu.cn.fm.model.BooleanConstraint#getFrom <em>From</em>}</li>
- *   <li>{@link moon.nju.edu.cn.fm.model.BooleanConstraint#getTo <em>To</em>}</li>
+ *   <li>{@link moon.nju.edu.cn.fm.model.BooleanConstraints#getFrom <em>From</em>}</li>
+ *   <li>{@link moon.nju.edu.cn.fm.model.BooleanConstraints#getTo <em>To</em>}</li>
  * </ul>
  *
- * @see moon.nju.edu.cn.fm.model.SFEAPackage#getBooleanConstraint()
+ * @see moon.nju.edu.cn.fm.model.SFEAPackage#getBooleanConstraints()
  * @model
  * @generated
  */
-public interface BooleanConstraint extends Constraints {
+public interface BooleanConstraints extends Constraints {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -31,14 +31,14 @@ public interface BooleanConstraint extends Constraints {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From</em>' reference.
 	 * @see #setFrom(Feature)
-	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getBooleanConstraint_From()
+	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getBooleanConstraints_From()
 	 * @model required="true"
 	 * @generated
 	 */
 	Feature getFrom();
 
 	/**
-	 * Sets the value of the '{@link moon.nju.edu.cn.fm.model.BooleanConstraint#getFrom <em>From</em>}' reference.
+	 * Sets the value of the '{@link moon.nju.edu.cn.fm.model.BooleanConstraints#getFrom <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>From</em>' reference.
@@ -57,14 +57,14 @@ public interface BooleanConstraint extends Constraints {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>To</em>' reference.
 	 * @see #setTo(Feature)
-	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getBooleanConstraint_To()
+	 * @see moon.nju.edu.cn.fm.model.SFEAPackage#getBooleanConstraints_To()
 	 * @model required="true"
 	 * @generated
 	 */
 	Feature getTo();
 
 	/**
-	 * Sets the value of the '{@link moon.nju.edu.cn.fm.model.BooleanConstraint#getTo <em>To</em>}' reference.
+	 * Sets the value of the '{@link moon.nju.edu.cn.fm.model.BooleanConstraints#getTo <em>To</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>To</em>' reference.
@@ -73,4 +73,4 @@ public interface BooleanConstraint extends Constraints {
 	 */
 	void setTo(Feature value);
 
-} // BooleanConstraint
+} // BooleanConstraints

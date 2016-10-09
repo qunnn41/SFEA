@@ -543,14 +543,14 @@ public interface SFEAPackage extends EPackage {
 	int CONSTRAINTS_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl <em>Boolean Constraint</em>}' class.
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl <em>Boolean Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl
-	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getBooleanConstraint()
+	 * @see moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getBooleanConstraints()
 	 * @generated
 	 */
-	int BOOLEAN_CONSTRAINT = 9;
+	int BOOLEAN_CONSTRAINTS = 9;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -559,7 +559,7 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_CONSTRAINT__FROM = CONSTRAINTS_FEATURE_COUNT + 0;
+	int BOOLEAN_CONSTRAINTS__FROM = CONSTRAINTS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -568,25 +568,25 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_CONSTRAINT__TO = CONSTRAINTS_FEATURE_COUNT + 1;
+	int BOOLEAN_CONSTRAINTS__TO = CONSTRAINTS_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Boolean Constraint</em>' class.
+	 * The number of structural features of the '<em>Boolean Constraints</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_CONSTRAINT_FEATURE_COUNT = CONSTRAINTS_FEATURE_COUNT + 2;
+	int BOOLEAN_CONSTRAINTS_FEATURE_COUNT = CONSTRAINTS_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of operations of the '<em>Boolean Constraint</em>' class.
+	 * The number of operations of the '<em>Boolean Constraints</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_CONSTRAINT_OPERATION_COUNT = CONSTRAINTS_OPERATION_COUNT + 0;
+	int BOOLEAN_CONSTRAINTS_OPERATION_COUNT = CONSTRAINTS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl <em>Implies Constraints</em>}' class.
@@ -605,7 +605,7 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPLIES_CONSTRAINTS__FROM = BOOLEAN_CONSTRAINT__FROM;
+	int IMPLIES_CONSTRAINTS__FROM = BOOLEAN_CONSTRAINTS__FROM;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -614,7 +614,7 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPLIES_CONSTRAINTS__TO = BOOLEAN_CONSTRAINT__TO;
+	int IMPLIES_CONSTRAINTS__TO = BOOLEAN_CONSTRAINTS__TO;
 
 	/**
 	 * The number of structural features of the '<em>Implies Constraints</em>' class.
@@ -623,7 +623,7 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPLIES_CONSTRAINTS_FEATURE_COUNT = BOOLEAN_CONSTRAINT_FEATURE_COUNT + 0;
+	int IMPLIES_CONSTRAINTS_FEATURE_COUNT = BOOLEAN_CONSTRAINTS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Implies Constraints</em>' class.
@@ -632,17 +632,17 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPLIES_CONSTRAINTS_OPERATION_COUNT = BOOLEAN_CONSTRAINT_OPERATION_COUNT + 0;
+	int IMPLIES_CONSTRAINTS_OPERATION_COUNT = BOOLEAN_CONSTRAINTS_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesImpl <em>Excludes</em>}' class.
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl <em>Excludes Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see moon.nju.edu.cn.fm.model.impl.ExcludesImpl
-	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getExcludes()
+	 * @see moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getExcludesConstraints()
 	 * @generated
 	 */
-	int EXCLUDES = 11;
+	int EXCLUDES_CONSTRAINTS = 11;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -651,7 +651,7 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXCLUDES__FROM = BOOLEAN_CONSTRAINT__FROM;
+	int EXCLUDES_CONSTRAINTS__FROM = BOOLEAN_CONSTRAINTS__FROM;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -660,25 +660,25 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXCLUDES__TO = BOOLEAN_CONSTRAINT__TO;
+	int EXCLUDES_CONSTRAINTS__TO = BOOLEAN_CONSTRAINTS__TO;
 
 	/**
-	 * The number of structural features of the '<em>Excludes</em>' class.
+	 * The number of structural features of the '<em>Excludes Constraints</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXCLUDES_FEATURE_COUNT = BOOLEAN_CONSTRAINT_FEATURE_COUNT + 0;
+	int EXCLUDES_CONSTRAINTS_FEATURE_COUNT = BOOLEAN_CONSTRAINTS_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Excludes</em>' class.
+	 * The number of operations of the '<em>Excludes Constraints</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXCLUDES_OPERATION_COUNT = BOOLEAN_CONSTRAINT_OPERATION_COUNT + 0;
+	int EXCLUDES_CONSTRAINTS_OPERATION_COUNT = BOOLEAN_CONSTRAINTS_OPERATION_COUNT + 0;
 
 
 	/**
@@ -904,36 +904,36 @@ public interface SFEAPackage extends EPackage {
 	EClass getConstraints();
 
 	/**
-	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.BooleanConstraint <em>Boolean Constraint</em>}'.
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.BooleanConstraints <em>Boolean Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Boolean Constraint</em>'.
-	 * @see moon.nju.edu.cn.fm.model.BooleanConstraint
+	 * @return the meta object for class '<em>Boolean Constraints</em>'.
+	 * @see moon.nju.edu.cn.fm.model.BooleanConstraints
 	 * @generated
 	 */
-	EClass getBooleanConstraint();
+	EClass getBooleanConstraints();
 
 	/**
-	 * Returns the meta object for the reference '{@link moon.nju.edu.cn.fm.model.BooleanConstraint#getFrom <em>From</em>}'.
+	 * Returns the meta object for the reference '{@link moon.nju.edu.cn.fm.model.BooleanConstraints#getFrom <em>From</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>From</em>'.
-	 * @see moon.nju.edu.cn.fm.model.BooleanConstraint#getFrom()
-	 * @see #getBooleanConstraint()
+	 * @see moon.nju.edu.cn.fm.model.BooleanConstraints#getFrom()
+	 * @see #getBooleanConstraints()
 	 * @generated
 	 */
-	EReference getBooleanConstraint_From();
+	EReference getBooleanConstraints_From();
 
 	/**
-	 * Returns the meta object for the reference '{@link moon.nju.edu.cn.fm.model.BooleanConstraint#getTo <em>To</em>}'.
+	 * Returns the meta object for the reference '{@link moon.nju.edu.cn.fm.model.BooleanConstraints#getTo <em>To</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>To</em>'.
-	 * @see moon.nju.edu.cn.fm.model.BooleanConstraint#getTo()
-	 * @see #getBooleanConstraint()
+	 * @see moon.nju.edu.cn.fm.model.BooleanConstraints#getTo()
+	 * @see #getBooleanConstraints()
 	 * @generated
 	 */
-	EReference getBooleanConstraint_To();
+	EReference getBooleanConstraints_To();
 
 	/**
 	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.ImpliesConstraints <em>Implies Constraints</em>}'.
@@ -946,14 +946,14 @@ public interface SFEAPackage extends EPackage {
 	EClass getImpliesConstraints();
 
 	/**
-	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.Excludes <em>Excludes</em>}'.
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.ExcludesConstraints <em>Excludes Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Excludes</em>'.
-	 * @see moon.nju.edu.cn.fm.model.Excludes
+	 * @return the meta object for class '<em>Excludes Constraints</em>'.
+	 * @see moon.nju.edu.cn.fm.model.ExcludesConstraints
 	 * @generated
 	 */
-	EClass getExcludes();
+	EClass getExcludesConstraints();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1165,14 +1165,14 @@ public interface SFEAPackage extends EPackage {
 		EClass CONSTRAINTS = eINSTANCE.getConstraints();
 
 		/**
-		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl <em>Boolean Constraint</em>}' class.
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl <em>Boolean Constraints</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see moon.nju.edu.cn.fm.model.impl.BooleanConstraintImpl
-		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getBooleanConstraint()
+		 * @see moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getBooleanConstraints()
 		 * @generated
 		 */
-		EClass BOOLEAN_CONSTRAINT = eINSTANCE.getBooleanConstraint();
+		EClass BOOLEAN_CONSTRAINTS = eINSTANCE.getBooleanConstraints();
 
 		/**
 		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
@@ -1180,7 +1180,7 @@ public interface SFEAPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOOLEAN_CONSTRAINT__FROM = eINSTANCE.getBooleanConstraint_From();
+		EReference BOOLEAN_CONSTRAINTS__FROM = eINSTANCE.getBooleanConstraints_From();
 
 		/**
 		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
@@ -1188,7 +1188,7 @@ public interface SFEAPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOOLEAN_CONSTRAINT__TO = eINSTANCE.getBooleanConstraint_To();
+		EReference BOOLEAN_CONSTRAINTS__TO = eINSTANCE.getBooleanConstraints_To();
 
 		/**
 		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl <em>Implies Constraints</em>}' class.
@@ -1201,14 +1201,14 @@ public interface SFEAPackage extends EPackage {
 		EClass IMPLIES_CONSTRAINTS = eINSTANCE.getImpliesConstraints();
 
 		/**
-		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesImpl <em>Excludes</em>}' class.
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl <em>Excludes Constraints</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see moon.nju.edu.cn.fm.model.impl.ExcludesImpl
-		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getExcludes()
+		 * @see moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getExcludesConstraints()
 		 * @generated
 		 */
-		EClass EXCLUDES = eINSTANCE.getExcludes();
+		EClass EXCLUDES_CONSTRAINTS = eINSTANCE.getExcludesConstraints();
 
 	}
 

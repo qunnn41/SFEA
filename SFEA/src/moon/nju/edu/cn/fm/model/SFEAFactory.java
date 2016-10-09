@@ -103,13 +103,13 @@ public interface SFEAFactory extends EFactory {
 	Constraints createConstraints();
 
 	/**
-	 * Returns a new object of class '<em>Boolean Constraint</em>'.
+	 * Returns a new object of class '<em>Boolean Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Constraint</em>'.
+	 * @return a new object of class '<em>Boolean Constraints</em>'.
 	 * @generated
 	 */
-	BooleanConstraint createBooleanConstraint();
+	BooleanConstraints createBooleanConstraints();
 
 	/**
 	 * Returns a new object of class '<em>Implies Constraints</em>'.
@@ -121,13 +121,13 @@ public interface SFEAFactory extends EFactory {
 	ImpliesConstraints createImpliesConstraints();
 
 	/**
-	 * Returns a new object of class '<em>Excludes</em>'.
+	 * Returns a new object of class '<em>Excludes Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Excludes</em>'.
+	 * @return a new object of class '<em>Excludes Constraints</em>'.
 	 * @generated
 	 */
-	Excludes createExcludes();
+	ExcludesConstraints createExcludesConstraints();
 
 	/**
 	 * Returns the package supported by this factory.
