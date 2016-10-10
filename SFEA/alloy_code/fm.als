@@ -53,8 +53,8 @@ pred wellFormed(fm: FeatureModel) {
 fact FormulaConstruction {
 	all formula: Form | formula not in formula.^(left + right)
 	all fm: FeatureModel | {
-		all f: NameF | f.welltyped[fm] = welltypedName[f,fm]
-		all f: Form | f.welltyped[fm] = welltypedFormula[f, fm]
+		all v1: NameF | v1.welltyped[fm] = welltypedName[v1, fm]
+		all v2: Form | v2.welltyped[fm] = welltypedFormula[v2, fm]
 	}
 }
 
@@ -72,7 +72,7 @@ sig Configuration {
 }
 
 fact configDatatype {
-	all name: Name | some c: Configuration | c.value = name
+	all n: Name | some c: Configuration | c.value = n
 }
 
 fun semantics(fm: FeatureModel): set Configuration {
@@ -87,8 +87,11 @@ pred satisfyRelations(fm: FeatureModel, c: Configuration) {
 	all r: fm.relations | {
 		r.type = Optional implies (r.child in c.value implies r.parent in c.value)
 		r.type = Mandatory implies (r.child in c.value <=> r.parent in c.value)
-		r.type = OrFeature implies (r.parent in c.value implies #{n: r.child | n in c.value} >= r.min and #{n: r.child | n in c.value} <= r.max)
-		r.type = XorFeature implies (r.parent in c.value implies #{n: r.child | n in c.value} >= r.min and #{n: r.child | n in c.value} <= r.max)
+
+		//r.type = OrFeature implies (r.parent in c.value implies (one n : r.child | n in c.value))
+		//r.type = OrFeature implies (r.parent in c.value implies (some n : r.child | n in c.value))
+		r.type = OrFeature implies (r.parent in c.value implies #{n1: r.child | n1 in c.value} >= r.min and #{n1: r.child | n1 in c.value} <= r.max)
+		r.type = XorFeature implies (r.parent in c.value implies #{n2: r.child | n2 in c.value} >= r.min and #{n2: r.child | n2 in c.value} <= r.max)
 	}
 }
 
@@ -160,7 +163,6 @@ fact formulas {
 	f4.left = f3
 	f4.right = f2
 }
-
 
 //instance
 one sig Config1 extends Configuration{} {
