@@ -8,21 +8,23 @@ sig FeatureModel {
 }
 
 sig Name {}
+
 sig Relation {
 	parent: Name,
-	child: set Name,
+	child: some Name,
 	type: Type,
 	min: Int,
 	max: Int
 }
 
 abstract sig Type {}
-one sig Optional, Mandatory, OrFeature, XorFeature extends Type{}
+one sig Optional, Mandatory, OrFeature, XorFeature extends Type {}
 
 abstract sig Formula {
 	satisfy: Configuration -> Bool,
 	welltyped: FeatureModel -> Bool
 }
+
 sig NameF extends Formula {
 	name: Name
 }
@@ -159,6 +161,8 @@ fact formulas {
 	f4.right = f2
 }
 
+
+//instance
 one sig Config1 extends Configuration{} {
 	value = mobilephone+mp3+earphone
 }
