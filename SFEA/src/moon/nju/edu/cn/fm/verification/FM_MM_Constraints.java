@@ -145,10 +145,10 @@ public class FM_MM_Constraints {
 		final Formula f1 = rSatisfy.in(sigFormula.product(sigConfiguration).product(BooleanExpression.BOOL));
 		final Formula f2 = rWelltyped.in(sigFormula.product(sigFeatureModel).product(BooleanExpression.BOOL));
 		
-		final Formula f3 = rName.function(sigNameF, sigName);
-		final Formula f4 = rLeft.function(sigForm, sigFormula);
-		final Formula f5 = rRight.function(sigForm, sigFormula);
-		final Formula f6 = rOp.function(sigForm, sigOperation);
+		final Formula f3 = rName.in(sigNameF.product(sigName));
+		final Formula f4 = rLeft.in(sigForm.product(sigFormula));
+		final Formula f5 = rRight.in(sigForm.product(sigFormula));
+		final Formula f6 = rOp.in(sigForm.product(sigOperation));
 		
 		final Formula f7 = Formula.and(sigAndF.one(), sigOrF.one(), sigImpliesF.one(), sigNotF.one());
 		
@@ -162,7 +162,6 @@ public class FM_MM_Constraints {
 	 * 
 	 * 	fact configDatatype {
 	 * 		all n: Name | some c: Configuration | c.value = n
-	 * 		all disj c1, c2: Configuration | c1.value != c2.value
 	 * 	}
 	 */
 	private Formula setupSigConfigurationDeclarations() {
@@ -171,11 +170,7 @@ public class FM_MM_Constraints {
 		final Variable c = Variable.unary("c");
 		final Formula f2 = c.join(rValue).eq(n).forSome(c.oneOf(sigConfiguration)).forAll(n.oneOf(sigName));
 		
-		final Variable c1 = Variable.unary("c1");
-		final Variable c2 = Variable.unary("c2");
-		final Formula f3 = (c1.join(rValue).eq(c2.join(rValue))).not().and(c1.eq(c2).not());
-		
-		return Formula.and(f1, f2);//, f3.forAll(c1.oneOf(sigConfiguration).and(c2.oneOf(sigConfiguration))));
+		return Formula.and(f1, f2);
 	}
 	
 	/**

@@ -75,8 +75,7 @@ public class DemoVerification {
 		formulas.add(fm1.join(FM_MM_Constraints.rRoot).eq(mobilePhone));
 		formulas.add(fm1.join(FM_MM_Constraints.rFeatures).eq(Expression.union(mobilePhone, earphone, mp3, camera)));
 		formulas.add(fm1.join(FM_MM_Constraints.rRelations).eq(Expression.union(r1, r2)));
-//		formulas.add(fm1.join(BasicFMVerification.rFormulas).eq(Expression.union(f1, f4)));
-		formulas.add(fm1.join(FM_MM_Constraints.rFormulas).eq(f2));
+//		formulas.add(fm1.join(FM_MM_Constraints.rFormulas).eq(Expression.union(f1, f2, f3, f4)));
 		
 		formulas.add(r1.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOptional));
 		formulas.add(r1.join(FM_MM_Constraints.rParent).eq(mobilePhone));
@@ -92,16 +91,16 @@ public class DemoVerification {
 		formulas.add(r2.join(FM_MM_Constraints.rMin).sum().eq(IntConstant.constant(1)));
 		formulas.add(r2.join(FM_MM_Constraints.rMax).sum().eq(IntConstant.constant(2)));
 		
-//		formulas.add(f1.join(BasicFMVerification.rOp).eq(BasicFMVerification.sigImpliesF));
-//		formulas.add(f1.join(BasicFMVerification.rLeft).eq(f2));
-//		formulas.add(f1.join(BasicFMVerification.rRight).eq(f3));
-		
-//		formulas.add(f2.join(BasicFMVerification.rName).eq(earphone));
-//		formulas.add(f3.join(BasicFMVerification.rName).eq(mp3));
+//		formulas.add(f1.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
+//		formulas.add(f1.join(FM_MM_Constraints.rLeft).eq(f2));
+//		formulas.add(f1.join(FM_MM_Constraints.rRight).eq(f3));
 //		
-//		formulas.add(f4.join(BasicFMVerification.rOp).eq(BasicFMVerification.sigImpliesF));
-//		formulas.add(f4.join(BasicFMVerification.rLeft).eq(f3));
-//		formulas.add(f4.join(BasicFMVerification.rRight).eq(f2));
+//		formulas.add(f2.join(FM_MM_Constraints.rName).eq(earphone));
+//		formulas.add(f3.join(FM_MM_Constraints.rName).eq(mp3));
+//		
+//		formulas.add(f4.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
+//		formulas.add(f4.join(FM_MM_Constraints.rLeft).eq(f3));
+//		formulas.add(f4.join(FM_MM_Constraints.rRight).eq(f2));
 	}
 
 	private Bounds bounds() {
@@ -146,8 +145,8 @@ public class DemoVerification {
 		
 		final TupleSet fmTuple = factory.range(factory.tuple("fm1"), factory.tuple("fm1"));
 		final TupleSet nameTuple = factory.range(factory.tuple("mobilephone"), factory.tuple("camera"));
-		final TupleSet nameFTuple = factory.range(factory.tuple("f1"), factory.tuple("f4"));
-		final TupleSet formTuple = factory.range(factory.tuple("f2"), factory.tuple("f3"));
+		final TupleSet nameFTuple = factory.range(factory.tuple("f2"), factory.tuple("f3"));
+		final TupleSet formTuple = factory.range(factory.tuple("f1"), factory.tuple("f4"));
 		final TupleSet formulaTuple = factory.range(factory.tuple("f1"), factory.tuple("f3"));
 		final TupleSet relationTuple = factory.range(factory.tuple("r1"), factory.tuple("r2"));
 		final TupleSet typeTuple = factory.range(factory.tuple("Optional"), factory.tuple("XorFeature"));
@@ -188,9 +187,9 @@ public class DemoVerification {
 		
 		bounds.boundExactly(FM_MM_Constraints.sigFeatureModel, fmTuple);
 		bounds.boundExactly(FM_MM_Constraints.sigName, nameTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigNameF, nameFTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigForm, formTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigFormula, formulaTuple);
+		bounds.bound(FM_MM_Constraints.sigNameF, nameFTuple);
+		bounds.bound(FM_MM_Constraints.sigForm, formTuple);
+		bounds.bound(FM_MM_Constraints.sigFormula, formulaTuple);
 		bounds.boundExactly(FM_MM_Constraints.sigRelation, relationTuple);
 		bounds.boundExactly(FM_MM_Constraints.sigConfiguration, configurationTuple);
 		
@@ -233,7 +232,8 @@ public class DemoVerification {
 	public void createInstance() {
 		config1 = Relation.unary("Config1");
 		formulas.add(config1.one());
-		formulas.add(config1.join(FM_MM_Constraints.rValue).eq(Expression.union(mobilePhone, mp3, earphone)));
+		// TODO camera conflicts with formula
+		formulas.add(config1.join(FM_MM_Constraints.rValue).eq(Expression.union(mobilePhone, camera)));
 	}
 	
 	public void validConfiguration() {
