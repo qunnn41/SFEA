@@ -73,6 +73,7 @@ sig Configuration {
 
 fact configDatatype {
 	all n: Name | some c: Configuration | c.value = n
+	all disj c1, c2: Configuration | c1.value != c2.value
 }
 
 fun semantics(fm: FeatureModel): set Configuration {
@@ -170,6 +171,7 @@ one sig Config1 extends Configuration{} {
 }
 
 assert validConfig {
+	wellFormed[fm1]
 	Config1 in semantics[fm1]
 }
 

@@ -5,9 +5,9 @@ import kodkod.ast.Formula;
 import kodkod.ast.Relation;
 
 public class BooleanExpression {
-	public static final Expression BOOL = Relation.unary("Bool");
-	public static final Expression TRUE = Relation.unary("True");
-	public static final Expression FALSE = Relation.unary("False");
+	public static final Relation BOOL = Relation.unary("Bool");
+	public static final Relation TRUE = Relation.unary("True");
+	public static final Relation FALSE = Relation.unary("False");
 	
 	public static Expression And(Expression expression1, Expression expression2) {
 		Formula f1 = (expression1.union(expression2)).in(TRUE);

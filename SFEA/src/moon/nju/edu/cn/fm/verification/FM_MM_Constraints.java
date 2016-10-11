@@ -9,11 +9,11 @@ import kodkod.ast.IntConstant;
 import kodkod.ast.Relation;
 import kodkod.ast.Variable;
 
-public class BasicFMVerification {
+public class FM_MM_Constraints {
 	// Signature
-	public static Relation sigFeatureModel, sigName, sigRelation, sigType, sigOptional, sigMandatory, sigOrFeature, sigXorFeature;
-	public static Relation sigFormula, sigNameF, sigForm, sigOperation, sigAndF, sigOrF, sigImpliesF, sigNotF;
-	public static Relation sigConfiguration;
+	public static final Relation sigFeatureModel, sigName, sigRelation, sigType, sigOptional, sigMandatory, sigOrFeature, sigXorFeature;
+	public static final Relation sigFormula, sigNameF, sigForm, sigOperation, sigAndF, sigOrF, sigImpliesF, sigNotF;
+	public static final Relation sigConfiguration;
 	
 	// Relation
 	public static Relation rFeatures, rRoot, rRelations, rFormulas, rParent, rChild, rType, rMin, rMax;
@@ -25,15 +25,13 @@ public class BasicFMVerification {
 		return formulas;
 	}
 	
-	public BasicFMVerification() {
+	public FM_MM_Constraints() {
 		formulas.add(this.setupSigFeatureModelDeclarations());
 		formulas.add(this.setupSigFeatureModelDeclarations());
 		formulas.add(this.setupSigRelationDeclarations());
 		formulas.add(this.setupSigFormulaDeclarations());
 		formulas.add(this.setupSigConfigurationDeclarations());
-		formulas.add(this.wellFormedFeatureModel(Variable.unary("fm")));
 		formulas.add(this.formulaConstruction());
-//		formulas.add(this.semantics(Variable.unary("fm")));
 		formulas.add(this.formulaSatisfaction());
 	}
 	
@@ -84,7 +82,7 @@ public class BasicFMVerification {
 	/**
 	 * 	sig FeatureModel {
 	 * 		features: set Name,
-	 * 		root: features,
+	 * 		root: Name,
 	 * 		relations: set Relation,
 	 * 		formulas: set Formula
 	 * 	}
@@ -100,7 +98,6 @@ public class BasicFMVerification {
 		return Formula.and(f1, f2, f3, f4);
 	}
 	
-	
 	/**
 	 * 	sig Relation {
 	 * 		parent: Name,
@@ -114,13 +111,11 @@ public class BasicFMVerification {
 	 *	one sig Optional, Mandatory, OrFeature, XorFeature extends Type {}
 	 */
 	private Formula setupSigRelationDeclarations() {
-		final Formula f1 = rParent.function(sigRelation, sigName);
+		final Formula f1 = rParent.in(sigRelation.product(sigName));
 		final Formula f2 = rChild.in(sigRelation.product(sigName));
-		final Formula f3 = rType.function(sigRelation, sigType);
-		final Formula f4 = rMin.function(sigRelation, Expression.INTS);
-		final Formula f5 = rMax.function(sigRelation, Expression.INTS);
-		
-		// TODO add in bound
+		final Formula f3 = rType.in(sigRelation.product(sigType));
+		final Formula f4 = rMin.in(sigRelation.product(Expression.INTS));
+		final Formula f5 = rMax.in(sigRelation.product(Expression.INTS));
 		final Formula f6 = Formula.and(sigOptional.one(), sigMandatory.one(), sigOrFeature.one(), sigXorFeature.one());
 		
 		return Formula.and(f1, f2, f3, f4, f5, f6);
@@ -155,7 +150,6 @@ public class BasicFMVerification {
 		final Formula f5 = rRight.function(sigForm, sigFormula);
 		final Formula f6 = rOp.function(sigForm, sigOperation);
 		
-		// TODO add in bound
 		final Formula f7 = Formula.and(sigAndF.one(), sigOrF.one(), sigImpliesF.one(), sigNotF.one());
 		
 		return Formula.and(f1, f2, f3, f4, f5, f6, f7);
@@ -168,6 +162,7 @@ public class BasicFMVerification {
 	 * 
 	 * 	fact configDatatype {
 	 * 		all n: Name | some c: Configuration | c.value = n
+	 * 		all disj c1, c2: Configuration | c1.value != c2.value
 	 * 	}
 	 */
 	private Formula setupSigConfigurationDeclarations() {
@@ -176,7 +171,11 @@ public class BasicFMVerification {
 		final Variable c = Variable.unary("c");
 		final Formula f2 = c.join(rValue).eq(n).forSome(c.oneOf(sigConfiguration)).forAll(n.oneOf(sigName));
 		
-		return Formula.and(f1, f2);
+		final Variable c1 = Variable.unary("c1");
+		final Variable c2 = Variable.unary("c2");
+		final Formula f3 = (c1.join(rValue).eq(c2.join(rValue))).not().and(c1.eq(c2).not());
+		
+		return Formula.and(f1, f2);//, f3.forAll(c1.oneOf(sigConfiguration).and(c2.oneOf(sigConfiguration))));
 	}
 	
 	/**
@@ -191,7 +190,7 @@ public class BasicFMVerification {
 	 *		all formula: fm.formulas | formula.welltyped[fm] = True
 	 *	} 
 	 */
-	private Formula wellFormedFeatureModel(Expression fm) {
+	public Formula wellFormedFeatureModel(Expression fm) {
 		final Variable formula = Variable.unary("formula");
 		final Formula f1 = (fm.join(formula.join(rWelltyped)).eq(BooleanExpression.TRUE)).forAll(formula.oneOf(fm.join(rFormulas)));
 		
@@ -199,9 +198,9 @@ public class BasicFMVerification {
 		final Formula f2 = (relation.join(rParent)).in(fm.join(rFeatures));
 		final Formula f3 = (relation.join(rChild)).in(fm.join(rFeatures));
 		
-		final Formula f4 = relation.join(rChild).sum().eq(IntConstant.constant(1));
+		final Formula f4 = relation.join(rChild).count().eq(IntConstant.constant(1));
 		final Formula f5 = relation.join(rType).in(Expression.union(sigOptional, sigMandatory)).implies(f4);
-		final Formula f6 = relation.join(rChild).sum().gt(IntConstant.constant(1));
+		final Formula f6 = relation.join(rChild).count().gt(IntConstant.constant(1));
 		final Formula f7 = relation.join(rType).in(Expression.union(sigOrFeature, sigXorFeature)).implies(f6);
 		final Formula f8 = Formula.and(f2, f3, f5, f7).forAll(relation.oneOf(fm.join(rRelations)));
 		
@@ -278,8 +277,8 @@ public class BasicFMVerification {
 	 * 
 	 * 			//r.type = OrFeature implies (r.parent in c.value implies (one n : r.child | n in c.value))
 	 * 			//r.type = OrFeature implies (r.parent in c.value implies (some n : r.child | n in c.value))
-	 * 			r.type = OrFeature implies (r.parent in c.value implies #{n1: r.child | n1 in c.value} >= r.min and #{n1: r.child | n1 in c.value} <= r.max)
-	 * 			r.type = XorFeature implies (r.parent in c.value implies #{n2: r.child | n2 in c.value} >= r.min and #{n2: r.child | n2 in c.value} <= r.max)
+	 * 			r.type = OrFeature implies (r.parent in c.value implies #{n1: r.child | n1 in c.value} >= r.min and #{n2: r.child | n2 in c.value} <= r.max)
+	 * 			r.type = XorFeature implies (r.parent in c.value implies #{n3: r.child | n3 in c.value} >= r.min and #{n4: r.child | n4 in c.value} <= r.max)
 	 * 		}
 	 * 	}
 	 */
@@ -289,8 +288,9 @@ public class BasicFMVerification {
 		final Formula f2 = r.join(rChild).in(c.join(rValue)).iff(r.join(rParent).in(c.join(rValue)));
 		
 		final Variable n = Variable.unary("n");
-		final Expression e = n.in(c.join(rValue)).comprehension(n.oneOf(c.join(rValue)));
-		final Formula f3 = Formula.and(e.sum().gte(r.join(rMin).sum()), e.sum().lte(r.join(rMax).sum()));
+		final Expression e = n.in(c.join(rValue)).comprehension(n.oneOf(r.join(rChild)));
+
+		final Formula f3 = Formula.and(e.count().gte(r.join(rMin).sum()), e.count().lte(r.join(rMax).sum()));
 		final Formula f4 = r.join(rParent).in(c.join(rValue)).implies(f3);
 		
 		final Formula f5 = r.join(rType).eq(sigOptional).implies(f1);
