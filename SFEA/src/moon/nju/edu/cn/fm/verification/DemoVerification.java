@@ -75,7 +75,7 @@ public class DemoVerification {
 		formulas.add(fm1.join(FM_MM_Constraints.rRoot).eq(mobilePhone));
 		formulas.add(fm1.join(FM_MM_Constraints.rFeatures).eq(Expression.union(mobilePhone, earphone, mp3, camera)));
 		formulas.add(fm1.join(FM_MM_Constraints.rRelations).eq(Expression.union(r1, r2)));
-//		formulas.add(fm1.join(FM_MM_Constraints.rFormulas).eq(Expression.union(f1, f2, f3, f4)));
+		formulas.add(fm1.join(FM_MM_Constraints.rFormulas).eq(Expression.union(f1, f4)));
 		
 		formulas.add(r1.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOptional));
 		formulas.add(r1.join(FM_MM_Constraints.rParent).eq(mobilePhone));
@@ -91,16 +91,16 @@ public class DemoVerification {
 		formulas.add(r2.join(FM_MM_Constraints.rMin).sum().eq(IntConstant.constant(1)));
 		formulas.add(r2.join(FM_MM_Constraints.rMax).sum().eq(IntConstant.constant(2)));
 		
-//		formulas.add(f1.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
-//		formulas.add(f1.join(FM_MM_Constraints.rLeft).eq(f2));
-//		formulas.add(f1.join(FM_MM_Constraints.rRight).eq(f3));
-//		
-//		formulas.add(f2.join(FM_MM_Constraints.rName).eq(earphone));
-//		formulas.add(f3.join(FM_MM_Constraints.rName).eq(mp3));
-//		
-//		formulas.add(f4.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
-//		formulas.add(f4.join(FM_MM_Constraints.rLeft).eq(f3));
-//		formulas.add(f4.join(FM_MM_Constraints.rRight).eq(f2));
+		formulas.add(f1.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
+		formulas.add(f1.join(FM_MM_Constraints.rLeft).eq(f2));
+		formulas.add(f1.join(FM_MM_Constraints.rRight).eq(f3));
+		
+		formulas.add(f2.join(FM_MM_Constraints.rName).eq(earphone));
+		formulas.add(f3.join(FM_MM_Constraints.rName).eq(mp3));
+		
+		formulas.add(f4.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
+		formulas.add(f4.join(FM_MM_Constraints.rLeft).eq(f3));
+		formulas.add(f4.join(FM_MM_Constraints.rRight).eq(f2));
 	}
 
 	private Bounds bounds() {
@@ -187,9 +187,9 @@ public class DemoVerification {
 		
 		bounds.boundExactly(FM_MM_Constraints.sigFeatureModel, fmTuple);
 		bounds.boundExactly(FM_MM_Constraints.sigName, nameTuple);
-		bounds.bound(FM_MM_Constraints.sigNameF, nameFTuple);
-		bounds.bound(FM_MM_Constraints.sigForm, formTuple);
-		bounds.bound(FM_MM_Constraints.sigFormula, formulaTuple);
+		bounds.boundExactly(FM_MM_Constraints.sigNameF, nameFTuple);
+		bounds.boundExactly(FM_MM_Constraints.sigForm, formTuple);
+		bounds.boundExactly(FM_MM_Constraints.sigFormula, formulaTuple);
 		bounds.boundExactly(FM_MM_Constraints.sigRelation, relationTuple);
 		bounds.boundExactly(FM_MM_Constraints.sigConfiguration, configurationTuple);
 		
@@ -219,7 +219,7 @@ public class DemoVerification {
 	
 	public void check() {
 		final Solver solver = new Solver();
-		solver.options().setSolver(SATFactory.DefaultSAT4J);
+		solver.options().setSolver(SATFactory.MiniSat);
 		final Solution solution = solver.solve(getFormulas(), bounds());
 		if (solution.unsat()) {
 			System.out.println("unsat");
@@ -232,7 +232,6 @@ public class DemoVerification {
 	public void createInstance() {
 		config1 = Relation.unary("Config1");
 		formulas.add(config1.one());
-		// TODO camera conflicts with formula
 		formulas.add(config1.join(FM_MM_Constraints.rValue).eq(Expression.union(mobilePhone, camera)));
 	}
 	
