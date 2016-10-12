@@ -35,23 +35,6 @@ import kodkod.instance.Universe;
 public class CloudVerification {
 	private List<Formula> formulas = new LinkedList<Formula>();
 	private FM_MM_Constraints basic;
-//	
-//	private Relation cloud;
-//	private Relation framework;
-//	private Relation language;
-//	private Relation rails;
-//	private Relation spring;
-//	private Relation java;
-//	private Relation python;
-//	
-//	private Relation r1;
-//	private Relation r2;
-//	private Relation r3;
-//	private Relation r4;
-//	
-//	private Relation f1;
-//	private Relation f2;
-//	private Relation f3;
 	
 	private Relation fm1;
 	private Relation config1;
@@ -63,7 +46,6 @@ public class CloudVerification {
 	
 	public CloudVerification() {
 		basic = new FM_MM_Constraints();
-//		init();
 		loadModel();
 	}
 	
@@ -288,73 +270,6 @@ public class CloudVerification {
 		}
 	}
 	
-	/*
-	private void init() {
-		cloud = Relation.unary("cloud");
-		framework = Relation.unary("framework");
-		language = Relation.unary("language");
-		rails = Relation.unary("rails");
-		spring = Relation.unary("spring");
-		java = Relation.unary("java");
-		python = Relation.unary("python");
-		
-		fm1 = Relation.unary("fm1");
-		r1 = Relation.unary("r1");
-		r2 = Relation.unary("r2");
-		r3 = Relation.unary("r3");
-		r4 = Relation.unary("r4");
-		
-		f1 = Relation.unary("f1");
-		f2 = Relation.unary("f2");
-		f3 = Relation.unary("f3");
-		
-		formulas.add(Formula.and(cloud.one(), framework.one(), language.one(), rails.one(), spring.one(), java.one(), python.one()));
-		formulas.add(Formula.and(fm1.one(), r1.one(), r2.one(), r3.one(), r4.one()));
-		formulas.add(Formula.and(f1.one(), f2.one(), f3.one()));
-		
-		formulas.add(fm1.join(FM_MM_Constraints.rRoot).eq(cloud));
-		formulas.add(fm1.join(FM_MM_Constraints.rFeatures).eq(Expression.union(cloud, framework, language, rails, spring, java, python)));
-		formulas.add(fm1.join(FM_MM_Constraints.rRelations).eq(Expression.union(r1, r2, r3, r4)));
-		formulas.add(fm1.join(FM_MM_Constraints.rFormulas).eq(f1));
-		
-		formulas.add(r1.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOptional));
-		formulas.add(r1.join(FM_MM_Constraints.rParent).eq(cloud));
-		formulas.add(r1.join(FM_MM_Constraints.rChild).eq(framework));
-		formulas.add(r1.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(0)));
-		formulas.add(r1.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(0)));
-		
-		formulas.add(r2.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigMandatory));
-		formulas.add(r2.join(FM_MM_Constraints.rParent).eq(cloud));
-		formulas.add(r2.join(FM_MM_Constraints.rChild).eq(language));
-		formulas.add(r2.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(0)));
-		formulas.add(r2.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(0)));
-		
-		
-		formulas.add(r3.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOrFeature));
-		formulas.add(r3.join(FM_MM_Constraints.rParent).eq(framework));
-		formulas.add(r3.join(FM_MM_Constraints.rChild).eq(Expression.union(rails, spring)));
-		formulas.add(r3.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(1)));
-		formulas.add(r3.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(1)));
-		formulas.add(r3.join(FM_MM_Constraints.rMin).sum().eq(IntConstant.constant(0)));
-		formulas.add(r3.join(FM_MM_Constraints.rMax).sum().eq(IntConstant.constant(1)));
-		
-		formulas.add(r4.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigXorFeature));
-		formulas.add(r4.join(FM_MM_Constraints.rParent).eq(language));
-		formulas.add(r4.join(FM_MM_Constraints.rChild).eq(Expression.union(java, python)));
-		formulas.add(r4.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(1)));
-		formulas.add(r4.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(1)));
-		formulas.add(r4.join(FM_MM_Constraints.rMin).sum().eq(IntConstant.constant(1)));
-		formulas.add(r4.join(FM_MM_Constraints.rMax).sum().eq(IntConstant.constant(1)));
-		
-		formulas.add(f1.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
-		formulas.add(f1.join(FM_MM_Constraints.rLeft).eq(f2));
-		formulas.add(f1.join(FM_MM_Constraints.rRight).eq(f3));
-		
-		formulas.add(f2.join(FM_MM_Constraints.rName).eq(spring));
-		formulas.add(f3.join(FM_MM_Constraints.rName).eq(java));
-	}
-	*/
-
 	private Bounds bounds() {
 		final List<Object> atoms = new LinkedList<Object>();
 		atoms.add("True");
@@ -371,22 +286,6 @@ public class CloudVerification {
 		atoms.add("NotF");
 		
 		atoms.add("fm1");
-		
-		/*
-		atoms.add("cloud");
-		atoms.add("framework");
-		atoms.add("language");
-		atoms.add("rails");
-		atoms.add("spring");
-		atoms.add("java");
-		atoms.add("python");
-		atoms.add("f1");
-		atoms.add("f2");
-		atoms.add("f3");
-		atoms.add("r1");
-		atoms.add("r2");
-		atoms.add("r3");
-		atoms.add("r4");*/
 		
 		for (Relation relation: signList) {
 			atoms.add(relationNameMap.get(relation));
@@ -424,34 +323,7 @@ public class CloudVerification {
 		final TupleSet configurationTuple = factory.range(factory.tuple("Configuration0"), factory.tuple("Configuration" + configurationSize));
 		final TupleSet intTuple = factory.range(factory.tuple(Integer.valueOf(0)), factory.tuple(Integer.valueOf(9)));
 		final TupleSet booleanTuple = factory.range(factory.tuple("True"), factory.tuple("False"));
-		
-		/*
-		final TupleSet fmTuple = factory.range(factory.tuple("fm1"), factory.tuple("fm1"));
-		final TupleSet nameTuple = factory.range(factory.tuple("cloud"), factory.tuple("python"));
-		final TupleSet nameFTuple = factory.range(factory.tuple("f2"), factory.tuple("f3"));
-		final TupleSet formTuple = factory.range(factory.tuple("f1"), factory.tuple("f1"));
-		final TupleSet formulaTuple = factory.range(factory.tuple("f1"), factory.tuple("f3"));
-		final TupleSet relationTuple = factory.range(factory.tuple("r1"), factory.tuple("r4"));
-		
-		bounds.boundExactly(cloud, factory.range(factory.tuple("cloud"), factory.tuple("cloud")));
-		bounds.boundExactly(framework, factory.range(factory.tuple("framework"), factory.tuple("framework")));
-		bounds.boundExactly(language, factory.range(factory.tuple("language"), factory.tuple("language")));
-		bounds.boundExactly(rails, factory.range(factory.tuple("rails"), factory.tuple("rails")));
-		bounds.boundExactly(spring, factory.range(factory.tuple("spring"), factory.tuple("spring")));
-		bounds.boundExactly(java, factory.range(factory.tuple("java"), factory.tuple("java")));
-		bounds.boundExactly(python, factory.range(factory.tuple("python"), factory.tuple("python")));
-		
 
-		bounds.boundExactly(f1, factory.range(factory.tuple("f1"), factory.tuple("f1")));
-		bounds.boundExactly(f2, factory.range(factory.tuple("f2"), factory.tuple("f2")));
-		bounds.boundExactly(f3, factory.range(factory.tuple("f3"), factory.tuple("f3")));
-		bounds.boundExactly(r1, factory.range(factory.tuple("r1"), factory.tuple("r1")));
-		bounds.boundExactly(r2, factory.range(factory.tuple("r2"), factory.tuple("r2")));
-		bounds.boundExactly(r3, factory.range(factory.tuple("r3"), factory.tuple("r3")));
-		bounds.boundExactly(r4, factory.range(factory.tuple("r4"), factory.tuple("r4")));
-		bounds.boundExactly(fm1, factory.range(factory.tuple("fm1"), factory.tuple("fm1")));
-		bounds.bound(config1, configurationTuple);*/
-		
 		final TupleSet fmTuple = factory.range(factory.tuple("fm1"), factory.tuple("fm1"));
 		final TupleSet nameTuple = factory.range(factory.tuple("s1"), factory.tuple("s" + mSignIndex));
 		final TupleSet nameFTuple = factory.range(factory.tuple("nf1"), factory.tuple("nf" + mNameFIndex));
