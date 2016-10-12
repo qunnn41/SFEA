@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fm:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="www.example.com/fm">
+  <root name="Cloud">
+    <subFeatures xsi:type="fm:OrFeature" name="Framework">
+      <featureCardinality max="1"/>
+      <variants name="Rails"/>
+      <variants name="Spring"/>
+      <groupCardinality min="1" max="2"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:XorFeature" name="Language">
+      <featureCardinality min="1" max="1"/>
+      <variants name="Java"/>
+      <variants name="Python"/>
+      <groupCardinality min="1" max="1"/>
+    </subFeatures>
+  </root>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.0/@variants.1" to="//@root/@subFeatures.1/@variants.0"/>
+</fm:FeatureModel>
