@@ -27,7 +27,6 @@ public class FM_MM_Constraints {
 	
 	public FM_MM_Constraints() {
 		formulas.add(this.setupSigFeatureModelDeclarations());
-		formulas.add(this.setupSigFeatureModelDeclarations());
 		formulas.add(this.setupSigRelationDeclarations());
 		formulas.add(this.setupSigFormulaDeclarations());
 		formulas.add(this.setupSigConfigurationDeclarations());

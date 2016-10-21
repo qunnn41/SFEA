@@ -45,6 +45,6 @@ public class HerokuFeatureModel {
 	}
 	
 	public static void main(String[] args) {
-		HerokuFeatureModel herokuFeatureModel = new HerokuFeatureModel();
+		new HerokuFeatureModel();
 	}
 }

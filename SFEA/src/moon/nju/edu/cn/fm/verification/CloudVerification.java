@@ -44,9 +44,9 @@ public class CloudVerification {
 	private LinkedList<Constraints> constraints = new LinkedList<Constraints>();
 	private LinkedList<Feature> queue = new LinkedList<Feature>();
 	
-	public CloudVerification() {
+	public CloudVerification(String file) {
 		basic = new FM_MM_Constraints();
-		loadModel();
+		loadModel(file);
 	}
 	
 	public Formula getFormulas() {
@@ -73,14 +73,14 @@ public class CloudVerification {
 	private int mFormIndex = 0;
 	private int mSignIndex = 0;
 	
-	private void loadModel() {
+	private void loadModel(String file) {
 		SFEAPackage.eINSTANCE.eClass();
 		Resource.Factory.Registry registry = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> map = registry.getExtensionToFactoryMap();
 		map.put("fm", new XMIResourceFactoryImpl());
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createURI("feature_model/heroku.fm"), true);
+		Resource resource = resourceSet.getResource(URI.createURI(file), true);
 		this.cloudFeatureModel = (FeatureModel) resource.getContents().get(0);
 		this.rootFeature = cloudFeatureModel.getRoot();
 		this.constraints.addAll(cloudFeatureModel.getConstraints());
@@ -432,17 +432,17 @@ public class CloudVerification {
 		}
 		
 		formulas.add(config1.join(FM_MM_Constraints.rValue).eq(featureSelection));
+		this.validConfiguration();
 	}
 	
-	public void validConfiguration() {
+	private void validConfiguration() {
 		formulas.add(basic.wellFormedFeatureModel(fm1));
 		formulas.add(config1.in(basic.semantics(fm1)));
 	}
 	
 	public static void main(String[] args) {
-		CloudVerification demo = new CloudVerification();
-		demo.createInstance(new String[] {"Language", "Spring", "EU", "Location", "Framework", "Java"});
-		demo.validConfiguration();
+		CloudVerification demo = new CloudVerification("feature_model/heroku.fm");
+		demo.createInstance(new String[] {"Language", "Rails", "EU", "Location", "Framework", "Ruby"});
 		demo.check();
 	}
 }

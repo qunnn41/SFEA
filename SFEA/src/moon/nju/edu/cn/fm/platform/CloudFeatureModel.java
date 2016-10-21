@@ -93,6 +93,6 @@ public class CloudFeatureModel {
 	}
 	
 	public static void main(String[] args) {
-		CloudFeatureModel cloudFeatureModel = new CloudFeatureModel();
+		new CloudFeatureModel();
 	}
 }
