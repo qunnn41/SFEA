@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.platform;
+package moon.nju.edu.cn.fm.verification;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -18,8 +18,6 @@ import moon.nju.edu.cn.fm.model.ImpliesConstraints;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
-import moon.nju.edu.cn.fm.verification.BooleanExpression;
-import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;
@@ -34,7 +32,7 @@ import kodkod.instance.TupleFactory;
 import kodkod.instance.TupleSet;
 import kodkod.instance.Universe;
 
-public class CloudVerification implements CloudFeatureModelInterface {
+public class CloudVerification {
 	protected List<Formula> formulas = new LinkedList<Formula>();
 	private MetaModelConstraints metamodel;
 	
@@ -296,17 +294,22 @@ public class CloudVerification implements CloudFeatureModelInterface {
 			atoms.add(relationNameMap.get(relation));
 		}
 		
-		for (Relation form: formList) {
-			atoms.add(relationNameMap.get(form));
-		}
-		
-		for (Relation nameF: nameFList) {
-			atoms.add(relationNameMap.get(nameF));
+		if (mNameFIndex == 0) {
+			atoms.add("f0");
+			atoms.add("nf0");
+		} else {
+			for (Relation form: formList) {
+				atoms.add(relationNameMap.get(form));
+			}
+			
+			for (Relation nameF: nameFList) {
+				atoms.add(relationNameMap.get(nameF));
+			}
 		}
 		
 		atoms.add("config1");
 		
-		int configurationSize = Math.min(128, (int) Math.pow(2, signMap.size()) - 1);
+		int configurationSize = Math.min(63, (int) Math.pow(2, signMap.size()) - 1);
 		for (int i = 0; i <= configurationSize; ++i) {
 			atoms.add("Configuration" + i);
 		}
@@ -327,10 +330,22 @@ public class CloudVerification implements CloudFeatureModelInterface {
 
 		final TupleSet fmTuple = factory.range(factory.tuple("fm1"), factory.tuple("fm1"));
 		final TupleSet nameTuple = factory.range(factory.tuple("s1"), factory.tuple("s" + mSignIndex));
-		final TupleSet nameFTuple = factory.range(factory.tuple("nf1"), factory.tuple("nf" + mNameFIndex));
-		final TupleSet formTuple = factory.range(factory.tuple("f1"), factory.tuple("f" + mFormIndex));
-		final TupleSet formulaTuple = factory.range(factory.tuple("f1"), factory.tuple("nf" + mNameFIndex));
 		final TupleSet relationTuple = factory.range(factory.tuple("r1"), factory.tuple("r" + mRelationIndex));
+		
+		TupleSet nameFTuple = null;
+		TupleSet formTuple = null;
+		TupleSet formulaTuple = null;
+		
+		if (mNameFIndex == 0) {
+			nameFTuple = factory.range(factory.tuple("nf0"), factory.tuple("nf0"));
+			formTuple = factory.range(factory.tuple("f0"), factory.tuple("f0"));
+			formulaTuple = factory.range(factory.tuple("f0"), factory.tuple("nf0"));
+		} else {
+			nameFTuple = factory.range(factory.tuple("nf1"), factory.tuple("nf" + mNameFIndex));
+			formTuple = factory.range(factory.tuple("f1"), factory.tuple("f" + mFormIndex));
+			formulaTuple = factory.range(factory.tuple("f1"), factory.tuple("nf" + mNameFIndex));
+		}
+
 		
 		for (Relation relation: signList) {
 			Tuple tuple = factory.tuple(relationNameMap.get(relation));
@@ -415,23 +430,23 @@ public class CloudVerification implements CloudFeatureModelInterface {
 		}
 	}
 	
-	public void createInstance(String[] string) {
-		config1 = Relation.unary("Config1");
-		formulas.add(config1.one());
-		
-		Expression featureSelection = signMap.get(rootFeature);
-		for (String str : string) {
-			for (Feature feature: signMap.keySet()) {
-				if (str.equals(feature.getName())) {
-					featureSelection = featureSelection == null ? signMap.get(feature) : featureSelection.union(signMap.get(feature));
-					break;
-				}
-			}
-		}
-		
-		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-		this.validConfiguration();
-	}
+//	public void createInstance(String[] string) {
+//		config1 = Relation.unary("Config1");
+//		formulas.add(config1.one());
+//		
+//		Expression featureSelection = signMap.get(rootFeature);
+//		for (String str : string) {
+//			for (Feature feature: signMap.keySet()) {
+//				if (str.equals(feature.getName())) {
+//					featureSelection = featureSelection == null ? signMap.get(feature) : featureSelection.union(signMap.get(feature));
+//					break;
+//				}
+//			}
+//		}
+//		
+//		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
+//		this.validConfiguration();
+//	}
 	
 	protected void validConfiguration() {
 		formulas.add(metamodel.wellFormedFeatureModel(fm1));

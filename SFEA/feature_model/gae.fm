@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fm:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="www.example.com/fm">
+  <root name="Google App Engine">
+    <subFeatures name="BackendInstance">
+      <featureCardinality max="5"/>
+      <attributes name="biSize" value="B1,B2,B4,B8"/>
+      <attributes name="biMemorySize" value="128,256,512,1024"/>
+      <attributes name="biCPUFrequencyType" value="GHz"/>
+      <attributes name="biTransferRateType" value="GB/s"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:XorFeature" name="Language">
+      <featureCardinality min="1" max="1"/>
+      <variants name="Go"/>
+      <variants name="Python"/>
+      <variants name="Java"/>
+      <variants name="PHP"/>
+      <groupCardinality min="1" max="1"/>
+    </subFeatures>
+    <subFeatures name="Service">
+      <subFeatures name="Log">
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Caching">
+        <subFeatures name="Memcache">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Protocol">
+        <subFeatures name="XMPP">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Database">
+        <subFeatures name="CloudSQL">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <featureCardinality max="1"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:OrFeature" name="Resource">
+      <featureCardinality max="1"/>
+      <variants name="Memory"/>
+      <variants name="CPU"/>
+      <variants name="Disk"/>
+      <variants name="Scaling"/>
+      <variants name="Bandwidth"/>
+      <variants name="HealthCheck"/>
+      <groupCardinality min="1" max="6"/>
+    </subFeatures>
+  </root>
+</fm:FeatureModel>

@@ -3,11 +3,12 @@ package moon.nju.edu.cn.fm.platform;
 import kodkod.ast.Expression;
 import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
+import moon.nju.edu.cn.fm.verification.CloudVerification;
 import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 
-public class HerokuFeatureModel extends CloudVerification implements CloudFeatureModelInterface {
+public class HerokuFM extends CloudVerification implements FMInterface {
 	
-	public HerokuFeatureModel(String file) {
+	public HerokuFM(String file) {
 		super(file);
 	}
 
@@ -32,8 +33,8 @@ public class HerokuFeatureModel extends CloudVerification implements CloudFeatur
 	
 	
 	public static void main(String[] args) {
-		CloudVerification demo = new CloudVerification("feature_model/heroku.fm");
-		demo.createInstance(new String[] {"Language", "Spring", "Framework", "Java", "Service", "Log"});
+		HerokuFM demo = new HerokuFM("feature_model/heroku.fm");
+		demo.createInstance(new String[] {"Language", "Go", "Service", "Log", "Resource", "CPU", "Memory"});
 		demo.check();
 	}
 }
