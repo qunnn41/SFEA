@@ -6,15 +6,17 @@
       <attributes name="dynoMemorySize" value="512,1024"/>
       <attributes name="dynoSize" value="1X,2X"/>
     </subFeatures>
-    <subFeatures xsi:type="fm:OrFeature" name="Language">
+    <subFeatures xsi:type="fm:XorFeature" name="Language">
       <featureCardinality min="1" max="1"/>
       <variants name="Java"/>
+      <variants name="Scala"/>
       <variants name="Python"/>
       <variants name="Ruby"/>
       <variants name="Javascript"/>
-      <groupCardinality min="1" max="4"/>
+      <variants name="PHP"/>
+      <groupCardinality min="1" max="1"/>
     </subFeatures>
-    <subFeatures xsi:type="fm:OrFeature" name="Framework">
+    <subFeatures xsi:type="fm:XorFeature" name="Framework">
       <featureCardinality max="1"/>
       <variants name="Spring"/>
       <variants name="Rails"/>
@@ -23,19 +25,34 @@
       <groupCardinality min="1" max="4"/>
     </subFeatures>
     <subFeatures name="Service">
-      <subFeatures name="Database">
-        <featureCardinality max="1"/>
+      <subFeatures name="Log">
+        <featureCardinality min="1" max="1"/>
       </subFeatures>
-      <subFeatures name="SearchEngine">
+      <subFeatures xsi:type="fm:OrFeature" name="Database">
         <featureCardinality max="1"/>
+        <variants xsi:type="fm:OrFeature" name="NoSQL">
+          <variants name="Redis"/>
+          <variants name="MongoDB"/>
+          <groupCardinality min="1" max="2"/>
+        </variants>
+        <variants xsi:type="fm:OrFeature" name="SQL">
+          <variants name="Postgres"/>
+          <variants name="TreasureData"/>
+          <variants name="clearDB"/>
+          <groupCardinality min="1" max="3"/>
+        </variants>
+        <groupCardinality min="1" max="2"/>
       </subFeatures>
-      <subFeatures name="Caching">
+      <subFeatures xsi:type="fm:OrFeature" name="Caching">
         <featureCardinality max="1"/>
+        <variants name="ironcache"/>
+        <variants name="memcachier"/>
+        <groupCardinality min="1" max="2"/>
       </subFeatures>
       <featureCardinality max="1"/>
     </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Location">
-      <featureCardinality min="1" max="1"/>
+      <featureCardinality max="1"/>
       <variants name="US"/>
       <variants name="EU"/>
       <groupCardinality min="1" max="1"/>
@@ -43,6 +60,6 @@
   </root>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.0" to="//@root/@subFeatures.1/@variants.0"/>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.2" to="//@root/@subFeatures.1/@variants.0"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.3"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.1" to="//@root/@subFeatures.1/@variants.2"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.4"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.1" to="//@root/@subFeatures.1/@variants.3"/>
 </fm:FeatureModel>

@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.verification;
+package moon.nju.edu.cn.fm.platform;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -18,6 +18,8 @@ import moon.nju.edu.cn.fm.model.ImpliesConstraints;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
+import moon.nju.edu.cn.fm.verification.BooleanExpression;
+import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;
@@ -32,37 +34,18 @@ import kodkod.instance.TupleFactory;
 import kodkod.instance.TupleSet;
 import kodkod.instance.Universe;
 
-public class CloudVerification {
-	private List<Formula> formulas = new LinkedList<Formula>();
-	private FM_MM_Constraints basic;
+public class CloudVerification implements CloudFeatureModelInterface {
+	protected List<Formula> formulas = new LinkedList<Formula>();
+	private MetaModelConstraints metamodel;
 	
 	private Relation fm1;
-	private Relation config1;
+	protected Relation config1;
 	
 	private FeatureModel cloudFeatureModel;
-	private Feature rootFeature;
+	protected Feature rootFeature;
 	private LinkedList<Constraints> constraints = new LinkedList<Constraints>();
-	private LinkedList<Feature> queue = new LinkedList<Feature>();
 	
-	public CloudVerification(String file) {
-		basic = new FM_MM_Constraints();
-		loadModel(file);
-	}
-	
-	public Formula getFormulas() {
-		Formula result = Formula.TRUE;
-		for (Formula f: basic.getFormulas()) {
-			result = result.and(f);
-		}
-		
-		for (Formula f: formulas) {
-			result = result.and(f);
-		}
-		
-		return result;
-	}
-	
-	private Map<Feature, Relation> signMap = new LinkedHashMap<Feature, Relation>();
+	protected Map<Feature, Relation> signMap = new LinkedHashMap<Feature, Relation>();
 	private List<Relation> signList = new LinkedList<Relation>(); 
 	private List<Relation> relationList = new LinkedList<Relation>();
 	private List<Relation> formList = new LinkedList<Relation>();
@@ -72,6 +55,24 @@ public class CloudVerification {
 	private int mNameFIndex = 0;
 	private int mFormIndex = 0;
 	private int mSignIndex = 0;
+	
+	public CloudVerification(String file) {
+		metamodel = new MetaModelConstraints();
+		loadModel(file);
+	}
+	
+	public Formula getFormulas() {
+		Formula result = Formula.TRUE;
+		for (Formula f: metamodel.getFormulas()) {
+			result = result.and(f);
+		}
+		
+		for (Formula f: formulas) {
+			result = result.and(f);
+		}
+		
+		return result;
+	}
 	
 	private void loadModel(String file) {
 		SFEAPackage.eINSTANCE.eClass();
@@ -90,7 +91,7 @@ public class CloudVerification {
 		this.loadFormula();
 		
 		fm1 = Relation.unary("fm1");
-		formulas.add(fm1.join(FM_MM_Constraints.rRoot).eq(signMap.get(rootFeature)));
+		formulas.add(fm1.join(MetaModelConstraints.rRoot).eq(signMap.get(rootFeature)));
 		
 		Expression features = null;
 		for (Relation signRelation: signList) {
@@ -98,7 +99,7 @@ public class CloudVerification {
 			features = features == null ? signRelation : features.union(signRelation);
 		}
 		
-		formulas.add(fm1.join(FM_MM_Constraints.rFeatures).eq(features));
+		formulas.add(fm1.join(MetaModelConstraints.rFeatures).eq(features));
 		
 		Expression relations = null;
 		for (Relation relation: relationList) {
@@ -107,7 +108,7 @@ public class CloudVerification {
 		}
 		
 		if (relations != null) {
-			formulas.add(fm1.join(FM_MM_Constraints.rRelations).eq(relations));
+			formulas.add(fm1.join(MetaModelConstraints.rRelations).eq(relations));
 		}
 		
 		Expression forms = null;
@@ -117,7 +118,7 @@ public class CloudVerification {
 		}
 		
 		if (forms != null) {
-			formulas.add(fm1.join(FM_MM_Constraints.rFormulas).eq(forms));
+			formulas.add(fm1.join(MetaModelConstraints.rFormulas).eq(forms));
 		}
 		
 		for (Relation nameF : nameFList) {
@@ -126,6 +127,7 @@ public class CloudVerification {
 	}
 	
 	private void loadSignature() {
+		LinkedList<Feature> queue = new LinkedList<Feature>();
 		queue.add(rootFeature);
 		
 		while (!queue.isEmpty()) {
@@ -154,7 +156,9 @@ public class CloudVerification {
 	}
 	
 	private void loadRelation() {
+		LinkedList<Feature> queue = new LinkedList<Feature>();
 		queue.add(rootFeature);
+		
 		while (!queue.isEmpty()) {
 			Feature feature = queue.poll();
 			if (feature instanceof XorFeature) {
@@ -171,13 +175,13 @@ public class CloudVerification {
 				String name = "r" + (++ mRelationIndex);
 				Relation relation = Relation.unary(name);
 				relationNameMap.put(relation, name);
-				formulas.add(relation.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigXorFeature));
-				formulas.add(relation.join(FM_MM_Constraints.rParent).eq(signMap.get(feature)));
-				formulas.add(relation.join(FM_MM_Constraints.rChild).eq(child));
-				formulas.add(relation.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(1)));
-				formulas.add(relation.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(1)));
-				formulas.add(relation.join(FM_MM_Constraints.rMin).sum().eq(IntConstant.constant(min)));
-				formulas.add(relation.join(FM_MM_Constraints.rMax).sum().eq(IntConstant.constant(max)));
+				formulas.add(relation.join(MetaModelConstraints.rType).eq(MetaModelConstraints.sigXorFeature));
+				formulas.add(relation.join(MetaModelConstraints.rParent).eq(signMap.get(feature)));
+				formulas.add(relation.join(MetaModelConstraints.rChild).eq(child));
+				formulas.add(relation.join(MetaModelConstraints.rMin).count().eq(IntConstant.constant(1)));
+				formulas.add(relation.join(MetaModelConstraints.rMax).count().eq(IntConstant.constant(1)));
+				formulas.add(relation.join(MetaModelConstraints.rMin).sum().eq(IntConstant.constant(min)));
+				formulas.add(relation.join(MetaModelConstraints.rMax).sum().eq(IntConstant.constant(max)));
 
 				relationList.add(relation);
 			} else if (feature instanceof OrFeature) {
@@ -194,13 +198,13 @@ public class CloudVerification {
 				String name = "r" + (++ mRelationIndex);
 				Relation relation = Relation.unary(name);
 				relationNameMap.put(relation, name);
-				formulas.add(relation.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOrFeature));
-				formulas.add(relation.join(FM_MM_Constraints.rParent).eq(signMap.get(feature)));
-				formulas.add(relation.join(FM_MM_Constraints.rChild).eq(child));
-				formulas.add(relation.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(1)));
-				formulas.add(relation.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(1)));
-				formulas.add(relation.join(FM_MM_Constraints.rMin).sum().eq(IntConstant.constant(min)));
-				formulas.add(relation.join(FM_MM_Constraints.rMax).sum().eq(IntConstant.constant(max)));
+				formulas.add(relation.join(MetaModelConstraints.rType).eq(MetaModelConstraints.sigOrFeature));
+				formulas.add(relation.join(MetaModelConstraints.rParent).eq(signMap.get(feature)));
+				formulas.add(relation.join(MetaModelConstraints.rChild).eq(child));
+				formulas.add(relation.join(MetaModelConstraints.rMin).count().eq(IntConstant.constant(1)));
+				formulas.add(relation.join(MetaModelConstraints.rMax).count().eq(IntConstant.constant(1)));
+				formulas.add(relation.join(MetaModelConstraints.rMin).sum().eq(IntConstant.constant(min)));
+				formulas.add(relation.join(MetaModelConstraints.rMax).sum().eq(IntConstant.constant(max)));
 				
 				relationList.add(relation);
 			} else {
@@ -214,18 +218,18 @@ public class CloudVerification {
 					int max = subFeature.getFeatureCardinality().getMax();
 					
 					if (min == 1 && max == 1) {
-						formulas.add(relation.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigMandatory));
+						formulas.add(relation.join(MetaModelConstraints.rType).eq(MetaModelConstraints.sigMandatory));
 					} else if (min == 0 && max == 1) {
-						formulas.add(relation.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOptional));
+						formulas.add(relation.join(MetaModelConstraints.rType).eq(MetaModelConstraints.sigOptional));
 					} else {
 //						System.out.println("wrong model\t" + feature.getName() + "\t" + subFeature.getName());
-						formulas.add(relation.join(FM_MM_Constraints.rType).eq(FM_MM_Constraints.sigOptional));
+						formulas.add(relation.join(MetaModelConstraints.rType).eq(MetaModelConstraints.sigOptional));
 					}
 					
-					formulas.add(relation.join(FM_MM_Constraints.rParent).eq(signMap.get(feature)));
-					formulas.add(relation.join(FM_MM_Constraints.rChild).eq(signMap.get(subFeature)));
-					formulas.add(relation.join(FM_MM_Constraints.rMin).count().eq(IntConstant.constant(0)));
-					formulas.add(relation.join(FM_MM_Constraints.rMax).count().eq(IntConstant.constant(0)));
+					formulas.add(relation.join(MetaModelConstraints.rParent).eq(signMap.get(feature)));
+					formulas.add(relation.join(MetaModelConstraints.rChild).eq(signMap.get(subFeature)));
+					formulas.add(relation.join(MetaModelConstraints.rMin).count().eq(IntConstant.constant(0)));
+					formulas.add(relation.join(MetaModelConstraints.rMax).count().eq(IntConstant.constant(0)));
 					
 					relationList.add(relation);
 				}
@@ -234,7 +238,6 @@ public class CloudVerification {
 	}
 
 	private void loadFormula() {
-		// should use DFS to load formula
 		for (Constraints constraint : constraints) {
 			if (constraint instanceof ImpliesConstraints) {
 				ImpliesConstraints impliesConstraint = (ImpliesConstraints) constraint;
@@ -253,19 +256,17 @@ public class CloudVerification {
 				Relation toRelation = Relation.unary(toName);
 				relationNameMap.put(toRelation, toName);
 				
-				formulas.add(fromRelation.join(FM_MM_Constraints.rName).eq(signMap.get(fromFeature)));
-				formulas.add(toRelation.join(FM_MM_Constraints.rName).eq(signMap.get(toFeature)));
+				formulas.add(fromRelation.join(MetaModelConstraints.rName).eq(signMap.get(fromFeature)));
+				formulas.add(toRelation.join(MetaModelConstraints.rName).eq(signMap.get(toFeature)));
 				
-				formulas.add(impliesRelation.join(FM_MM_Constraints.rOp).eq(FM_MM_Constraints.sigImpliesF));
-				formulas.add(impliesRelation.join(FM_MM_Constraints.rLeft).eq(fromRelation));
-				formulas.add(impliesRelation.join(FM_MM_Constraints.rRight).eq(toRelation));
+				formulas.add(impliesRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
+				formulas.add(impliesRelation.join(MetaModelConstraints.rLeft).eq(fromRelation));
+				formulas.add(impliesRelation.join(MetaModelConstraints.rRight).eq(toRelation));
 				
 				nameFList.add(fromRelation);
 				nameFList.add(toRelation);
 				
 				formList.add(impliesRelation);
-			} else {
-				//TODO add other
 			}
 		}
 	}
@@ -355,46 +356,46 @@ public class CloudVerification {
 		bounds.boundExactly(fm1, factory.range(factory.tuple("fm1"), factory.tuple("fm1")));
 		bounds.bound(config1, configurationTuple);
 		
-		bounds.boundExactly(FM_MM_Constraints.sigOptional, factory.range(factory.tuple("Optional"), factory.tuple("Optional")));
-		bounds.boundExactly(FM_MM_Constraints.sigMandatory, factory.range(factory.tuple("Mandatory"), factory.tuple("Mandatory")));
-		bounds.boundExactly(FM_MM_Constraints.sigOrFeature, factory.range(factory.tuple("OrFeature"), factory.tuple("OrFeature")));
-		bounds.boundExactly(FM_MM_Constraints.sigXorFeature, factory.range(factory.tuple("XorFeature"), factory.tuple("XorFeature")));
-		bounds.boundExactly(FM_MM_Constraints.sigType, typeTuple);
+		bounds.boundExactly(MetaModelConstraints.sigOptional, factory.range(factory.tuple("Optional"), factory.tuple("Optional")));
+		bounds.boundExactly(MetaModelConstraints.sigMandatory, factory.range(factory.tuple("Mandatory"), factory.tuple("Mandatory")));
+		bounds.boundExactly(MetaModelConstraints.sigOrFeature, factory.range(factory.tuple("OrFeature"), factory.tuple("OrFeature")));
+		bounds.boundExactly(MetaModelConstraints.sigXorFeature, factory.range(factory.tuple("XorFeature"), factory.tuple("XorFeature")));
+		bounds.boundExactly(MetaModelConstraints.sigType, typeTuple);
 		
-		bounds.boundExactly(FM_MM_Constraints.sigAndF, factory.range(factory.tuple("AndF"), factory.tuple("AndF")));
-		bounds.boundExactly(FM_MM_Constraints.sigOrF, factory.range(factory.tuple("OrF"), factory.tuple("OrF")));
-		bounds.boundExactly(FM_MM_Constraints.sigImpliesF, factory.range(factory.tuple("ImpliesF"), factory.tuple("ImpliesF")));
-		bounds.boundExactly(FM_MM_Constraints.sigNotF, factory.range(factory.tuple("NotF"), factory.tuple("NotF")));
-		bounds.boundExactly(FM_MM_Constraints.sigOperation, operationTuple);
+		bounds.boundExactly(MetaModelConstraints.sigAndF, factory.range(factory.tuple("AndF"), factory.tuple("AndF")));
+		bounds.boundExactly(MetaModelConstraints.sigOrF, factory.range(factory.tuple("OrF"), factory.tuple("OrF")));
+		bounds.boundExactly(MetaModelConstraints.sigImpliesF, factory.range(factory.tuple("ImpliesF"), factory.tuple("ImpliesF")));
+		bounds.boundExactly(MetaModelConstraints.sigNotF, factory.range(factory.tuple("NotF"), factory.tuple("NotF")));
+		bounds.boundExactly(MetaModelConstraints.sigOperation, operationTuple);
 		
 		bounds.boundExactly(BooleanExpression.TRUE, factory.range(factory.tuple("True"), factory.tuple("True")));
 		bounds.boundExactly(BooleanExpression.FALSE, factory.range(factory.tuple("False"), factory.tuple("False")));
 		bounds.boundExactly(BooleanExpression.BOOL, booleanTuple);
 		
-		bounds.boundExactly(FM_MM_Constraints.sigFeatureModel, fmTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigName, nameTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigNameF, nameFTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigForm, formTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigFormula, formulaTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigRelation, relationTuple);
-		bounds.boundExactly(FM_MM_Constraints.sigConfiguration, configurationTuple);
+		bounds.boundExactly(MetaModelConstraints.sigFeatureModel, fmTuple);
+		bounds.boundExactly(MetaModelConstraints.sigName, nameTuple);
+		bounds.boundExactly(MetaModelConstraints.sigNameF, nameFTuple);
+		bounds.boundExactly(MetaModelConstraints.sigForm, formTuple);
+		bounds.boundExactly(MetaModelConstraints.sigFormula, formulaTuple);
+		bounds.boundExactly(MetaModelConstraints.sigRelation, relationTuple);
+		bounds.boundExactly(MetaModelConstraints.sigConfiguration, configurationTuple);
 		
-		bounds.bound(FM_MM_Constraints.rFeatures, fmTuple.product(nameTuple));
-		bounds.bound(FM_MM_Constraints.rRoot, fmTuple.product(nameTuple));
-		bounds.bound(FM_MM_Constraints.rRelations, fmTuple.product(relationTuple));
-		bounds.bound(FM_MM_Constraints.rFormulas, fmTuple.product(formulaTuple));
-		bounds.bound(FM_MM_Constraints.rParent, relationTuple.product(nameTuple));
-		bounds.bound(FM_MM_Constraints.rChild, relationTuple.product(nameTuple));
-		bounds.bound(FM_MM_Constraints.rType, relationTuple.product(typeTuple));
-		bounds.bound(FM_MM_Constraints.rMin, relationTuple.product(intTuple));
-		bounds.bound(FM_MM_Constraints.rMax, relationTuple.product(intTuple));
-		bounds.bound(FM_MM_Constraints.rSatisfy, formulaTuple.product(configurationTuple).product(booleanTuple));
-		bounds.bound(FM_MM_Constraints.rWelltyped, formulaTuple.product(fmTuple).product(booleanTuple));
-		bounds.bound(FM_MM_Constraints.rName, nameFTuple.product(nameTuple));
-		bounds.bound(FM_MM_Constraints.rLeft, formTuple.product(formulaTuple));
-		bounds.bound(FM_MM_Constraints.rRight, formTuple.product(formulaTuple));
-		bounds.bound(FM_MM_Constraints.rOp, formTuple.product(operationTuple));
-		bounds.bound(FM_MM_Constraints.rValue, configurationTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rFeatures, fmTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rRoot, fmTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rRelations, fmTuple.product(relationTuple));
+		bounds.bound(MetaModelConstraints.rFormulas, fmTuple.product(formulaTuple));
+		bounds.bound(MetaModelConstraints.rParent, relationTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rChild, relationTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rType, relationTuple.product(typeTuple));
+		bounds.bound(MetaModelConstraints.rMin, relationTuple.product(intTuple));
+		bounds.bound(MetaModelConstraints.rMax, relationTuple.product(intTuple));
+		bounds.bound(MetaModelConstraints.rSatisfy, formulaTuple.product(configurationTuple).product(booleanTuple));
+		bounds.bound(MetaModelConstraints.rWelltyped, formulaTuple.product(fmTuple).product(booleanTuple));
+		bounds.bound(MetaModelConstraints.rName, nameFTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rLeft, formTuple.product(formulaTuple));
+		bounds.bound(MetaModelConstraints.rRight, formTuple.product(formulaTuple));
+		bounds.bound(MetaModelConstraints.rOp, formTuple.product(operationTuple));
+		bounds.bound(MetaModelConstraints.rValue, configurationTuple.product(nameTuple));
 		
 		for (int i = 0; i < 10; ++i) {
 			bounds.boundExactly(i, factory.setOf(Integer.valueOf(i)));
@@ -414,13 +415,10 @@ public class CloudVerification {
 		}
 	}
 	
-	// mapping function might be different among feature models
 	public void createInstance(String[] string) {
 		config1 = Relation.unary("Config1");
 		formulas.add(config1.one());
 		
-//		formulas.add(config1.join(FM_MM_Constraints.rValue).eq(Expression.union(cloud, language, framework, rails, java)));
-
 		Expression featureSelection = signMap.get(rootFeature);
 		for (String str : string) {
 			for (Feature feature: signMap.keySet()) {
@@ -431,18 +429,12 @@ public class CloudVerification {
 			}
 		}
 		
-		formulas.add(config1.join(FM_MM_Constraints.rValue).eq(featureSelection));
+		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
 		this.validConfiguration();
 	}
 	
-	private void validConfiguration() {
-		formulas.add(basic.wellFormedFeatureModel(fm1));
-		formulas.add(config1.in(basic.semantics(fm1)));
-	}
-	
-	public static void main(String[] args) {
-		CloudVerification demo = new CloudVerification("feature_model/heroku.fm");
-		demo.createInstance(new String[] {"Language", "Rails", "EU", "Location", "Framework", "Ruby"});
-		demo.check();
+	protected void validConfiguration() {
+		formulas.add(metamodel.wellFormedFeatureModel(fm1));
+		formulas.add(config1.in(metamodel.semantics(fm1)));
 	}
 }

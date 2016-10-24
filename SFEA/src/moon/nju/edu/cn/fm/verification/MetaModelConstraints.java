@@ -9,7 +9,7 @@ import kodkod.ast.IntConstant;
 import kodkod.ast.Relation;
 import kodkod.ast.Variable;
 
-public class FM_MM_Constraints {
+public class MetaModelConstraints {
 	// Signature
 	public static final Relation sigFeatureModel, sigName, sigRelation, sigType, sigOptional, sigMandatory, sigOrFeature, sigXorFeature;
 	public static final Relation sigFormula, sigNameF, sigForm, sigOperation, sigAndF, sigOrF, sigImpliesF, sigNotF;
@@ -25,7 +25,7 @@ public class FM_MM_Constraints {
 		return formulas;
 	}
 	
-	public FM_MM_Constraints() {
+	public MetaModelConstraints() {
 		formulas.add(this.setupSigFeatureModelDeclarations());
 		formulas.add(this.setupSigRelationDeclarations());
 		formulas.add(this.setupSigFormulaDeclarations());

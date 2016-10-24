@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.platform;
+package moon.nju.edu.cn.fm.reference;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -20,22 +20,22 @@ import moon.nju.edu.cn.fm.model.XorFeature;
 /**
  * How to parse a feature model
  * @author wyq
- *
  */
-public class CloudFeatureModel {
+
+public class ExampleForParseModel {
 	private FeatureModel cloudFeatureModel;
 	private Feature rootFeature;
 	private LinkedList<Constraints> constraints = new LinkedList<Constraints>();
 	private LinkedList<Feature> queue = new LinkedList<Feature>();
 	
-	public CloudFeatureModel() {
+	public ExampleForParseModel() {
 		SFEAPackage.eINSTANCE.eClass();
 		Resource.Factory.Registry registry = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> map = registry.getExtensionToFactoryMap();
 		map.put("fm", new XMIResourceFactoryImpl());
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createURI("feature_model/cloud.fm"), true);
+		Resource resource = resourceSet.getResource(URI.createURI("feature_model/heroku.fm"), true);
 		this.cloudFeatureModel = (FeatureModel) resource.getContents().get(0);
 		this.rootFeature = cloudFeatureModel.getRoot();
 		this.constraints.addAll(cloudFeatureModel.getConstraints());
@@ -93,6 +93,6 @@ public class CloudFeatureModel {
 	}
 	
 	public static void main(String[] args) {
-		new CloudFeatureModel();
+		new ExampleForParseModel();
 	}
 }

@@ -1,50 +1,39 @@
 package moon.nju.edu.cn.fm.platform;
 
-import java.util.Map;
-
+import kodkod.ast.Expression;
+import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
-import moon.nju.edu.cn.fm.model.FeatureModel;
-import moon.nju.edu.cn.fm.model.OrFeature;
-import moon.nju.edu.cn.fm.model.SFEAPackage;
-import moon.nju.edu.cn.fm.model.XorFeature;
+import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-public class HerokuFeatureModel {
-	private FeatureModel herokuFeatureModel;
+public class HerokuFeatureModel extends CloudVerification implements CloudFeatureModelInterface {
 	
-	public HerokuFeatureModel() {
-		SFEAPackage.eINSTANCE.eClass();
-		Resource.Factory.Registry registry = Resource.Factory.Registry.INSTANCE;
-		Map<String, Object> map = registry.getExtensionToFactoryMap();
-		map.put("fm", new XMIResourceFactoryImpl());
+	public HerokuFeatureModel(String file) {
+		super(file);
+	}
+
+	@Override
+	public void createInstance(String[] string) {
+		config1 = Relation.unary("Config1");
+		formulas.add(config1.one());
 		
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createURI("feature_model/heroku.fm"), true);
-		this.herokuFeatureModel = (FeatureModel) resource.getContents().get(0);
-		System.out.println(herokuFeatureModel.getRoot().getName());
-		for (Feature f: herokuFeatureModel.getRoot().getSubFeatures()) {
-			System.out.println(f.getName());
-			for (Feature ff: f.getSubFeatures()) {
-				System.out.println("\t" + ff.getName());
-			}
-			
-			if (f instanceof OrFeature) {
-				//OrFeature
-				System.out.println("Or\t" + ((OrFeature)f).getVariants());
-			} else if (f instanceof XorFeature) {
-				//XorFeature
-			} else {
-				//Optional or Mandatory
+		Expression featureSelection = signMap.get(rootFeature);
+		for (String str : string) {
+			for (Feature feature: signMap.keySet()) {
+				if (str.equals(feature.getName())) {
+					featureSelection = featureSelection == null ? signMap.get(feature) : featureSelection.union(signMap.get(feature));
+					break;
+				}
 			}
 		}
+		
+		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
+		this.validConfiguration();
 	}
 	
+	
 	public static void main(String[] args) {
-		new HerokuFeatureModel();
+		CloudVerification demo = new CloudVerification("feature_model/heroku.fm");
+		demo.createInstance(new String[] {"Language", "Spring", "Framework", "Java", "Service", "Log"});
+		demo.check();
 	}
 }
