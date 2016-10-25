@@ -4,6 +4,7 @@
     <subFeatures name="Dyno">
       <featureCardinality max="10"/>
       <attributes name="dynoMemorySize" value="512,1024"/>
+      <attributes name="dynoCPUFrequencyType" value="GHz"/>
       <attributes name="dynoSize" value="1X,2X"/>
     </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Language">
@@ -14,6 +15,7 @@
       <variants name="Ruby"/>
       <variants name="Javascript"/>
       <variants name="PHP"/>
+      <variants name="Go"/>
       <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Framework">
@@ -22,7 +24,7 @@
       <variants name="Rails"/>
       <variants name="Play"/>
       <variants name="Node.js"/>
-      <groupCardinality min="1" max="4"/>
+      <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures name="Service">
       <subFeatures name="Log">
@@ -37,25 +39,18 @@
         </variants>
         <variants xsi:type="fm:OrFeature" name="SQL">
           <variants name="Postgres"/>
-          <variants name="TreasureData"/>
-          <variants name="clearDB"/>
-          <groupCardinality min="1" max="3"/>
+          <variants name="ClearDB"/>
+          <groupCardinality min="1" max="2"/>
         </variants>
         <groupCardinality min="1" max="2"/>
       </subFeatures>
       <subFeatures xsi:type="fm:OrFeature" name="Caching">
         <featureCardinality max="1"/>
-        <variants name="ironcache"/>
-        <variants name="memcachier"/>
+        <variants name="Ironcache"/>
+        <variants name="Memcachier"/>
         <groupCardinality min="1" max="2"/>
       </subFeatures>
       <featureCardinality max="1"/>
-    </subFeatures>
-    <subFeatures xsi:type="fm:XorFeature" name="Location">
-      <featureCardinality max="1"/>
-      <variants name="US"/>
-      <variants name="EU"/>
-      <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures xsi:type="fm:OrFeature" name="Resource">
       <featureCardinality max="1"/>

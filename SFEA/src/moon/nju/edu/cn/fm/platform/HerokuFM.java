@@ -33,7 +33,7 @@ public class HerokuFM extends CloudVerification implements FMInterface {
 	
 	public static void main(String[] args) {
 		HerokuFM demo = new HerokuFM("feature_model/heroku.fm");
-		demo.createInstance(new String[] {"Language", "Go", "Service", "Log", "Resource", "CPU", "Memory"});
+		demo.createInstance(new String[] {"Language", "Java", "Service", "Database", "SQL", "Postgres", "Log"});
 		demo.check();
 	}
 }

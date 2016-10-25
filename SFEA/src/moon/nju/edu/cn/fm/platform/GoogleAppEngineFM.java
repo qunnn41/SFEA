@@ -33,7 +33,7 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface 
 	
 	public static void main(String[] args) {
 		GoogleAppEngineFM demo = new GoogleAppEngineFM("feature_model/gae.fm");
-		demo.createInstance(new String[] {"Language", "Go", "Service", "Log", "Resource", "CPU", "Memory"});
+		demo.createInstance(new String[] {"Language", "Java"});
 		demo.check();
 	}
 }
