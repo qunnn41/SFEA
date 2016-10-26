@@ -419,14 +419,16 @@ public class CloudVerification {
 		return bounds;
 	}
 	
-	public void check() {
+	public boolean check() {
 		final Solver solver = new Solver();
 		solver.options().setSolver(SATFactory.MiniSat);
 		final Solution solution = solver.solve(getFormulas(), bounds());
 		if (solution.unsat()) {
 			System.out.println("unsat");
+			return false;
 		} else {
 			System.out.println(solution);
+			return true;
 		}
 	}
 	

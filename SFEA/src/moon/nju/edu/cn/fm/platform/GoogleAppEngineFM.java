@@ -1,15 +1,23 @@
 package moon.nju.edu.cn.fm.platform;
 
+import java.util.concurrent.CountDownLatch;
+
 import kodkod.ast.Expression;
 import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.verification.CloudVerification;
 import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 
-public class GoogleAppEngineFM extends CloudVerification implements FMInterface {
-
-	public GoogleAppEngineFM(String file) {
-		super(file);
+public class GoogleAppEngineFM extends CloudVerification implements FMInterface, Runnable {
+	private CountDownLatch downLatch;
+	private String[] feature;
+	private ValidConfigurationCallback callback;
+	
+	public GoogleAppEngineFM(CountDownLatch downLatch, String[] feature, ValidConfigurationCallback callback) {
+		super("feature_model/gae.fm");
+		this.feature = feature;
+		this.downLatch = downLatch;
+		this.callback = callback;
 	}
 
 	@Override
@@ -31,9 +39,21 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface 
 		this.validConfiguration();
 	}
 	
-	public static void main(String[] args) {
-		GoogleAppEngineFM demo = new GoogleAppEngineFM("feature_model/gae.fm");
-		demo.createInstance(new String[] {"Language", "Java"});
-		demo.check();
+//	public static void main(String[] args) {
+//		GoogleAppEngineFM demo = new GoogleAppEngineFM();
+//		demo.createInstance(new String[] {"Language", "Java"});
+//		demo.check();
+//	}
+
+	@Override
+	public void run() {
+		this.createInstance(feature);
+		if (this.check()) {
+			callback.onValid();
+		} else {
+			callback.onInvalid();
+		}
+		
+		downLatch.countDown();
 	}
 }
