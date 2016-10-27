@@ -40,15 +40,5 @@
       </subFeatures>
       <featureCardinality max="1"/>
     </subFeatures>
-    <subFeatures xsi:type="fm:OrFeature" name="Resource">
-      <featureCardinality max="1"/>
-      <variants name="Memory"/>
-      <variants name="CPU"/>
-      <variants name="Disk"/>
-      <variants name="Scaling"/>
-      <variants name="Bandwidth"/>
-      <variants name="HealthCheck"/>
-      <groupCardinality min="1" max="6"/>
-    </subFeatures>
   </root>
 </fm:FeatureModel>

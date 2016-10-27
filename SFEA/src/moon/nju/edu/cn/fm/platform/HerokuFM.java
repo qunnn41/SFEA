@@ -11,9 +11,9 @@ import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 public class HerokuFM extends CloudVerification implements FMInterface, Runnable {
 	private CountDownLatch downLatch;
 	private String[] feature;
-	private ValidConfigurationCallback callback;
+	private ValidConfigCallback callback;
 	
-	public HerokuFM(CountDownLatch downLatch, String[] feature, ValidConfigurationCallback callback) {
+	public HerokuFM(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
 		super("feature_model/heroku.fm");
 		this.feature = feature;
 		this.downLatch = downLatch;

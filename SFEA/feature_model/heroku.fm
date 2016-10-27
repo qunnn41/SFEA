@@ -52,15 +52,6 @@
       </subFeatures>
       <featureCardinality max="1"/>
     </subFeatures>
-    <subFeatures xsi:type="fm:OrFeature" name="Resource">
-      <featureCardinality max="1"/>
-      <variants name="CPU"/>
-      <variants name="Memory"/>
-      <variants name="Disk"/>
-      <variants name="Bandwidth"/>
-      <variants name="Scaling"/>
-      <groupCardinality min="1" max="5"/>
-    </subFeatures>
   </root>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.0" to="//@root/@subFeatures.1/@variants.0"/>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.2" to="//@root/@subFeatures.1/@variants.0"/>

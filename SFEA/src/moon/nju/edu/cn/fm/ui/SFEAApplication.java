@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 import moon.nju.edu.cn.fm.platform.GoogleAppEngineFM;
 import moon.nju.edu.cn.fm.platform.HerokuFM;
-import moon.nju.edu.cn.fm.platform.ValidConfigurationCallback;
+import moon.nju.edu.cn.fm.platform.ValidConfigCallback;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -158,6 +158,8 @@ public class SFEAApplication {
 		resetButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				featureSelected.clear();
+				
 				javaLanguageButton.setSelection(false);
 				pythonLanguageButton.setSelection(false);
 				rubyLanguageButton.setSelection(false);
@@ -344,7 +346,7 @@ public class SFEAApplication {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		CountDownLatch latch = new CountDownLatch(2);
 		
-		HerokuFM herokuFM = new HerokuFM(latch, feature, new ValidConfigurationCallback() {
+		HerokuFM herokuFM = new HerokuFM(latch, feature, new ValidConfigCallback() {
 			
 			@Override
 			public void onValid() {
@@ -357,7 +359,7 @@ public class SFEAApplication {
 			}
 		});
 		
-		GoogleAppEngineFM gaeFM = new GoogleAppEngineFM(latch, feature, new ValidConfigurationCallback() {
+		GoogleAppEngineFM gaeFM = new GoogleAppEngineFM(latch, feature, new ValidConfigCallback() {
 			
 			@Override
 			public void onValid() {
@@ -379,6 +381,7 @@ public class SFEAApplication {
 		} catch (InterruptedException e) {
 		}
 		
+		//TODO add NFS selection and generate script
 		System.out.println("finish");
 	}
 	

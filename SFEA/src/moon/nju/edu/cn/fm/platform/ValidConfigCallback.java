@@ -1,6 +1,6 @@
 package moon.nju.edu.cn.fm.platform;
 
-public interface ValidConfigurationCallback {
+public interface ValidConfigCallback {
 	void onValid();
 	void onInvalid();
 }

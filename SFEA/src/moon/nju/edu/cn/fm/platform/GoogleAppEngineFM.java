@@ -11,9 +11,9 @@ import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
 public class GoogleAppEngineFM extends CloudVerification implements FMInterface, Runnable {
 	private CountDownLatch downLatch;
 	private String[] feature;
-	private ValidConfigurationCallback callback;
+	private ValidConfigCallback callback;
 	
-	public GoogleAppEngineFM(CountDownLatch downLatch, String[] feature, ValidConfigurationCallback callback) {
+	public GoogleAppEngineFM(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
 		super("feature_model/gae.fm");
 		this.feature = feature;
 		this.downLatch = downLatch;
