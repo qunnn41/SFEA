@@ -1,6 +1,8 @@
 package moon.nju.edu.cn.fm.ui;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -10,6 +12,8 @@ import moon.nju.edu.cn.fm.platform.GoogleAppEngineFM;
 import moon.nju.edu.cn.fm.platform.HerokuFM;
 import moon.nju.edu.cn.fm.platform.ValidConfigCallback;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -23,8 +27,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class SFEAApplication {
-	private Display display;
-	private Shell shell;
+	private Display sfeaDisplay;
+	private Shell sfeaShell;
 	private final Set<String> featureSelected = new HashSet<String>();
 	
 	private Button deployButton, resetButton;
@@ -34,11 +38,12 @@ public class SFEAApplication {
 	private Button springFrameworkButton, railsFrameworkButton, playFrameworkButton, nodejsFrameworkButton;
 	private Button postgresSQLButton, clearDBSQLButton, redisNoSQLButton, mongoDBNoSQLButton;
 	private Button ironCacheButton, memCacheButton;
+	private Text applicationText, executionText;
 	
 	public SFEAApplication() {
-		display = new Display();
-		shell = new Shell(display);
-		shell.setLayout(new GridLayout(1, false));
+		sfeaDisplay = new Display();
+		sfeaShell = new Shell(sfeaDisplay);
+		sfeaShell.setLayout(new GridLayout(1, false));
 		
 		this.setupInputArea();
 		this.setupLanugage();
@@ -46,7 +51,7 @@ public class SFEAApplication {
 		this.setupDatabase();
 		this.setupCaching();
 		
-		Composite composite = new Composite(shell, SWT.BORDER);
+		Composite composite = new Composite(sfeaShell, SWT.BORDER);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		composite.setLayout(new GridLayout(2, true));
 		deployButton = new Button(composite, SWT.PUSH);
@@ -59,26 +64,26 @@ public class SFEAApplication {
 	}
 	
 	private void setupInputArea() {
-		Group applicationGroup = new Group(shell, SWT.NONE);
+		Group applicationGroup = new Group(sfeaShell, SWT.NONE);
 		applicationGroup.setText("Application Name");
 		applicationGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		applicationGroup.setLayout(new GridLayout(1, true));
-		Text applicationText = new Text(applicationGroup, SWT.NONE);
+		applicationText = new Text(applicationGroup, SWT.NONE);
 		applicationText.setText("");
 		applicationText.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		
-		Group executionGroup = new Group(shell, SWT.NONE);
+		Group executionGroup = new Group(sfeaShell, SWT.NONE);
 		executionGroup.setText("Execution Command");
 		executionGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		executionGroup.setLayout(new GridLayout(1, true));
-		Text executionText = new Text(executionGroup, SWT.NONE);
+		executionText = new Text(executionGroup, SWT.NONE);
 		executionText.setText("");
 		executionText.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 	}
 	
 	private void setupLanugage() {
 		// Language
-		languageGroup = new Group(shell, SWT.NONE);
+		languageGroup = new Group(sfeaShell, SWT.NONE);
 		languageGroup.setText("Language");
 		languageGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		languageGroup.setLayout(new GridLayout(4, true));
@@ -100,7 +105,7 @@ public class SFEAApplication {
 	
 	private void setupFramework() {
 		// Framework
-		frameworkGroup = new Group(shell, SWT.NONE);
+		frameworkGroup = new Group(sfeaShell, SWT.NONE);
 		frameworkGroup.setText("Framework");
 		frameworkGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		frameworkGroup.setLayout(new GridLayout(4, true));
@@ -116,7 +121,7 @@ public class SFEAApplication {
 	
 	private void setupDatabase() {
 		// SQL
-		SQLGroup = new Group(shell, SWT.NONE);
+		SQLGroup = new Group(sfeaShell, SWT.NONE);
 		SQLGroup.setText("SQL Database");
 		SQLGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		SQLGroup.setLayout(new GridLayout(4, true));
@@ -126,7 +131,7 @@ public class SFEAApplication {
 		clearDBSQLButton.setText("ClearDB");
 		
 		// NoSQL
-		NoSQLGroup = new Group(shell, SWT.NONE);
+		NoSQLGroup = new Group(sfeaShell, SWT.NONE);
 		NoSQLGroup.setText("NoSQL Database");
 		NoSQLGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		NoSQLGroup.setLayout(new GridLayout(4, true));
@@ -137,7 +142,7 @@ public class SFEAApplication {
 	}
 	
 	private void setupCaching() {
-		cacheGroup = new Group(shell, SWT.NONE);
+		cacheGroup = new Group(sfeaShell, SWT.NONE);
 		cacheGroup.setText("Cache");
 		cacheGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		cacheGroup.setLayout(new GridLayout(4, true));
@@ -180,182 +185,215 @@ public class SFEAApplication {
 				
 				ironCacheButton.setSelection(false);
 				memCacheButton.setSelection(false);
+				
+				applicationText.setText("");
+				executionText.setText("");
 			}
 		});
 		
 		javaLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("Java");
+				selectLanguage(e, "Java");
 			}
 		});
 		
 		pythonLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("Python");
+				selectLanguage(e, "Python");
 			}
 		});
 		
 		rubyLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("Ruby");
+				selectLanguage(e, "Ruby");
 			}
 		});
 		
 		scalaLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("Scala");
+				selectLanguage(e, "Scala");
 			}
 		});
 		
 		jsLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("Javascript");
+				selectLanguage(e, "Javascript");
 			}
 		});
 		
 		phpLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("PHP");
+				selectLanguage(e, "PHP");
 			}
 		});
 		
 		goLanguageButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectLanguage("Go");
+				selectLanguage(e, "Go");
 			}
 		});
 		
 		springFrameworkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectFramework("Spring");
+				selectFramework(e, "Spring");
 			}
 		});
 		
 		railsFrameworkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectFramework("Rails");
+				selectFramework(e, "Rails");
 			}
 		});
 		
 		playFrameworkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectFramework("Play");
+				selectFramework(e, "Play");
 			}
 		});
 		
 		nodejsFrameworkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectFramework("Node.js");
+				selectFramework(e, "Node.js");
 			}
 		});
 		
 		postgresSQLButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectSql("Postgres");
+				selectSql(e, "Postgres");
 			}
 		});
 		
 		clearDBSQLButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectSql("ClearDB");
+				selectSql(e, "ClearDB");
 			}
 		});
 		
 		redisNoSQLButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectNoSql("Redis");
+				selectNoSql(e, "Redis");
 			}
 		});
 		
 		mongoDBNoSQLButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectNoSql("MongoDB");
+				selectNoSql(e, "MongoDB");
 			}
 		});
 		
 		ironCacheButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectCache("Ironcache");
+				selectCache(e, "Ironcache");
 			}
 		});
 		
 		memCacheButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectCache("Memcachier");
-				selectCache("Memcache");
+				selectCache(e, "Memcachier");
+				selectCache(e, "Memcache");
 			}
 		});
 	}
 	
-	private void selectLanguage(String language) {
-		featureSelected.add(language);
-		featureSelected.add("Language");
+	private void selectLanguage(SelectionEvent event, String language) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(language);
+			featureSelected.add("Language");
+		} else {
+			featureSelected.remove(language);
+			featureSelected.remove("Language");
+		}
 	}
 	
-	private void selectFramework(String framework) {
-		featureSelected.add(framework);
-		featureSelected.add("Framework");
+	private void selectFramework(SelectionEvent event, String framework) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(framework);
+			featureSelected.add("Framework");
+		} else {
+			featureSelected.remove(framework);
+			featureSelected.remove("Framework");
+		}
 	}
 	
-	private void selectSql(String sql) {
-		featureSelected.add(sql);
-		featureSelected.add("SQL");
-		featureSelected.add("Database");
-		featureSelected.add("Service");
+	private void selectSql(SelectionEvent event, String sql) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(sql);
+			featureSelected.add("SQL");
+			featureSelected.add("Database");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(sql);
+			featureSelected.remove("SQL");
+			featureSelected.remove("Database");
+			featureSelected.remove("Service");
+		}
 	}
 	
-	private void selectNoSql(String Nosql) {
-		featureSelected.add(Nosql);
-		featureSelected.add("SQL");
-		featureSelected.add("Database");
-		featureSelected.add("Service");
+	private void selectNoSql(SelectionEvent event, String Nosql) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(Nosql);
+			featureSelected.add("NoSQL");
+			featureSelected.add("Database");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(Nosql);
+			featureSelected.remove("NoSQL");
+			featureSelected.remove("Database");
+			featureSelected.remove("Service");
+		}
 	}
 	
-	private void selectCache(String cache) {
-		featureSelected.add(cache);
-		featureSelected.add("Caching");
-		featureSelected.add("Service");
+	private void selectCache(SelectionEvent event, String cache) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(cache);
+			featureSelected.add("Caching");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(cache);
+			featureSelected.remove("Caching");
+			featureSelected.remove("Service");
+		}
 	}
 	
 	private void deployApp() {
-		System.out.println("deploying...");
 		String[] feature = featureSelected.toArray(new String[featureSelected.size()]);
-		
-		for (String string : feature) {
-			System.out.println(string);
-		}
 		
 		// Currently we have two feature models
 		ExecutorService executor = Executors.newCachedThreadPool();
 		CountDownLatch latch = new CountDownLatch(2);
 		
+		final List<String> avaliablePlatform = new LinkedList<String>(); 
 		HerokuFM herokuFM = new HerokuFM(latch, feature, new ValidConfigCallback() {
 			
 			@Override
 			public void onValid() {
-				System.out.println("heroku valid");
+				avaliablePlatform.add("heroku");
 			}
 			
 			@Override
 			public void onInvalid() {
-				System.out.println("heroku invalid");
 			}
 		});
 		
@@ -363,12 +401,11 @@ public class SFEAApplication {
 			
 			@Override
 			public void onValid() {
-				System.out.println("google app engine valid");
+				avaliablePlatform.add("google app engine");
 			}
 			
 			@Override
 			public void onInvalid() {
-				System.out.println("google app engine invalid");
 			}
 		});
 		
@@ -381,20 +418,46 @@ public class SFEAApplication {
 		} catch (InterruptedException e) {
 		}
 		
-		//TODO add NFS selection and generate script
-		System.out.println("finish");
+		System.out.println("valid configuration checking job is DONE!!!!");
+		if (avaliablePlatform.size() == 0) {
+			MessageDialog.openError(sfeaShell, "Error", "No platform is avaliable for this configuration");
+			return;
+		}
+		
+		String platform = null;
+		while ((platform = selectPlatform(avaliablePlatform)) == null) {
+			MessageDialog.openError(sfeaShell, "Error", "Please select a platform");
+		}
+		
+		showNFRUI(platform, feature);
+	}
+	
+	private void showNFRUI(String platfrom, String[] feature) {
+		if (platfrom.equals("heroku")) {
+			new HerokuNFR(executionText.getText(), applicationText.getText(), sfeaDisplay, feature);
+		}
+	}
+	
+	private String selectPlatform(List<String> platformList) {
+		PlatformSelectionDialog dialog = new PlatformSelectionDialog(sfeaShell, platformList);
+		dialog.create();
+		if (dialog.open() == Window.OK) {
+			return dialog.getSelectedPlatfrom();
+		}
+		
+		return null;
 	}
 	
 	public void showUI() {
-		shell.pack();
-		shell.open();
-		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
+		sfeaShell.pack();
+		sfeaShell.open();
+		while (!sfeaShell.isDisposed()) {
+			if (!sfeaDisplay.readAndDispatch()) {
+				sfeaDisplay.sleep();
 			}
 		}
 		
-		display.dispose();
+		sfeaDisplay.dispose();
 	}
 	
 	public static void main(String[] args) {

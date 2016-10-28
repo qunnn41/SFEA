@@ -3,7 +3,7 @@ echo "web: node web.js" > Procfile
 git init
 git add -A
 git commit -m "first commit"
-heroku create wyq-app-name
+heroku create wyq-nodejs-app
 heroku addons:create cleardb:ignite
 url=$(heroku config | grep CLEARDB_DATABASE_URL)
 IFS=": // / ? @"

@@ -1,149 +1,139 @@
 {
     "dynos": {
         "free": {
-            "price": 0.0,
+            "memory (GB)": 0.5,
+            "price ($/mon)": 0.0,
             "cpu": "1x",
-            "sleep": true,
-            "memory": 0.5,
             "professional features(horizontal scalability, application metrics, faster build, preboot)": false
         },
         "standard-1x": {
-            "price": 2.5,
+            "memory (GB)": 0.5,
+            "price ($/mon)": 2.5,
             "cpu": "1x",
-            "sleep": false,
-            "memory": 0.5,
             "professional features(horizontal scalability, application metrics, faster build, preboot)": true
         },
         "performance-l": {
-            "price": 500.0,
+            "memory (GB)": 14.0,
+            "price ($/mon)": 500.0,
             "cpu": "100%",
-            "sleep": false,
-            "memory": 14.0,
             "professional features(horizontal scalability, application metrics, faster build, preboot)": true
         },
         "standard-2x": {
-            "price": 50.0,
+            "memory (GB)": 1.0,
+            "price ($/mon)": 50.0,
             "cpu": "2x",
-            "sleep": false,
-            "memory": 1.0,
             "professional features(horizontal scalability, application metrics, faster build, preboot)": true
         },
         "hobby": {
-            "price": 7.0,
+            "memory (GB)": 0.5,
+            "price ($/mon)": 7.0,
             "cpu": "1x",
-            "sleep": false,
-            "memory": 0.5,
             "professional features(horizontal scalability, application metrics, faster build, preboot)": false
         },
         "performance-m": {
-            "price": 250.0,
+            "memory (GB)": 2.5,
+            "price ($/mon)": 250.0,
             "cpu": "100%",
-            "sleep": false,
-            "memory": 2.5,
             "professional features(horizontal scalability, application metrics, faster build, preboot)": true
         }
     },
     "database": {
         "Redis": {
             "Premium2": {
-                "prize": 60.0,
+                "price ($/mon)": 60.0,
                 "persistence": true,
                 "connections": 200,
                 "high avaliability": true,
-                "size": 0.25
+                "size (GB)": 0.25
             },
             "Premium1": {
-                "prize": 30.0,
+                "price ($/mon)": 30.0,
                 "persistence": true,
                 "connections": 80,
                 "high avaliability": true,
-                "size": 0.1
+                "size (GB)": 0.1
             },
             "Premium0": {
-                "prize": 15.0,
+                "price ($/mon)": 15.0,
                 "persistence": true,
                 "connections": 40,
                 "high avaliability": true,
-                "size": 0.05
+                "size (GB)": 0.05
             },
             "hobby": {
-                "prize": 0.0,
+                "price ($/mon)": 0.0,
                 "persistence": false,
                 "connections": 20,
                 "high avaliability": false,
-                "size": 0.025
+                "size (GB)": 0.025
             }
         },
         "MongoDB": {
             "sharecluster4": {
                 "monitoring": true,
+                "price ($/mon)": 72.0,
                 "dedicated": true,
-                "prize": 72.0,
                 "log": true,
                 "high avaliability": true,
-                "size": 4
+                "size": 4.0
             },
             "sandbox": {
                 "monitoring": false,
+                "price ($/mon)": 0.0,
                 "dedicated": false,
-                "prize": 0.0,
                 "log": false,
                 "high avaliability": false,
                 "size": 0.496
             },
             "sharecluster1": {
                 "monitoring": true,
+                "price ($/mon)": 18.0,
                 "dedicated": true,
-                "prize": 18.0,
                 "log": true,
                 "high avaliability": true,
-                "size": 1
+                "size": 1.0
             },
             "sharecluster2": {
                 "monitoring": true,
+                "price ($/mon)": 36.0,
                 "dedicated": true,
-                "prize": 36.0,
                 "log": true,
                 "high avaliability": true,
-                "size": 2
+                "size": 2.0
             }
         },
-        "clearDB": {
+        "ClearDB": {
             "punch": {
-                "prize": "10",
+                "price ($/mon)": 10.0,
                 "connections": 15,
                 "IO support": false,
                 "production": true,
                 "time support": false,
-                "backup": true,
-                "size": 1.0
+                "size (GB)": 1.0
             },
             "scream": {
-                "prize": 100.0,
+                "price ($/mon)": 100.0,
                 "connections": 40,
                 "IO support": true,
                 "production": true,
                 "time support": true,
-                "backup": true,
-                "size": 10.0
+                "size (GB)": 10.0
             },
             "ignite": {
-                "prize": 0.0,
+                "price ($/mon)": 0.0,
                 "connections": 10,
                 "IO support": false,
                 "production": false,
                 "time support": false,
-                "backup": true,
-                "size": 0.005
+                "size (GB)": 0.005
             },
             "drift": {
-                "prize": 50.0,
+                "price ($/mon)": 50.0,
                 "connections": 30,
                 "IO support": true,
                 "production": true,
                 "time support": false,
-                "backup": true,
-                "size": 5.0
+                "size (GB)": 5.0
             }
         }
     }
