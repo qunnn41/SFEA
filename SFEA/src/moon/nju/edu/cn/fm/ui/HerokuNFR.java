@@ -77,6 +77,25 @@ public class HerokuNFR {
 			if (features.contains("MongoDB")) {
 				setupConfig(obj, "MongoDB");
 			}
+			
+			if (features.contains("Redis")) {
+				setupConfig(obj, "Redis");
+			}
+			
+			if (features.contains("Postgres")) {
+				setupConfig(obj, "Postgres");
+			}
+		}
+		
+		if (features.contains("Caching")) {
+			JSONObject obj = (JSONObject) jsonRoot.get("caching");
+			if (features.contains("Ironcache")) {
+				setupConfig(obj, "Ironcache");
+			}
+			
+			if (features.contains("Memcache")) {
+				setupConfig(obj, "Memcache");
+			}
 		}
 		
 		Composite composite = new Composite(herokuShell, SWT.BORDER);

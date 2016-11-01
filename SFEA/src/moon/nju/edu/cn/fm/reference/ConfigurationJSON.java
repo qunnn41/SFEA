@@ -16,6 +16,7 @@ public class ConfigurationJSON {
 		root = new JSONObject();
 		root.put("dynos", initDynos());
 		root.put("database", initDatabase());
+		root.put("caching", initCaching());
 		
 		try {
 			FileWriter file = new FileWriter("config.json");
@@ -27,13 +28,153 @@ public class ConfigurationJSON {
 		}
 	}
 	
+	private JSONObject initCaching() {
+		JSONObject obj = new JSONObject();
+		obj.put("Memcache", initMemCachier());
+		obj.put("Ironcache", initIronCache());
+		
+		return obj;
+	}
+	
+	// cache
+	private JSONObject initMemCachier() {
+		JSONObject obj = new JSONObject();
+		
+		JSONObject dev = new JSONObject();
+		dev.put("PST Support", false);
+		dev.put("bucket Size (MB)", 25.0);
+		dev.put("connections", 10);
+		dev.put("advanced analytics dashboard", false);
+		dev.put("new relic integration", false);
+		dev.put("price ($/mon)", 0.0);
+		obj.put("dev", dev);
+		
+		JSONObject m100 = new JSONObject();
+		m100.put("PST Support", true);
+		m100.put("bucket Size (MB)", 100.0);
+		m100.put("connections", 1000);
+		m100.put("advanced analytics dashboard", false);
+		m100.put("new relic integration", false);
+		m100.put("price ($/mon)", 15.0);
+		obj.put("100", m100);
+		
+		JSONObject m250 = new JSONObject();
+		m250.put("PST Support", true);
+		m250.put("bucket Size (MB)", 250.0);
+		m250.put("connections", 1000);
+		m250.put("advanced analytics dashboard", false);
+		m250.put("new relic integration", false);
+		m250.put("price ($/mon)", 25.0);
+		obj.put("250", m250);
+		
+		JSONObject m500 = new JSONObject();
+		m500.put("PST Support", true);
+		m500.put("bucket Size (MB)", 500.0);
+		m500.put("connections", 1000);
+		m500.put("advanced analytics dashboard", true);
+		m500.put("new relic integration", true);
+		m500.put("price ($/mon)", 40.0);
+		obj.put("500", m500);
+		
+		return obj;
+	}
+	
+	private JSONObject initIronCache() {
+		JSONObject obj = new JSONObject();
+		
+		JSONObject dev = new JSONObject();
+		dev.put("size (GB)", 0.1);
+		dev.put("request per month", 10000000);
+		dev.put("unlimited caches", false);
+		dev.put("ssl", false);
+		dev.put("high availability", false);
+		dev.put("phone support", false);
+		dev.put("price ($/mon)", 0.0);
+		obj.put("developer", dev);
+		
+		JSONObject small = new JSONObject();
+		small.put("size (GB)", 1.0);
+		small.put("request per month", 50000000);
+		small.put("unlimited caches", true);
+		small.put("ssl", true);
+		small.put("high availability", false);
+		small.put("phone support", false);
+		small.put("price ($/mon)", 49.0);
+		obj.put("small", small);
+		
+		JSONObject medium = new JSONObject();
+		medium.put("size (GB)", 5.0);
+		medium.put("request per month", 150000000);
+		medium.put("unlimited caches", true);
+		medium.put("ssl", true);
+		medium.put("high availability", true);
+		medium.put("phone support", false);
+		medium.put("price ($/mon)", 149.0);
+		obj.put("medium", medium);
+		
+		JSONObject large = new JSONObject();
+		large.put("size (GB)", 20.0);
+		large.put("request per month", 500000000);
+		large.put("unlimited caches", true);
+		large.put("ssl", true);
+		large.put("high availability", true);
+		large.put("phone support", true);
+		large.put("price ($/mon)", 499.0);
+		obj.put("developer", large);
+		
+		return obj;
+	}
+	
 	// database
 	private JSONObject initDatabase() {
 		JSONObject obj = new JSONObject();
 		obj.put("ClearDB", initClearDB());
 		obj.put("Redis", initRedis());
 		obj.put("MongoDB", initMongoDB());
+		obj.put("Postgres", initPostgres());
 		
+		return obj;
+	}
+	
+	private JSONObject initPostgres() {
+		JSONObject obj = new JSONObject();
+		
+		JSONObject hobby_dev = new JSONObject();
+		hobby_dev.put("RAM (GB)", 0.05);
+		hobby_dev.put("connections", 20);
+		hobby_dev.put("rollback", false);
+		hobby_dev.put("high avaliability", false);
+		hobby_dev.put("database forks", false);
+		hobby_dev.put("price ($/mon)", 0.0);
+		obj.put("hobby-dev", hobby_dev);
+		
+		JSONObject hobby_basic = new JSONObject();
+		hobby_basic.put("RAM (GB)", 0.5);
+		hobby_basic.put("connections", 20);
+		hobby_basic.put("rollback", false);
+		hobby_basic.put("high avaliability", false);
+		hobby_basic.put("database forks", false);
+		hobby_basic.put("price ($/mon)", 9.0);
+		obj.put("hobby-basic", hobby_basic);
+		
+		JSONObject standard = new JSONObject();
+		standard.put("RAM (GB)", 1.0);
+		standard.put("connections", 120);
+		standard.put("rollback", true);
+		standard.put("high avaliability", false);
+		standard.put("database forks", true);
+		standard.put("price ($/mon)", 50.0);
+		obj.put("standard-0", standard);
+		
+		JSONObject premium = new JSONObject();
+		premium.put("RAM (GB)", 1.0);
+		premium.put("connections", 120);
+		premium.put("rollback", true);
+		premium.put("high avaliability", true);
+		premium.put("database forks", true);
+		premium.put("price ($/mon)", 200.0);
+		obj.put("premium-0", premium);
+
 		return obj;
 	}
 	
@@ -56,7 +197,7 @@ public class ConfigurationJSON {
 		sharecluster1.put("high avaliability", true);
 		sharecluster1.put("log", true);
 		sharecluster1.put("price ($/mon)", 18.0);
-		obj.put("sharecluster1", sharecluster1);
+		obj.put("shared-cluster-1", sharecluster1);
 		
 		JSONObject sharecluster2 = new JSONObject();
 		sharecluster2.put("size", 2.0);
@@ -65,7 +206,7 @@ public class ConfigurationJSON {
 		sharecluster2.put("high avaliability", true);
 		sharecluster2.put("log", true);
 		sharecluster2.put("price ($/mon)", 36.0);
-		obj.put("sharecluster2", sharecluster2);
+		obj.put("shared-cluster-2", sharecluster2);
 		
 		JSONObject sharecluster4 = new JSONObject();
 		sharecluster4.put("size", 4.0);
@@ -74,7 +215,7 @@ public class ConfigurationJSON {
 		sharecluster4.put("high avaliability", true);
 		sharecluster4.put("log", true);
 		sharecluster4.put("price ($/mon)", 72.0);
-		obj.put("sharecluster4", sharecluster4);
+		obj.put("shared-cluster-4", sharecluster4);
 		
 		return obj;	
 	}
@@ -88,7 +229,7 @@ public class ConfigurationJSON {
 		hobbyDev.put("high avaliability", false);
 		hobbyDev.put("persistence", false);
 		hobbyDev.put("price ($/mon)", 0.0);
-		obj.put("hobby", hobbyDev);
+		obj.put("hobby-dev", hobbyDev);
 		
 		JSONObject P0 = new JSONObject();
 		P0.put("size (GB)", 0.05);
@@ -96,7 +237,7 @@ public class ConfigurationJSON {
 		P0.put("high avaliability", true);
 		P0.put("persistence", true);
 		P0.put("price ($/mon)", 15.0);
-		obj.put("Premium0", P0);
+		obj.put("premium-0", P0);
 		
 		JSONObject P1 = new JSONObject();
 		P1.put("size (GB)", 0.1);
@@ -104,7 +245,7 @@ public class ConfigurationJSON {
 		P1.put("high avaliability", true);
 		P1.put("persistence", true);
 		P1.put("price ($/mon)", 30.0);
-		obj.put("Premium1", P1);
+		obj.put("premium-1", P1);
 		
 		JSONObject P2 = new JSONObject();
 		P2.put("size (GB)", 0.25);
@@ -112,7 +253,7 @@ public class ConfigurationJSON {
 		P2.put("high avaliability", true);
 		P2.put("persistence", true);
 		P2.put("price ($/mon)", 60.0);
-		obj.put("Premium2", P2);
+		obj.put("premium-2", P2);
 		
 		return obj;
 	}
@@ -174,7 +315,6 @@ public class ConfigurationJSON {
 	
 	private JSONObject initFreeDynos() {
 		JSONObject obj = new JSONObject();
-		obj.put("sleep", true);
 		obj.put("professional features(horizontal scalability, application metrics, faster build, preboot)", false);
 		obj.put("memory (GB)", 0.5);
 		obj.put("cpu", "1x");
@@ -185,7 +325,6 @@ public class ConfigurationJSON {
 	
 	private JSONObject initHobbyDynos() {
 		JSONObject obj = new JSONObject();
-		obj.put("sleep", false);
 		obj.put("professional features(horizontal scalability, application metrics, faster build, preboot)", false);
 		obj.put("memory (GB)", 0.5);
 		obj.put("cpu", "1x");
@@ -196,7 +335,6 @@ public class ConfigurationJSON {
 	
 	private JSONObject initStandard1xDynos() {
 		JSONObject obj = new JSONObject();
-		obj.put("sleep", false);
 		obj.put("professional features(horizontal scalability, application metrics, faster build, preboot)", true);
 		obj.put("memory (GB)", 0.5);
 		obj.put("cpu", "1x");
@@ -207,7 +345,6 @@ public class ConfigurationJSON {
 	
 	private JSONObject initStandard2xDynos() {
 		JSONObject obj = new JSONObject();
-		obj.put("sleep", false);
 		obj.put("professional features(horizontal scalability, application metrics, faster build, preboot)", true);
 		obj.put("memory (GB)", 1.0);
 		obj.put("cpu", "2x");
@@ -218,7 +355,6 @@ public class ConfigurationJSON {
 	
 	private JSONObject initPerformanceMDynos() {
 		JSONObject obj = new JSONObject();
-		obj.put("sleep", false);
 		obj.put("professional features(horizontal scalability, application metrics, faster build, preboot)", true);
 		obj.put("memory (GB)", 2.5);
 		obj.put("cpu", "100%");
@@ -229,7 +365,6 @@ public class ConfigurationJSON {
 	
 	private JSONObject initPerformanceLDynos() {
 		JSONObject obj = new JSONObject();
-		obj.put("sleep", false);
 		obj.put("professional features(horizontal scalability, application metrics, faster build, preboot)", true);
 		obj.put("memory (GB)", 14.0);
 		obj.put("cpu", "100%");

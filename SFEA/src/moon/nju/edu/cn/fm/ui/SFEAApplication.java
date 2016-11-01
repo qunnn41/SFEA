@@ -306,7 +306,6 @@ public class SFEAApplication {
 		memCacheButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectCache(e, "Memcachier");
 				selectCache(e, "Memcache");
 			}
 		});

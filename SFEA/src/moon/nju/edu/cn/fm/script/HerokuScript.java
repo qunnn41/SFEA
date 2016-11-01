@@ -28,6 +28,16 @@ public class HerokuScript {
 				file.write("db_host=$(echo $array | cut -d \" \" -f 5)\n");
 				file.write("db_database=$(echo $array | cut -d \" \" -f 6)\n");
 				file.write("heroku config:set DB_USER=$db_user DB_PASSWORD=$db_password DB_HOST=$db_host DB_DATABASE=$db_database\n");
+			} else if (addon.equals("mongodb")) {
+				file.write("heroku addons:create mongolab:" + type + "\n");
+			} else if (addon.equals("redis")) {
+				file.write("heroku addons:create redis:" + type + "\n");
+			} else if (addon.equals("postgres")) {
+				file.write("heroku addons:create heroku-postgresql:" + type + "\n");
+			} else if (addon.equals("memcache")) {
+				file.write("heroku addons:create memcachier:" + type + "\n");
+			} else if (addon.equals("ironcache")) {
+				file.write("heroku addons:create iron cache:" + type + "\n");
 			}
 		}
 		

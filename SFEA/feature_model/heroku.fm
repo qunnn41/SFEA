@@ -47,7 +47,7 @@
       <subFeatures xsi:type="fm:OrFeature" name="Caching">
         <featureCardinality max="1"/>
         <variants name="Ironcache"/>
-        <variants name="Memcachier"/>
+        <variants name="Memcache"/>
         <groupCardinality min="1" max="2"/>
       </subFeatures>
       <featureCardinality max="1"/>
