@@ -48,11 +48,12 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 	@Override
 	public void run() {
 		this.createInstance(feature);
-		if (this.check()) {
-			callback.onValid();
-		} else {
-			callback.onInvalid();
-		}
+//		if (this.check()) {
+//			callback.onValid();
+//		} else {
+//			callback.onInvalid();
+//		}
+		callback.onInvalid();
 		
 		downLatch.countDown();
 	}

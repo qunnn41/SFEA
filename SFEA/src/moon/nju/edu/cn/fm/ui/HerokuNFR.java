@@ -14,8 +14,10 @@ import moon.nju.edu.cn.fm.script.HerokuScript;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -29,6 +31,8 @@ import org.json.simple.parser.JSONParser;
 public class HerokuNFR {
 	private String PRICE = "price ($/mon)";
 	private Shell herokuShell;
+	private ScrolledComposite scrolledComposite;
+	private Composite content;
 	
 	private List<String> features;
 	private JSONObject jsonRoot;
@@ -65,8 +69,34 @@ public class HerokuNFR {
 	
 	private void setupUI(Display display) {
 		herokuShell = new Shell(display);
-		herokuShell.setLayout(new GridLayout(1, false));
+		herokuShell.setLayout(new FillLayout());
+		scrolledComposite = new ScrolledComposite(herokuShell, SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite.setLayout(new FillLayout());
 		
+		content = new Composite(scrolledComposite, SWT.NONE);
+		content.setLayout(new GridLayout(1, false));
+		
+		loadConfig();
+		
+		Composite composite = new Group(content, SWT.NONE);
+		composite.setLayout(new GridLayout(2, true));
+		doneButton = new Button(composite, SWT.PUSH);
+		doneButton.setText("Done");
+		
+		cancelButton = new Button(composite, SWT.PUSH);
+		cancelButton.setText("Cancel");
+		
+		scrolledComposite.setMinSize(400, 400);
+		scrolledComposite.setContent(content);
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setAlwaysShowScrollBars(true);
+		herokuShell.open();
+		
+		setupListeners();
+	}
+	
+	private void loadConfig() {
 		setupConfig(jsonRoot, "dynos");
 		if (features.contains("Database")) {
 			JSONObject obj = (JSONObject) jsonRoot.get("database");
@@ -98,19 +128,68 @@ public class HerokuNFR {
 			}
 		}
 		
-		Composite composite = new Composite(herokuShell, SWT.BORDER);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
-		composite.setLayout(new GridLayout(2, true));
-		doneButton = new Button(composite, SWT.PUSH);
-		doneButton.setText("Done");
+		if (features.contains("Log")) {
+			JSONObject object = (JSONObject) jsonRoot.get("log");
+			if (features.contains("Papertrail")) {
+				setupConfig(object, "papertrail");
+			}
+			
+			if (features.contains("LogDNA")) {
+				setupConfig(object, "LogDNA");
+			}
+		}
 		
-		cancelButton = new Button(composite, SWT.PUSH);
-		cancelButton.setText("Cancel");
+		if (features.contains("Monitoring")) {
+			JSONObject object = (JSONObject) jsonRoot.get("monitoring");
+			if (features.contains("Scout")) {
+				setupConfig(object, "scout");
+			}
+			
+			if (features.contains("Pingdom")) {
+				setupConfig(object, "pingdom");
+			}
+			
+			if (features.contains("Librato")) {
+				setupConfig(object, "librato");
+			}
+		}
 		
-		herokuShell.pack();
-		herokuShell.open();
+		if (features.contains("Protocol")) {
+			JSONObject object = (JSONObject) jsonRoot.get("protocol");
+			if (features.contains("CloudAMQP")) {
+				setupConfig(object, "cloudAMQP");
+			}
+			
+			if (features.contains("RabbitMQ")) {
+				setupConfig(object, "rabbitMQ");
+			}
+		}
 		
-		setupListeners();
+		if (features.contains("Network")) {
+			JSONObject object = (JSONObject) jsonRoot.get("network");
+			if (features.contains("Fixie")) {
+				setupConfig(object, "fixie");
+			}
+			
+			if (features.contains("Proximo")) {
+				setupConfig(object, "proximo");
+			}
+			
+			if (features.contains("PointDNS")) {
+				setupConfig(object, "pointdns");
+			}
+		}
+		
+		if (features.contains("Security")) {
+			JSONObject object = (JSONObject) jsonRoot.get("security");
+			if (features.contains("SSL")) {
+				setupConfig(object, "ssl");
+			}
+			
+			if (features.contains("SecureKey")) {
+				setupConfig(object, "securekey");
+			}
+		}
 	}
 	
 	private void setupListeners() {
@@ -207,16 +286,16 @@ public class HerokuNFR {
 		JSONObject jsonObj = (JSONObject)json.get(config);
 		configMap.put(config, jsonObj);
 		selectedConfig.put(config, new HashMap<String, Object>());
-		Group dynoGroup = new Group(herokuShell, SWT.BORDER);
-		dynoGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
-		dynoGroup.setLayout(new GridLayout(1, true));
+		
+		Group dynoGroup = new Group(content, SWT.NONE);
+		dynoGroup.setLayout(new GridLayout(5, false));
 		dynoGroup.setText(config);
 		
 		Map<String, TreeSet<Object>> values = getValues(jsonObj);
 		for (final String key: values.keySet()) {
 			Group group = new Group(dynoGroup, SWT.BORDER);
 			group.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
-			group.setLayout(new GridLayout(values.get(key).size(), true));
+			group.setLayout(new GridLayout(values.get(key).size(), false));
 			group.setText(key);
 			
 			for (final Object value: values.get(key)) {

@@ -48,11 +48,12 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	@Override
 	public void run() {
 		this.createInstance(feature);
-		if (this.check()) {
-			callback.onValid();
-		} else {
-			callback.onInvalid();
-		}
+		callback.onValid();
+//		if (this.check()) {
+//			callback.onValid();
+//		} else {
+//			callback.onInvalid();
+//		}
 		
 		downLatch.countDown();
 	}

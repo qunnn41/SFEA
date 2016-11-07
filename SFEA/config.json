@@ -1,4 +1,144 @@
 {
+    "protocol": {
+        "cloudAMQP": {
+            "bunny": {
+                "Queues": 10000,
+                "price ($/mon)": 99.0,
+                "Message per month": 100000000,
+                "Queued messages": 1000000,
+                "Concurrent connections": 5000
+            },
+            "tiger": {
+                "Queues": 1000,
+                "price ($/mon)": 19.0,
+                "Message per month": 10000000,
+                "Queued messages": 100000,
+                "Concurrent connections": 100
+            },
+            "lemur": {
+                "Queues": 1000,
+                "price ($/mon)": 0.0,
+                "Message per month": 1000000,
+                "Queued messages": 10000,
+                "Concurrent connections": 20
+            }
+        },
+        "rabbitMQ": {
+            "toadflax": {
+                "vCPUs per provision": 1.0,
+                "SSL": true,
+                "price ($/mon)": 100.0,
+                "Send Rate (MB/s)": 100.0,
+                "Memory threshold (GB)": 0.69
+            },
+            "speedwell": {
+                "vCPUs per provision": 0.04,
+                "SSL": false,
+                "price ($/mon)": 20.0,
+                "Send Rate (MB/s)": 1.0,
+                "Memory threshold (GB)": 0.19
+            },
+            "pipkin": {
+                "vCPUs per provision": 2.0,
+                "SSL": false,
+                "price ($/mon)": 0.0,
+                "Send Rate (MB/s)": 0.2,
+                "Memory threshold (GB)": 0.03
+            }
+        }
+    },
+    "monitoring": {
+        "pingdom": {
+            "standard": {
+                "price ($/mon)": 45.95,
+                "Real User Monitoring Sites": 5,
+                "Uptime checks": 50,
+                "Advanced checks": 3,
+                "SMS Credits per month": 200
+            },
+            "starter": {
+                "price ($/mon)": 14.95,
+                "Real User Monitoring Sites": 1,
+                "Uptime checks": 10,
+                "Advanced checks": 1,
+                "SMS Credits per month": 50
+            },
+            "advanced": {
+                "price ($/mon)": 89.95,
+                "Real User Monitoring Sites": 5,
+                "Uptime checks": 60,
+                "Advanced checks": 5,
+                "SMS Credits per month": 350
+            },
+            "professional": {
+                "price ($/mon)": 15.0,
+                "Real User Monitoring Sites": 1,
+                "Uptime checks": 10,
+                "Advanced checks": 1,
+                "SMS Credits per month": 50
+            }
+        },
+        "scout": {
+            "chair": {
+                "price ($/mon)": 0.0,
+                "Transactions per day": 10000,
+                "Trace Retention (Hours)": 1,
+                "Deploy tracking": false,
+                "Metric Retention (Hours)": 24
+            },
+            "eldora": {
+                "price ($/mon)": 39.0,
+                "Transactions per day": 65000,
+                "Trace Retention (Hours)": 24,
+                "Deploy tracking": true,
+                "Metric Retention (Hours)": 24
+            },
+            "keystone": {
+                "price ($/mon)": 79.0,
+                "Transactions per day": 130000,
+                "Trace Retention (Hours)": 168,
+                "Deploy tracking": false,
+                "Metric Retention (Hours)": 30
+            },
+            "skiloveland": {
+                "price ($/mon)": 59.0,
+                "Transactions per day": 100000,
+                "Trace Retention (Hours)": 168,
+                "Deploy tracking": true,
+                "Metric Retention (Hours)": 30
+            }
+        },
+        "librato": {
+            "bronze": {
+                "Custom Annotations": true,
+                "Custom metrics": true,
+                "Days retention ": 365,
+                "price ($/mon)": 29.0,
+                "Metric Stream at 60s resolution": 30
+            },
+            "development": {
+                "Custom Annotations": false,
+                "Custom metrics": false,
+                "Days retention ": 1,
+                "price ($/mon)": 0.0,
+                "Metric Stream at 60s resolution": 0
+            },
+            "silver": {
+                "Custom Annotations": true,
+                "Custom metrics": true,
+                "Days retention ": 265,
+                "price ($/mon)": 49.0,
+                "Metric Stream at 60s resolution": 125
+            },
+            "nickel": {
+                "Custom Annotations": false,
+                "Custom metrics": true,
+                "Days retention ": 365,
+                "price ($/mon)": 19.0,
+                "Metric Stream at 60s resolution": 20
+            }
+        }
+    },
     "dynos": {
         "free": {
             "memory (GB)": 0.5,
@@ -35,6 +175,159 @@
             "price ($/mon)": 250.0,
             "cpu": "100%",
             "professional features(horizontal scalability, application metrics, faster build, preboot)": true
+        }
+    },
+    "security": {
+        "securekey": {
+            "fortnightly": {
+                "price ($/mon)": 0.0,
+                "Rotation Interval (Days)": 14
+            }
+        },
+        "ssl": {
+            "endpoint": {
+                "Use with any hostname on your domain": true,
+                "price ($/mon)": 20.0,
+                "User your own SSL certificate": true
+            }
+        }
+    },
+    "log": {
+        "papertrail": {
+            "ludvig": {
+                "Search Duration (Days)": 7,
+                "Log volume per day (MB)": 100.0,
+                "price ($/mon)": 15.0,
+                "Archive duration (Days)": 365
+            },
+            "forsta": {
+                "Search Duration (Days)": 7,
+                "Log volume per day (MB)": 200.0,
+                "price ($/mon)": 29.0,
+                "Archive duration (Days)": 365
+            },
+            "choklad": {
+                "Search Duration (Days)": 2,
+                "Log volume per day (MB)": 10.0,
+                "price ($/mon)": 0.0,
+                "Archive duration (Days)": 7
+            },
+            "fixa": {
+                "Search Duration (Days)": 7,
+                "Log volume per day (MB)": 50.0,
+                "price ($/mon)": 7.0,
+                "Archive duration (Days)": 365
+            }
+        },
+        "LogDNA": {
+            "atto": {
+                "Users": 5,
+                "Real Time Alert": true,
+                "Unlimited Saved Views": true,
+                "Storage volume per day(MB)": 175.0,
+                "price ($/mon)": 10.0,
+                "Search Retention": 7
+            },
+            "quaco": {
+                "Users": 1,
+                "Real Time Alert": false,
+                "Unlimited Saved Views": false,
+                "Storage volume per day(MB)": 50.0,
+                "price ($/mon)": 0.0,
+                "Search Retention": 5
+            },
+            "femto": {
+                "Users": 1,
+                "Real Time Alert": false,
+                "Unlimited Saved Views": false,
+                "Storage volume per day(MB)": 50.0,
+                "price ($/mon)": 0.0,
+                "Search Retention": 5
+            },
+            "zepto": {
+                "Users": 5,
+                "Real Time Alert": true,
+                "Unlimited Saved Views": true,
+                "Storage volume per day(MB)": 90.0,
+                "price ($/mon)": 5.0,
+                "Search Retention": 7
+            }
+        }
+    },
+    "network": {
+        "fixie": {
+            "tricycle": {
+                "Bandwidth per month (GB)": 0.1,
+                "price ($/mon)": 0.0,
+                "Request per month": 500
+            },
+            "cruiser": {
+                "Bandwidth per month (GB)": 10.0,
+                "price ($/mon)": 19.0,
+                "Request per month": 25000
+            },
+            "commuter": {
+                "Bandwidth per month (GB)": 0.5,
+                "price ($/mon)": 5.0,
+                "Request per month": 2500
+            },
+            "hybrid": {
+                "Bandwidth per month (MG)": 50.0,
+                "price ($/mon)": 49.0,
+                "Request per month": 250000
+            }
+        },
+        "pointdns": {
+            "developer": {
+                "record": 10,
+                "price ($/mon)": 0.0,
+                "domains": 1,
+                "queries quota": 10,
+                "mail redirects": false
+            },
+            "small": {
+                "record": 10000,
+                "price ($/mon)": 15.0,
+                "domains": 10,
+                "queries quota": 1000,
+                "mail redirects": true
+            },
+            "large": {
+                "record": 10,
+                "price ($/mon)": 95.0,
+                "domains": 500,
+                "queries quota": 10000,
+                "mail redirects": true
+            },
+            "medium": {
+                "record": 10000,
+                "price ($/mon)": 35.0,
+                "domains": 50,
+                "queries quota": 5000,
+                "mail redirects": true
+            }
+        },
+        "proximo": {
+            "development": {
+                "Bandwidth per month (GB)": 0.5,
+                "price ($/mon)": 5.0,
+                "Request per month": 2000
+            },
+            "starter": {
+                "Bandwidth per month (GB)": 20.0,
+                "price ($/mon)": 25.0,
+                "Request per month": 50000
+            },
+            "advanced": {
+                "Bandwidth per month (GB)": 500.0,
+                "price ($/mon)": 150.0,
+                "Request per month": 1250000
+            },
+            "professional": {
+                "Bandwidth per month (GB)": 200.0,
+                "price ($/mon)": 75.0,
+                "Request per month": 500000
+            }
         }
     },
     "database": {

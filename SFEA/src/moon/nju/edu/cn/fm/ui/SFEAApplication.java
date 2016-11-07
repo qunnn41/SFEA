@@ -2,7 +2,6 @@ package moon.nju.edu.cn.fm.ui;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -32,12 +31,16 @@ public class SFEAApplication {
 	private final Set<String> featureSelected = new HashSet<String>();
 	
 	private Button deployButton, resetButton;
-	private Group languageGroup, frameworkGroup, SQLGroup, NoSQLGroup, cacheGroup;
-	private Button javaLanguageButton, pythonLanguageButton, rubyLanguageButton, 
-		scalaLanguageButton, jsLanguageButton, phpLanguageButton, goLanguageButton;
-	private Button springFrameworkButton, railsFrameworkButton, playFrameworkButton, nodejsFrameworkButton;
-	private Button postgresSQLButton, clearDBSQLButton, redisNoSQLButton, mongoDBNoSQLButton;
+	private Group languageGroup, frameworkGroup, SQLGroup, NoSQLGroup, cacheGroup, logGroup, protocolGroup, monitorGroup, securityGroup, networkGroup;
+	private Button javaButton, pythonButton, rubyButton, scalaButton, jsButton, phpButton, goButton;
+	private Button springButton, railsButton, playButton, nodejsButton;
+	private Button postgresButton, clearDBButton, redisButton, mongoDBButton;
 	private Button ironCacheButton, memCacheButton;
+	private Button papertrailButton, logdnaButton;
+	private Button cloudAMQPButton, rabbitMQButton;
+	private Button scoutButton, libratoButton, pingdomButton;
+	private Button sslButton, secureKeyButton;
+	private Button fixieButton, proximoButton, pointDNSButton;
 	private Text applicationText, executionText;
 	
 	public SFEAApplication() {
@@ -50,6 +53,11 @@ public class SFEAApplication {
 		this.setupFramework();
 		this.setupDatabase();
 		this.setupCaching();
+		this.setupLog();
+		this.setupMonitoring();
+		this.setupProtocol();
+		this.setupNetwork();
+		this.setupSecurity();
 		
 		Composite composite = new Composite(sfeaShell, SWT.BORDER);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
@@ -82,63 +90,118 @@ public class SFEAApplication {
 	}
 	
 	private void setupLanugage() {
-		// Language
 		languageGroup = new Group(sfeaShell, SWT.NONE);
 		languageGroup.setText("Language");
 		languageGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		languageGroup.setLayout(new GridLayout(4, true));
-		javaLanguageButton = new Button(languageGroup, SWT.CHECK);
-		javaLanguageButton.setText("Java");
-		pythonLanguageButton = new Button(languageGroup, SWT.CHECK);
-		pythonLanguageButton.setText("Python");
-		rubyLanguageButton = new Button(languageGroup, SWT.CHECK);
-		rubyLanguageButton.setText("Ruby");
-		scalaLanguageButton = new Button(languageGroup, SWT.CHECK);
-		scalaLanguageButton.setText("Scala");
-		jsLanguageButton = new Button(languageGroup, SWT.CHECK);
-		jsLanguageButton.setText("Javascript");
-		phpLanguageButton = new Button(languageGroup, SWT.CHECK);
-		phpLanguageButton.setText("PHP");
-		goLanguageButton = new Button(languageGroup, SWT.CHECK);
-		goLanguageButton.setText("Go");
+		javaButton = new Button(languageGroup, SWT.CHECK);
+		javaButton.setText("Java");
+		pythonButton = new Button(languageGroup, SWT.CHECK);
+		pythonButton.setText("Python");
+		rubyButton = new Button(languageGroup, SWT.CHECK);
+		rubyButton.setText("Ruby");
+		scalaButton = new Button(languageGroup, SWT.CHECK);
+		scalaButton.setText("Scala");
+		jsButton = new Button(languageGroup, SWT.CHECK);
+		jsButton.setText("Javascript");
+		phpButton = new Button(languageGroup, SWT.CHECK);
+		phpButton.setText("PHP");
+		goButton = new Button(languageGroup, SWT.CHECK);
+		goButton.setText("Go");
+	}
+	
+	private void setupLog() {
+		logGroup = new Group(sfeaShell, SWT.NONE);
+		logGroup.setText("Logging");
+		logGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
+		logGroup.setLayout(new GridLayout(4, true));
+		papertrailButton = new Button(logGroup, SWT.CHECK);
+		papertrailButton.setText("Papertrail");
+		logdnaButton = new Button(logGroup, SWT.CHECK);
+		logdnaButton.setText("LogDNA");
+	}
+	
+	private void setupProtocol() {
+		protocolGroup = new Group(sfeaShell, SWT.NONE);
+		protocolGroup.setText("Protocol");
+		protocolGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
+		protocolGroup.setLayout(new GridLayout(4, true));
+		cloudAMQPButton = new Button(protocolGroup, SWT.CHECK);
+		cloudAMQPButton.setText("cloudAMQP");
+		rabbitMQButton = new Button(protocolGroup, SWT.CHECK);
+		rabbitMQButton.setText("rabbitMQ");
+	}
+	
+	private void setupMonitoring() {
+		monitorGroup = new Group(sfeaShell, SWT.NONE);
+		monitorGroup.setText("Monitoring");
+		monitorGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
+		monitorGroup.setLayout(new GridLayout(4, true));
+		scoutButton = new Button(monitorGroup, SWT.CHECK);
+		scoutButton.setText("Scout");
+		libratoButton = new Button(monitorGroup, SWT.CHECK);
+		libratoButton.setText("Librato");
+		pingdomButton = new Button(monitorGroup, SWT.CHECK);
+		pingdomButton.setText("Pingdom");
+	}
+	
+	private void setupSecurity() {
+		securityGroup = new Group(sfeaShell, SWT.NONE);
+		securityGroup.setText("Security");
+		securityGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
+		securityGroup.setLayout(new GridLayout(4, true));
+		sslButton = new Button(securityGroup, SWT.CHECK);
+		sslButton.setText("SSL");
+		secureKeyButton = new Button(securityGroup, SWT.CHECK);
+		secureKeyButton.setText("SecurityKey");
+	}
+	
+	private void setupNetwork() {
+		networkGroup = new Group(sfeaShell, SWT.NONE);
+		networkGroup.setText("Network");
+		networkGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
+		networkGroup.setLayout(new GridLayout(4, true));
+		fixieButton = new Button(networkGroup, SWT.CHECK);
+		fixieButton.setText("Fixie");
+		proximoButton = new Button(networkGroup, SWT.CHECK);
+		proximoButton.setText("Proximo");
+		pointDNSButton = new Button(networkGroup, SWT.CHECK);
+		pointDNSButton.setText("PointDNS");
 	}
 	
 	private void setupFramework() {
-		// Framework
 		frameworkGroup = new Group(sfeaShell, SWT.NONE);
 		frameworkGroup.setText("Framework");
 		frameworkGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		frameworkGroup.setLayout(new GridLayout(4, true));
-		springFrameworkButton = new Button(frameworkGroup, SWT.CHECK);
-		springFrameworkButton.setText("Spring");
-		railsFrameworkButton = new Button(frameworkGroup, SWT.CHECK);
-		railsFrameworkButton.setText("Rails");
-		playFrameworkButton = new Button(frameworkGroup, SWT.CHECK);
-		playFrameworkButton.setText("Play");
-		nodejsFrameworkButton = new Button(frameworkGroup, SWT.CHECK);
-		nodejsFrameworkButton.setText("Node.js");
+		springButton = new Button(frameworkGroup, SWT.CHECK);
+		springButton.setText("Spring");
+		railsButton = new Button(frameworkGroup, SWT.CHECK);
+		railsButton.setText("Rails");
+		playButton = new Button(frameworkGroup, SWT.CHECK);
+		playButton.setText("Play");
+		nodejsButton = new Button(frameworkGroup, SWT.CHECK);
+		nodejsButton.setText("Node.js");
 	}
 	
 	private void setupDatabase() {
-		// SQL
 		SQLGroup = new Group(sfeaShell, SWT.NONE);
 		SQLGroup.setText("SQL Database");
 		SQLGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		SQLGroup.setLayout(new GridLayout(4, true));
-		postgresSQLButton = new Button(SQLGroup, SWT.CHECK);
-		postgresSQLButton.setText("Postgres");
-		clearDBSQLButton = new Button(SQLGroup, SWT.CHECK);
-		clearDBSQLButton.setText("ClearDB");
+		postgresButton = new Button(SQLGroup, SWT.CHECK);
+		postgresButton.setText("Postgres");
+		clearDBButton = new Button(SQLGroup, SWT.CHECK);
+		clearDBButton.setText("ClearDB");
 		
-		// NoSQL
 		NoSQLGroup = new Group(sfeaShell, SWT.NONE);
 		NoSQLGroup.setText("NoSQL Database");
 		NoSQLGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, true));
 		NoSQLGroup.setLayout(new GridLayout(4, true));
-		redisNoSQLButton = new Button(NoSQLGroup, SWT.CHECK);
-		redisNoSQLButton.setText("Redis");
-		mongoDBNoSQLButton = new Button(NoSQLGroup, SWT.CHECK);
-		mongoDBNoSQLButton.setText("MongoDB");
+		redisButton = new Button(NoSQLGroup, SWT.CHECK);
+		redisButton.setText("Redis");
+		mongoDBButton = new Button(NoSQLGroup, SWT.CHECK);
+		mongoDBButton.setText("MongoDB");
 	}
 	
 	private void setupCaching() {
@@ -165,131 +228,140 @@ public class SFEAApplication {
 			public void widgetSelected(SelectionEvent e) {
 				featureSelected.clear();
 				
-				javaLanguageButton.setSelection(false);
-				pythonLanguageButton.setSelection(false);
-				rubyLanguageButton.setSelection(false);
-				scalaLanguageButton.setSelection(false);
-				jsLanguageButton.setSelection(false);
-				phpLanguageButton.setSelection(false);
-				goLanguageButton.setSelection(false);
-				
-				springFrameworkButton.setSelection(false);
-				railsFrameworkButton.setSelection(false);
-				playFrameworkButton.setSelection(false);
-				nodejsFrameworkButton.setSelection(false);
-				
-				postgresSQLButton.setSelection(false);
-				clearDBSQLButton.setSelection(false);
-				redisNoSQLButton.setSelection(false);
-				mongoDBNoSQLButton.setSelection(false);
-				
+				javaButton.setSelection(false);
+				pythonButton.setSelection(false);
+				rubyButton.setSelection(false);
+				scalaButton.setSelection(false);
+				jsButton.setSelection(false);
+				phpButton.setSelection(false);
+				goButton.setSelection(false);
+				springButton.setSelection(false);
+				railsButton.setSelection(false);
+				playButton.setSelection(false);
+				nodejsButton.setSelection(false);
+				postgresButton.setSelection(false);
+				clearDBButton.setSelection(false);
+				redisButton.setSelection(false);
+				mongoDBButton.setSelection(false);
 				ironCacheButton.setSelection(false);
 				memCacheButton.setSelection(false);
+				papertrailButton.setSelection(false);
+				logdnaButton.setSelection(false);
+				cloudAMQPButton.setSelection(false);
+				rabbitMQButton.setSelection(false);
+				scoutButton.setSelection(false);
+				libratoButton.setSelection(false);
+				pingdomButton.setSelection(false);
+				sslButton.setSelection(false);
+				secureKeyButton.setSelection(false);
+				fixieButton.setSelection(false);
+				proximoButton.setSelection(false);
+				pointDNSButton.setSelection(false);
 				
 				applicationText.setText("");
 				executionText.setText("");
 			}
 		});
 		
-		javaLanguageButton.addSelectionListener(new SelectionAdapter() {
+		javaButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "Java");
 			}
 		});
 		
-		pythonLanguageButton.addSelectionListener(new SelectionAdapter() {
+		pythonButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "Python");
 			}
 		});
 		
-		rubyLanguageButton.addSelectionListener(new SelectionAdapter() {
+		rubyButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "Ruby");
 			}
 		});
 		
-		scalaLanguageButton.addSelectionListener(new SelectionAdapter() {
+		scalaButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "Scala");
 			}
 		});
 		
-		jsLanguageButton.addSelectionListener(new SelectionAdapter() {
+		jsButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "Javascript");
 			}
 		});
 		
-		phpLanguageButton.addSelectionListener(new SelectionAdapter() {
+		phpButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "PHP");
 			}
 		});
 		
-		goLanguageButton.addSelectionListener(new SelectionAdapter() {
+		goButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectLanguage(e, "Go");
 			}
 		});
 		
-		springFrameworkButton.addSelectionListener(new SelectionAdapter() {
+		springButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectFramework(e, "Spring");
 			}
 		});
 		
-		railsFrameworkButton.addSelectionListener(new SelectionAdapter() {
+		railsButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectFramework(e, "Rails");
 			}
 		});
 		
-		playFrameworkButton.addSelectionListener(new SelectionAdapter() {
+		playButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectFramework(e, "Play");
 			}
 		});
 		
-		nodejsFrameworkButton.addSelectionListener(new SelectionAdapter() {
+		nodejsButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectFramework(e, "Node.js");
 			}
 		});
 		
-		postgresSQLButton.addSelectionListener(new SelectionAdapter() {
+		postgresButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectSql(e, "Postgres");
 			}
 		});
 		
-		clearDBSQLButton.addSelectionListener(new SelectionAdapter() {
+		clearDBButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectSql(e, "ClearDB");
 			}
 		});
 		
-		redisNoSQLButton.addSelectionListener(new SelectionAdapter() {
+		redisButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectNoSql(e, "Redis");
 			}
 		});
 		
-		mongoDBNoSQLButton.addSelectionListener(new SelectionAdapter() {
+		mongoDBButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectNoSql(e, "MongoDB");
@@ -309,6 +381,155 @@ public class SFEAApplication {
 				selectCache(e, "Memcache");
 			}
 		});
+		
+		papertrailButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectLog(e, "Papertrail");
+			}
+		});
+		
+		logdnaButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectLog(e, "LogDNA");
+			}
+		});
+		
+		cloudAMQPButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectProtocol(e, "CloudAMQP");
+			}
+		});
+		
+		rabbitMQButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectProtocol(e, "RabbitMQ");
+			}
+		});
+		
+		scoutButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectMonitoring(e, "Scout");
+			}
+		});
+		
+		libratoButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectMonitoring(e, "Librato");
+			}
+		});
+		
+		pingdomButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectMonitoring(e, "Pingdom");
+			}
+		});
+		
+		sslButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectSecurity(e, "SSL");
+			}
+		});
+		
+		secureKeyButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectSecurity(e, "SecureKey");
+			}
+		});
+		
+		fixieButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectNetwork(e, "Fixie");
+			}
+		});
+		
+		proximoButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectNetwork(e, "Proximo");
+			}
+		});
+		
+		pointDNSButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				selectNetwork(e, "PointDNS");
+			}
+		});
+	}
+	
+	private void selectLog(SelectionEvent event, String log) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(log);
+			featureSelected.add("Log");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(log);
+			featureSelected.remove("Log");
+			featureSelected.remove("Service");
+		}
+	}
+	
+	private void selectProtocol(SelectionEvent event, String protocol) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(protocol);
+			featureSelected.add("Protocol");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(protocol);
+			featureSelected.remove("Protocol");
+			featureSelected.remove("Service");
+		}
+	}
+	
+	private void selectMonitoring(SelectionEvent event, String monitor) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(monitor);
+			featureSelected.add("Monitoring");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(monitor);
+			featureSelected.remove("Monitoring");
+			featureSelected.remove("Service");
+		}
+	}
+	
+	private void selectSecurity(SelectionEvent event, String security) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(security);
+			featureSelected.add("Security");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(security);
+			featureSelected.remove("Security");
+			featureSelected.remove("Service");
+		}
+	}
+	
+	private void selectNetwork(SelectionEvent event, String network) {
+		Button button = (Button) event.getSource();
+		if (button.getSelection()) {
+			featureSelected.add(network);
+			featureSelected.add("Network");
+			featureSelected.add("Service");
+		} else {
+			featureSelected.remove(network);
+			featureSelected.remove("Network");
+			featureSelected.remove("Service");
+		}
 	}
 	
 	private void selectLanguage(SelectionEvent event, String language) {
@@ -383,7 +604,7 @@ public class SFEAApplication {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		CountDownLatch latch = new CountDownLatch(2);
 		
-		final List<String> avaliablePlatform = new LinkedList<String>(); 
+		final LinkedList<String> avaliablePlatform = new LinkedList<String>(); 
 		HerokuFM herokuFM = new HerokuFM(latch, feature, new ValidConfigCallback() {
 			
 			@Override
@@ -437,7 +658,7 @@ public class SFEAApplication {
 		}
 	}
 	
-	private String selectPlatform(List<String> platformList) {
+	private String selectPlatform(LinkedList<String> platformList) {
 		PlatformSelectionDialog dialog = new PlatformSelectionDialog(sfeaShell, platformList);
 		dialog.create();
 		if (dialog.open() == Window.OK) {

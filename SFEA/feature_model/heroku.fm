@@ -27,8 +27,11 @@
       <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures name="Service">
-      <subFeatures name="Log">
-        <featureCardinality min="0" max="1"/>
+      <subFeatures xsi:type="fm:OrFeature" name="Log">
+        <featureCardinality max="1"/>
+        <variants name="Papertrail"/>
+        <variants name="LogDNA"/>
+        <groupCardinality min="1" max="2"/>
       </subFeatures>
       <subFeatures xsi:type="fm:OrFeature" name="Database">
         <featureCardinality max="1"/>
@@ -50,10 +53,38 @@
         <variants name="Memcache"/>
         <groupCardinality min="1" max="2"/>
       </subFeatures>
+      <subFeatures xsi:type="fm:OrFeature" name="Monitoring">
+        <featureCardinality max="1"/>
+        <variants name="Scout"/>
+        <variants name="Librato"/>
+        <variants name="Pingdom"/>
+        <groupCardinality min="1" max="3"/>
+      </subFeatures>
+      <subFeatures xsi:type="fm:OrFeature" name="Protocol">
+        <featureCardinality max="1"/>
+        <variants name="CloudAMQP"/>
+        <variants name="RabbitMQ"/>
+        <groupCardinality min="1" max="2"/>
+      </subFeatures>
+      <subFeatures xsi:type="fm:OrFeature" name="Network">
+        <featureCardinality max="1"/>
+        <variants name="Fixie"/>
+        <variants name="Proximo"/>
+        <variants name="PointDNS"/>
+        <groupCardinality min="1" max="3"/>
+      </subFeatures>
+      <subFeatures xsi:type="fm:OrFeature" name="Security">
+        <featureCardinality max="1"/>
+        <variants name="SSL"/>
+        <variants name="SecureKey"/>
+        <groupCardinality min="1" max="2"/>
+      </subFeatures>
       <featureCardinality max="1"/>
     </subFeatures>
   </root>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.0" to="//@root/@subFeatures.1/@variants.0"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.3/@subFeatures.3/@variants.0" to="//@root/@subFeatures.2/@variants.1"/>
+  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.3/@subFeatures.4/@variants.1" to="//@root/@subFeatures.1/@variants.3"/>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.2" to="//@root/@subFeatures.1/@variants.0"/>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.4"/>
   <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.1" to="//@root/@subFeatures.1/@variants.3"/>
