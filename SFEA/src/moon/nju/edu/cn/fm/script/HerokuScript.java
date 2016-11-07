@@ -39,6 +39,8 @@ public class HerokuScript {
 			} else if (addon.equals("ironcache")) {
 				file.write("heroku addons:create iron cache:" + type + "\n");
 			}
+			
+			//TODO add script for new service
 		}
 		
 		file.write("git push heroku master\n");
