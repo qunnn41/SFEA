@@ -39,21 +39,14 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 		this.validConfiguration();
 	}
 	
-//	public static void main(String[] args) {
-//		GoogleAppEngineFM demo = new GoogleAppEngineFM();
-//		demo.createInstance(new String[] {"Language", "Java"});
-//		demo.check();
-//	}
-
 	@Override
 	public void run() {
 		this.createInstance(feature);
-//		if (this.check()) {
-//			callback.onValid();
-//		} else {
-//			callback.onInvalid();
-//		}
-		callback.onInvalid();
+		if (this.check()) {
+			callback.onValid();
+		} else {
+			callback.onInvalid();
+		}
 		
 		downLatch.countDown();
 	}

@@ -2,7 +2,6 @@ package moon.nju.edu.cn.fm.script;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HerokuScript {
@@ -38,9 +37,31 @@ public class HerokuScript {
 				file.write("heroku addons:create memcachier:" + type + "\n");
 			} else if (addon.equals("ironcache")) {
 				file.write("heroku addons:create iron cache:" + type + "\n");
+			} else if (addon.equals("papertrail")) {
+				file.write("heroku addons:create papertrail:" + type + "\n");
+			} else if (addon.equals("logdna")) {
+				file.write("heroku addons:create logdna:" + type + "\n");
+			} else if (addon.equals("scout")) {
+				file.write("heroku addons:create scout:" + type + "\n");
+			} else if (addon.equals("librato")) {
+				file.write("heroku addons:create librato:" + type + "\n");
+			} else if (addon.equals("pingdom")) {
+				file.write("heroku addons:create pingdom:" + type + "\n");
+			} else if (addon.equals("cloudamqp")) {
+				file.write("heroku addons:create cloudamqp:" + type + "\n");
+			} else if (addons.equals("rabbitmq")) {
+				file.write("heroku addons:create rabbitmq-bigwig:" + type + "\n");
+			} else if (addons.equals("fixie")) {
+				file.write("heroku addons:create fixie:" + type + "\n");
+			} else if (addons.equals("proximo")) {
+				file.write("heroku addons:create proximo:" + type + "\n");
+			} else if (addons.equals("pointdns")) {
+				file.write("heroku addons:create pointdns:" + type + "\n");
+			} else if (addons.equals("ssl")) {
+				file.write("heroku addons:create ssl:endpoint\n");
+			} else if (addons.equals("securekey")) {
+				file.write("heroku addons:create securekey:fortnightly\n");
 			}
-			
-			//TODO add script for new service
 		}
 		
 		file.write("git push heroku master\n");
@@ -52,11 +73,5 @@ public class HerokuScript {
 		file.close();
 		
 		Runtime.getRuntime().exec("chmod u+x derivation/command.sh");
-	}
-	
-	public static void main(String[] args) throws IOException {
-		Map<String, String> addons = new HashMap<String, String>();
-		addons.put("cleardb", "ignite");
-		new HerokuScript("node web.js", "wyq-app-name", addons, "free", 1);
 	}
 }
