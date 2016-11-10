@@ -1,0 +1,40 @@
+@startuml
+
+FeatureModel *--> "1" root
+
+Feature <|-- root
+Feature *-- "0..*" Feature : subFeatures
+
+class Feature {
+name: string
+}
+
+Feature <|-- OrFeature
+OrFeature <|-- XorFeature
+
+class Cardinality {
+min: int
+max: int
+}
+
+Cardinality <|-- GroupCardinality
+Cardinality <|-- FeatureCardinality
+
+class Attribute {
+name: string
+value: string
+}
+
+Feature *--> "0..*" Attribute: attributes
+Feature *--> "1" FeatureCardinality
+OrFeature *--> "2..*" Feature : variants
+OrFeature --> GroupCardinality
+
+FeatureModel *--> "0..*" Constraint
+Constraint <|-- BooleanConstraint
+BooleanConstraint --> "1" Feature : from
+BooleanConstraint --> "1" Feature : to
+BooleanConstraint <|-- Implies
+BooleanConstraint <|-- Excludes
+
+@enduml
