@@ -432,26 +432,8 @@ public class CloudVerification {
 		}
 	}
 	
-//	public void createInstance(String[] string) {
-//		config1 = Relation.unary("Config1");
-//		formulas.add(config1.one());
-//		
-//		Expression featureSelection = signMap.get(rootFeature);
-//		for (String str : string) {
-//			for (Feature feature: signMap.keySet()) {
-//				if (str.equals(feature.getName())) {
-//					featureSelection = featureSelection == null ? signMap.get(feature) : featureSelection.union(signMap.get(feature));
-//					break;
-//				}
-//			}
-//		}
-//		
-//		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-//		this.validConfiguration();
-//	}
-	
 	protected void validConfiguration() {
-		formulas.add(metamodel.wellFormedFeatureModel(fm1));
+		formulas.add(metamodel.wellFormed(fm1));
 		formulas.add(config1.in(metamodel.semantics(fm1)));
 	}
 }

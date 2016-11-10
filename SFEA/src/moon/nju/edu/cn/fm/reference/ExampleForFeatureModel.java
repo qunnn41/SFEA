@@ -239,7 +239,7 @@ public class ExampleForFeatureModel {
 	}
 	
 	public void validConfiguration() {
-		formulas.add(basic.wellFormedFeatureModel(fm1));
+		formulas.add(basic.wellFormed(fm1));
 		formulas.add(config1.in(basic.semantics(fm1)));
 	}
 	

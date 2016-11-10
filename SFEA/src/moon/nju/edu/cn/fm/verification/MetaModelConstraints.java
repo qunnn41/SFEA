@@ -184,7 +184,7 @@ public class MetaModelConstraints {
 	 *		all formula: fm.formulas | formula.welltyped[fm] = True
 	 *	} 
 	 */
-	public Formula wellFormedFeatureModel(Expression fm) {
+	public Formula wellFormed(Expression fm) {
 		final Variable formula = Variable.unary("formula");
 		final Formula f1 = (fm.join(formula.join(rWelltyped)).eq(BooleanExpression.TRUE)).forAll(formula.oneOf(fm.join(rFormulas)));
 		
