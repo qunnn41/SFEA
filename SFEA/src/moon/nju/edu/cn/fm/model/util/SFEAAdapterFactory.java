@@ -104,16 +104,32 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 				return createConstraintsAdapter();
 			}
 			@Override
-			public Adapter caseBooleanConstraints(BooleanConstraints object) {
-				return createBooleanConstraintsAdapter();
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
 			}
 			@Override
-			public Adapter caseImpliesConstraints(ImpliesConstraints object) {
-				return createImpliesConstraintsAdapter();
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
 			}
 			@Override
-			public Adapter caseExcludesConstraints(ExcludesConstraints object) {
-				return createExcludesConstraintsAdapter();
+			public Adapter caseOperator(Operator object) {
+				return createOperatorAdapter();
+			}
+			@Override
+			public Adapter caseAndOperator(AndOperator object) {
+				return createAndOperatorAdapter();
+			}
+			@Override
+			public Adapter caseOrOperator(OrOperator object) {
+				return createOrOperatorAdapter();
+			}
+			@Override
+			public Adapter caseNotOperator(NotOperator object) {
+				return createNotOperatorAdapter();
+			}
+			@Override
+			public Adapter caseImpliesOperator(ImpliesOperator object) {
+				return createImpliesOperatorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -262,44 +278,100 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.BooleanConstraints <em>Boolean Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see moon.nju.edu.cn.fm.model.BooleanConstraints
+	 * @see moon.nju.edu.cn.fm.model.Element
 	 * @generated
 	 */
-	public Adapter createBooleanConstraintsAdapter() {
+	public Adapter createElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.ImpliesConstraints <em>Implies Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see moon.nju.edu.cn.fm.model.ImpliesConstraints
+	 * @see moon.nju.edu.cn.fm.model.Operation
 	 * @generated
 	 */
-	public Adapter createImpliesConstraintsAdapter() {
+	public Adapter createOperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.ExcludesConstraints <em>Excludes Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.Operator <em>Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see moon.nju.edu.cn.fm.model.ExcludesConstraints
+	 * @see moon.nju.edu.cn.fm.model.Operator
 	 * @generated
 	 */
-	public Adapter createExcludesConstraintsAdapter() {
+	public Adapter createOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.AndOperator <em>And Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.AndOperator
+	 * @generated
+	 */
+	public Adapter createAndOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.OrOperator <em>Or Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.OrOperator
+	 * @generated
+	 */
+	public Adapter createOrOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.NotOperator <em>Not Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.NotOperator
+	 * @generated
+	 */
+	public Adapter createNotOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.ImpliesOperator <em>Implies Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.ImpliesOperator
+	 * @generated
+	 */
+	public Adapter createImpliesOperatorAdapter() {
 		return null;
 	}
 

@@ -2,25 +2,25 @@
  */
 package moon.nju.edu.cn.fm.model.impl;
 
-import moon.nju.edu.cn.fm.model.ImpliesConstraints;
+import moon.nju.edu.cn.fm.model.OrOperator;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Implies Constraints</b></em>'.
+ * An implementation of the model object '<em><b>Or Operator</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class ImpliesConstraintsImpl extends BooleanConstraintsImpl implements ImpliesConstraints {
+public class OrOperatorImpl extends OperatorImpl implements OrOperator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImpliesConstraintsImpl() {
+	protected OrOperatorImpl() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public class ImpliesConstraintsImpl extends BooleanConstraintsImpl implements Im
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SFEAPackage.Literals.IMPLIES_CONSTRAINTS;
+		return SFEAPackage.Literals.OR_OPERATOR;
 	}
 
-} //ImpliesConstraintsImpl
+} //OrOperatorImpl

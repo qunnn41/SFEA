@@ -2,25 +2,27 @@
  */
 package moon.nju.edu.cn.fm.model.impl;
 
-import moon.nju.edu.cn.fm.model.ExcludesConstraints;
+import moon.nju.edu.cn.fm.model.Operator;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Excludes Constraints</b></em>'.
+ * An implementation of the model object '<em><b>Operator</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class ExcludesConstraintsImpl extends BooleanConstraintsImpl implements ExcludesConstraints {
+public class OperatorImpl extends MinimalEObjectImpl.Container implements Operator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExcludesConstraintsImpl() {
+	protected OperatorImpl() {
 		super();
 	}
 
@@ -31,7 +33,7 @@ public class ExcludesConstraintsImpl extends BooleanConstraintsImpl implements E
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SFEAPackage.Literals.EXCLUDES_CONSTRAINTS;
+		return SFEAPackage.Literals.OPERATOR;
 	}
 
-} //ExcludesConstraintsImpl
+} //OperatorImpl

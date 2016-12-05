@@ -103,31 +103,67 @@ public interface SFEAFactory extends EFactory {
 	Constraints createConstraints();
 
 	/**
-	 * Returns a new object of class '<em>Boolean Constraints</em>'.
+	 * Returns a new object of class '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Constraints</em>'.
+	 * @return a new object of class '<em>Element</em>'.
 	 * @generated
 	 */
-	BooleanConstraints createBooleanConstraints();
+	Element createElement();
 
 	/**
-	 * Returns a new object of class '<em>Implies Constraints</em>'.
+	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Implies Constraints</em>'.
+	 * @return a new object of class '<em>Operation</em>'.
 	 * @generated
 	 */
-	ImpliesConstraints createImpliesConstraints();
+	Operation createOperation();
 
 	/**
-	 * Returns a new object of class '<em>Excludes Constraints</em>'.
+	 * Returns a new object of class '<em>Operator</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Excludes Constraints</em>'.
+	 * @return a new object of class '<em>Operator</em>'.
 	 * @generated
 	 */
-	ExcludesConstraints createExcludesConstraints();
+	Operator createOperator();
+
+	/**
+	 * Returns a new object of class '<em>And Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>And Operator</em>'.
+	 * @generated
+	 */
+	AndOperator createAndOperator();
+
+	/**
+	 * Returns a new object of class '<em>Or Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Or Operator</em>'.
+	 * @generated
+	 */
+	OrOperator createOrOperator();
+
+	/**
+	 * Returns a new object of class '<em>Not Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not Operator</em>'.
+	 * @generated
+	 */
+	NotOperator createNotOperator();
+
+	/**
+	 * Returns a new object of class '<em>Implies Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Implies Operator</em>'.
+	 * @generated
+	 */
+	ImpliesOperator createImpliesOperator();
 
 	/**
 	 * Returns the package supported by this factory.

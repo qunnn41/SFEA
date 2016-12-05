@@ -31,10 +31,24 @@ OrFeature *--> "2..*" Feature : variants
 OrFeature --> GroupCardinality
 
 FeatureModel *--> "0..*" Constraint
-Constraint <|-- BooleanConstraint
-BooleanConstraint --> "1" Feature : from
-BooleanConstraint --> "1" Feature : to
-BooleanConstraint <|-- Implies
-BooleanConstraint <|-- Excludes
+
+Constraint <|-- Operation
+Operator <|-- And
+Operator <|-- Or
+Operator <|-- Implies
+Operator <|-- Not
+
+Operation --> "1" ConstrainableElement : from
+Operation --> "0..1" ConstrainableElement : to
+Operation --> "1" Operator: op
+
+class Element {
+value: int
+}
+
+ConstrainableElement <|-- Element
+ConstrainableElement <|-- Operation
+
+Element *--> "1" Feature : feature
 
 @enduml

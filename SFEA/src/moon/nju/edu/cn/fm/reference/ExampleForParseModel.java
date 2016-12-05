@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import moon.nju.edu.cn.fm.model.Constraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureModel;
-import moon.nju.edu.cn.fm.model.ImpliesConstraints;
+import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -84,9 +84,9 @@ public class ExampleForParseModel {
 		
 		// TODO handle complex constraint, a^b->c
 		for (Constraints constraint: constraints) {
-			if (constraint instanceof ImpliesConstraints) {
-				ImpliesConstraints impliesConstraint = (ImpliesConstraints) constraint;
-				System.out.println(impliesConstraint.getFrom().getName() + "->" + impliesConstraint.getTo().getName());
+			if (constraint instanceof Operation) {
+				Operation operation = (Operation) constraint;
+				System.out.println(operation.getFrom().getFeature().getName() + "->" + operation.getTo().getFeature().getName());
 			}
 		}
 

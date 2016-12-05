@@ -9,21 +9,14 @@
     </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Language">
       <featureCardinality min="1" max="1"/>
-      <variants name="Java"/>
       <variants name="Scala"/>
       <variants name="Python"/>
-      <variants name="Ruby"/>
-      <variants name="Javascript"/>
       <variants name="PHP"/>
       <variants name="Go"/>
       <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Framework">
       <featureCardinality max="1"/>
-      <variants name="Spring"/>
-      <variants name="Rails"/>
-      <variants name="Play"/>
-      <variants name="Node.js"/>
       <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures name="Service">
@@ -60,32 +53,43 @@
         <variants name="Pingdom"/>
         <groupCardinality min="1" max="3"/>
       </subFeatures>
-      <subFeatures xsi:type="fm:OrFeature" name="Protocol">
-        <featureCardinality max="1"/>
-        <variants name="CloudAMQP"/>
-        <variants name="RabbitMQ"/>
-        <groupCardinality min="1" max="2"/>
-      </subFeatures>
-      <subFeatures xsi:type="fm:OrFeature" name="Network">
-        <featureCardinality max="1"/>
-        <variants name="Fixie"/>
-        <variants name="Proximo"/>
-        <variants name="PointDNS"/>
-        <groupCardinality min="1" max="3"/>
-      </subFeatures>
-      <subFeatures xsi:type="fm:OrFeature" name="Security">
-        <featureCardinality max="1"/>
-        <variants name="SSL"/>
-        <variants name="SecureKey"/>
-        <groupCardinality min="1" max="2"/>
-      </subFeatures>
       <featureCardinality max="1"/>
     </subFeatures>
   </root>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.0" to="//@root/@subFeatures.1/@variants.0"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.3/@subFeatures.3/@variants.0" to="//@root/@subFeatures.2/@variants.1"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.3/@subFeatures.4/@variants.1" to="//@root/@subFeatures.1/@variants.3"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.2" to="//@root/@subFeatures.1/@variants.0"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.4"/>
-  <constraints xsi:type="fm:ImpliesConstraints" from="//@root/@subFeatures.2/@variants.1" to="//@root/@subFeatures.1/@variants.3"/>
+  <constraints xsi:type="fm:Operation">
+    <from value="1">
+      <feature name="Node.js"/>
+    </from>
+    <to value="1">
+      <feature name="Javascript"/>
+    </to>
+    <op xsi:type="fm:ImpliesOperator"/>
+  </constraints>
+  <constraints xsi:type="fm:Operation">
+    <from value="1">
+      <feature name="Spring"/>
+    </from>
+    <to value="1">
+      <feature name="Java"/>
+    </to>
+    <op xsi:type="fm:ImpliesOperator"/>
+  </constraints>
+  <constraints xsi:type="fm:Operation">
+    <from value="1">
+      <feature name="Play"/>
+    </from>
+    <to value="1">
+      <feature name="Java"/>
+    </to>
+    <op xsi:type="fm:ImpliesOperator"/>
+  </constraints>
+  <constraints xsi:type="fm:Operation">
+    <from value="1">
+      <feature name="Rails"/>
+    </from>
+    <to value="1">
+      <feature name="Ruby"/>
+    </to>
+    <op xsi:type="fm:ImpliesOperator"/>
+  </constraints>
 </fm:FeatureModel>

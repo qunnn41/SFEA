@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import moon.nju.edu.cn.fm.model.Constraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureModel;
-import moon.nju.edu.cn.fm.model.ImpliesConstraints;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -236,37 +235,37 @@ public class CloudVerification {
 	}
 
 	private void loadFormula() {
-		for (Constraints constraint : constraints) {
-			if (constraint instanceof ImpliesConstraints) {
-				ImpliesConstraints impliesConstraint = (ImpliesConstraints) constraint;
-				Feature fromFeature = impliesConstraint.getFrom();
-				Feature toFeature = impliesConstraint.getTo();
-				
-				String impliesName = "f" + (++ mFormIndex);
-				Relation impliesRelation = Relation.unary(impliesName);
-				relationNameMap.put(impliesRelation, impliesName);
-				
-				String fromName = "nf" + (++ mNameFIndex);
-				Relation fromRelation = Relation.unary(fromName);
-				relationNameMap.put(fromRelation, fromName);
-				
-				String toName = "nf" + (++ mNameFIndex);
-				Relation toRelation = Relation.unary(toName);
-				relationNameMap.put(toRelation, toName);
-				
-				formulas.add(fromRelation.join(MetaModelConstraints.rName).eq(signMap.get(fromFeature)));
-				formulas.add(toRelation.join(MetaModelConstraints.rName).eq(signMap.get(toFeature)));
-				
-				formulas.add(impliesRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
-				formulas.add(impliesRelation.join(MetaModelConstraints.rLeft).eq(fromRelation));
-				formulas.add(impliesRelation.join(MetaModelConstraints.rRight).eq(toRelation));
-				
-				nameFList.add(fromRelation);
-				nameFList.add(toRelation);
-				
-				formList.add(impliesRelation);
-			}
-		}
+//		for (Constraints constraint : constraints) {
+//			if (constraint instanceof ImpliesConstraints) {
+//				ImpliesConstraints impliesConstraint = (ImpliesConstraints) constraint;
+//				Feature fromFeature = impliesConstraint.getFrom();
+//				Feature toFeature = impliesConstraint.getTo();
+//				
+//				String impliesName = "f" + (++ mFormIndex);
+//				Relation impliesRelation = Relation.unary(impliesName);
+//				relationNameMap.put(impliesRelation, impliesName);
+//				
+//				String fromName = "nf" + (++ mNameFIndex);
+//				Relation fromRelation = Relation.unary(fromName);
+//				relationNameMap.put(fromRelation, fromName);
+//				
+//				String toName = "nf" + (++ mNameFIndex);
+//				Relation toRelation = Relation.unary(toName);
+//				relationNameMap.put(toRelation, toName);
+//				
+//				formulas.add(fromRelation.join(MetaModelConstraints.rName).eq(signMap.get(fromFeature)));
+//				formulas.add(toRelation.join(MetaModelConstraints.rName).eq(signMap.get(toFeature)));
+//				
+//				formulas.add(impliesRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
+//				formulas.add(impliesRelation.join(MetaModelConstraints.rLeft).eq(fromRelation));
+//				formulas.add(impliesRelation.join(MetaModelConstraints.rRight).eq(toRelation));
+//				
+//				nameFList.add(fromRelation);
+//				nameFList.add(toRelation);
+//				
+//				formList.add(impliesRelation);
+//			}
+//		}
 	}
 	
 	private Bounds bounds() {

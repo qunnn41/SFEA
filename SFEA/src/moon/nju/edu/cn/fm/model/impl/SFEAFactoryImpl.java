@@ -65,9 +65,13 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 			case SFEAPackage.GROUP_CARDINALITY: return createGroupCardinality();
 			case SFEAPackage.ATTRIBUTE: return createAttribute();
 			case SFEAPackage.CONSTRAINTS: return createConstraints();
-			case SFEAPackage.BOOLEAN_CONSTRAINTS: return createBooleanConstraints();
-			case SFEAPackage.IMPLIES_CONSTRAINTS: return createImpliesConstraints();
-			case SFEAPackage.EXCLUDES_CONSTRAINTS: return createExcludesConstraints();
+			case SFEAPackage.ELEMENT: return createElement();
+			case SFEAPackage.OPERATION: return createOperation();
+			case SFEAPackage.OPERATOR: return createOperator();
+			case SFEAPackage.AND_OPERATOR: return createAndOperator();
+			case SFEAPackage.OR_OPERATOR: return createOrOperator();
+			case SFEAPackage.NOT_OPERATOR: return createNotOperator();
+			case SFEAPackage.IMPLIES_OPERATOR: return createImpliesOperator();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -168,9 +172,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BooleanConstraints createBooleanConstraints() {
-		BooleanConstraintsImpl booleanConstraints = new BooleanConstraintsImpl();
-		return booleanConstraints;
+	public Element createElement() {
+		ElementImpl element = new ElementImpl();
+		return element;
 	}
 
 	/**
@@ -178,9 +182,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImpliesConstraints createImpliesConstraints() {
-		ImpliesConstraintsImpl impliesConstraints = new ImpliesConstraintsImpl();
-		return impliesConstraints;
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
 	}
 
 	/**
@@ -188,9 +192,49 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExcludesConstraints createExcludesConstraints() {
-		ExcludesConstraintsImpl excludesConstraints = new ExcludesConstraintsImpl();
-		return excludesConstraints;
+	public Operator createOperator() {
+		OperatorImpl operator = new OperatorImpl();
+		return operator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AndOperator createAndOperator() {
+		AndOperatorImpl andOperator = new AndOperatorImpl();
+		return andOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OrOperator createOrOperator() {
+		OrOperatorImpl orOperator = new OrOperatorImpl();
+		return orOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotOperator createNotOperator() {
+		NotOperatorImpl notOperator = new NotOperatorImpl();
+		return notOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImpliesOperator createImpliesOperator() {
+		ImpliesOperatorImpl impliesOperator = new ImpliesOperatorImpl();
+		return impliesOperator;
 	}
 
 	/**

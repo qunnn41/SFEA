@@ -125,26 +125,50 @@ public class SFEASwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SFEAPackage.BOOLEAN_CONSTRAINTS: {
-				BooleanConstraints booleanConstraints = (BooleanConstraints)theEObject;
-				T result = caseBooleanConstraints(booleanConstraints);
-				if (result == null) result = caseConstraints(booleanConstraints);
+			case SFEAPackage.ELEMENT: {
+				Element element = (Element)theEObject;
+				T result = caseElement(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SFEAPackage.IMPLIES_CONSTRAINTS: {
-				ImpliesConstraints impliesConstraints = (ImpliesConstraints)theEObject;
-				T result = caseImpliesConstraints(impliesConstraints);
-				if (result == null) result = caseBooleanConstraints(impliesConstraints);
-				if (result == null) result = caseConstraints(impliesConstraints);
+			case SFEAPackage.OPERATION: {
+				Operation operation = (Operation)theEObject;
+				T result = caseOperation(operation);
+				if (result == null) result = caseConstraints(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SFEAPackage.EXCLUDES_CONSTRAINTS: {
-				ExcludesConstraints excludesConstraints = (ExcludesConstraints)theEObject;
-				T result = caseExcludesConstraints(excludesConstraints);
-				if (result == null) result = caseBooleanConstraints(excludesConstraints);
-				if (result == null) result = caseConstraints(excludesConstraints);
+			case SFEAPackage.OPERATOR: {
+				Operator operator = (Operator)theEObject;
+				T result = caseOperator(operator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SFEAPackage.AND_OPERATOR: {
+				AndOperator andOperator = (AndOperator)theEObject;
+				T result = caseAndOperator(andOperator);
+				if (result == null) result = caseOperator(andOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SFEAPackage.OR_OPERATOR: {
+				OrOperator orOperator = (OrOperator)theEObject;
+				T result = caseOrOperator(orOperator);
+				if (result == null) result = caseOperator(orOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SFEAPackage.NOT_OPERATOR: {
+				NotOperator notOperator = (NotOperator)theEObject;
+				T result = caseNotOperator(notOperator);
+				if (result == null) result = caseOperator(notOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SFEAPackage.IMPLIES_OPERATOR: {
+				ImpliesOperator impliesOperator = (ImpliesOperator)theEObject;
+				T result = caseImpliesOperator(impliesOperator);
+				if (result == null) result = caseOperator(impliesOperator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -288,47 +312,107 @@ public class SFEASwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBooleanConstraints(BooleanConstraints object) {
+	public T caseElement(Element object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Implies Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Implies Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseImpliesConstraints(ImpliesConstraints object) {
+	public T caseOperation(Operation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Excludes Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Operator</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Excludes Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Operator</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExcludesConstraints(ExcludesConstraints object) {
+	public T caseOperator(Operator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>And Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>And Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAndOperator(AndOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Or Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Or Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrOperator(OrOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Not Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Not Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNotOperator(NotOperator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Implies Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Implies Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImpliesOperator(ImpliesOperator object) {
 		return null;
 	}
 
