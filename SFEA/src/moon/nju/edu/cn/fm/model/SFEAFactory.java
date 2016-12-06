@@ -103,22 +103,13 @@ public interface SFEAFactory extends EFactory {
 	Constraints createConstraints();
 
 	/**
-	 * Returns a new object of class '<em>Element</em>'.
+	 * Returns a new object of class '<em>Card Ex Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Element</em>'.
+	 * @return a new object of class '<em>Card Ex Constraint</em>'.
 	 * @generated
 	 */
-	Element createElement();
-
-	/**
-	 * Returns a new object of class '<em>Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation</em>'.
-	 * @generated
-	 */
-	Operation createOperation();
+	CardExConstraint createCardExConstraint();
 
 	/**
 	 * Returns a new object of class '<em>Operator</em>'.
@@ -148,22 +139,31 @@ public interface SFEAFactory extends EFactory {
 	OrOperator createOrOperator();
 
 	/**
-	 * Returns a new object of class '<em>Not Operator</em>'.
+	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Not Operator</em>'.
+	 * @return a new object of class '<em>Operation</em>'.
 	 * @generated
 	 */
-	NotOperator createNotOperator();
+	Operation createOperation();
 
 	/**
-	 * Returns a new object of class '<em>Implies Operator</em>'.
+	 * Returns a new object of class '<em>Value Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Implies Operator</em>'.
+	 * @return a new object of class '<em>Value Operation</em>'.
 	 * @generated
 	 */
-	ImpliesOperator createImpliesOperator();
+	ValueOperation createValueOperation();
+
+	/**
+	 * Returns a new object of class '<em>Boolean Constraints</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Constraints</em>'.
+	 * @generated
+	 */
+	BooleanConstraints createBooleanConstraints();
 
 	/**
 	 * Returns the package supported by this factory.

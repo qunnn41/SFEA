@@ -34,19 +34,23 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Attribute/value"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//Constraints"/>
-    <genClasses ecoreClass="fm_mm.ecore#//Element">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Element/value"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Element/feature"/>
-    </genClasses>
-    <genClasses ecoreClass="fm_mm.ecore#//Operation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Operation/from"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Operation/to"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Operation/op"/>
+    <genClasses ecoreClass="fm_mm.ecore#//CardExConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//CardExConstraint/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//CardExConstraint/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//CardExConstraint/operator"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//Operator"/>
     <genClasses ecoreClass="fm_mm.ecore#//AndOperator"/>
     <genClasses ecoreClass="fm_mm.ecore#//OrOperator"/>
-    <genClasses ecoreClass="fm_mm.ecore#//NotOperator"/>
-    <genClasses ecoreClass="fm_mm.ecore#//ImpliesOperator"/>
+    <genClasses ecoreClass="fm_mm.ecore#//Operation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Operation/feature"/>
+    </genClasses>
+    <genClasses ecoreClass="fm_mm.ecore#//ValueOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//ValueOperation/value"/>
+    </genClasses>
+    <genClasses ecoreClass="fm_mm.ecore#//BooleanConstraints">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/to"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

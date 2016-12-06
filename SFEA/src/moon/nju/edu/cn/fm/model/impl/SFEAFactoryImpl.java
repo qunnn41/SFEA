@@ -65,13 +65,13 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 			case SFEAPackage.GROUP_CARDINALITY: return createGroupCardinality();
 			case SFEAPackage.ATTRIBUTE: return createAttribute();
 			case SFEAPackage.CONSTRAINTS: return createConstraints();
-			case SFEAPackage.ELEMENT: return createElement();
-			case SFEAPackage.OPERATION: return createOperation();
+			case SFEAPackage.CARD_EX_CONSTRAINT: return createCardExConstraint();
 			case SFEAPackage.OPERATOR: return createOperator();
 			case SFEAPackage.AND_OPERATOR: return createAndOperator();
 			case SFEAPackage.OR_OPERATOR: return createOrOperator();
-			case SFEAPackage.NOT_OPERATOR: return createNotOperator();
-			case SFEAPackage.IMPLIES_OPERATOR: return createImpliesOperator();
+			case SFEAPackage.OPERATION: return createOperation();
+			case SFEAPackage.VALUE_OPERATION: return createValueOperation();
+			case SFEAPackage.BOOLEAN_CONSTRAINTS: return createBooleanConstraints();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -172,19 +172,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Element createElement() {
-		ElementImpl element = new ElementImpl();
-		return element;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Operation createOperation() {
-		OperationImpl operation = new OperationImpl();
-		return operation;
+	public CardExConstraint createCardExConstraint() {
+		CardExConstraintImpl cardExConstraint = new CardExConstraintImpl();
+		return cardExConstraint;
 	}
 
 	/**
@@ -222,9 +212,9 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotOperator createNotOperator() {
-		NotOperatorImpl notOperator = new NotOperatorImpl();
-		return notOperator;
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
 	}
 
 	/**
@@ -232,9 +222,19 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImpliesOperator createImpliesOperator() {
-		ImpliesOperatorImpl impliesOperator = new ImpliesOperatorImpl();
-		return impliesOperator;
+	public ValueOperation createValueOperation() {
+		ValueOperationImpl valueOperation = new ValueOperationImpl();
+		return valueOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanConstraints createBooleanConstraints() {
+		BooleanConstraintsImpl booleanConstraints = new BooleanConstraintsImpl();
+		return booleanConstraints;
 	}
 
 	/**

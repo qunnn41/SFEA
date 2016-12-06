@@ -32,23 +32,24 @@ OrFeature --> GroupCardinality
 
 FeatureModel *--> "0..*" Constraint
 
-Constraint <|-- Operation
-Operator <|-- And
-Operator <|-- Or
-Operator <|-- Implies
-Operator <|-- Not
+Constraint <|-- BooleanConstraint
+BooleanConstraint --> "1" Feature : from
+BooleanConstraint --> "1" Feature : to
+BooleanConstraint <|-- Implies
+BooleanConstraint <|-- Excludes
+Constraint <|-- CardExConstraint
 
-Operation --> "1" ConstrainableElement : from
-Operation --> "0..1" ConstrainableElement : to
-Operation --> "1" Operator: op
+CardExConstraint *--> "1" Operation : Action
+CardExConstraint *--> "1..*" ValueOperation : Condition
 
-class Element {
+class ValueOperation {
 value: int
 }
 
-ConstrainableElement <|-- Element
-ConstrainableElement <|-- Operation
-
-Element *--> "1" Feature : feature
+CardExConstraint *--> Operator
+Operator <|-- And
+Operator <|-- Or
+Operation <|-- ValueOperation
+Operation --> Feature
 
 @enduml
