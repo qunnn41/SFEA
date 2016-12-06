@@ -104,6 +104,30 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 				return createConstraintsAdapter();
 			}
 			@Override
+			public Adapter caseCardExConstraint(CardExConstraint object) {
+				return createCardExConstraintAdapter();
+			}
+			@Override
+			public Adapter caseOperator(Operator object) {
+				return createOperatorAdapter();
+			}
+			@Override
+			public Adapter caseAndOperator(AndOperator object) {
+				return createAndOperatorAdapter();
+			}
+			@Override
+			public Adapter caseOrOperator(OrOperator object) {
+				return createOrOperatorAdapter();
+			}
+			@Override
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
+			}
+			@Override
+			public Adapter caseValueOperation(ValueOperation object) {
+				return createValueOperationAdapter();
+			}
+			@Override
 			public Adapter caseBooleanConstraints(BooleanConstraints object) {
 				return createBooleanConstraintsAdapter();
 			}
@@ -258,6 +282,90 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConstraintsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.CardExConstraint <em>Card Ex Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.CardExConstraint
+	 * @generated
+	 */
+	public Adapter createCardExConstraintAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.Operator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.Operator
+	 * @generated
+	 */
+	public Adapter createOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.AndOperator <em>And Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.AndOperator
+	 * @generated
+	 */
+	public Adapter createAndOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.OrOperator <em>Or Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.OrOperator
+	 * @generated
+	 */
+	public Adapter createOrOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.Operation
+	 * @generated
+	 */
+	public Adapter createOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.ValueOperation <em>Value Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see moon.nju.edu.cn.fm.model.ValueOperation
+	 * @generated
+	 */
+	public Adapter createValueOperationAdapter() {
 		return null;
 	}
 

@@ -65,6 +65,12 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 			case SFEAPackage.GROUP_CARDINALITY: return createGroupCardinality();
 			case SFEAPackage.ATTRIBUTE: return createAttribute();
 			case SFEAPackage.CONSTRAINTS: return createConstraints();
+			case SFEAPackage.CARD_EX_CONSTRAINT: return createCardExConstraint();
+			case SFEAPackage.OPERATOR: return createOperator();
+			case SFEAPackage.AND_OPERATOR: return createAndOperator();
+			case SFEAPackage.OR_OPERATOR: return createOrOperator();
+			case SFEAPackage.OPERATION: return createOperation();
+			case SFEAPackage.VALUE_OPERATION: return createValueOperation();
 			case SFEAPackage.BOOLEAN_CONSTRAINTS: return createBooleanConstraints();
 			case SFEAPackage.IMPLIES_CONSTRAINTS: return createImpliesConstraints();
 			case SFEAPackage.EXCLUDES_CONSTRAINTS: return createExcludesConstraints();
@@ -161,6 +167,66 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	public Constraints createConstraints() {
 		ConstraintsImpl constraints = new ConstraintsImpl();
 		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CardExConstraint createCardExConstraint() {
+		CardExConstraintImpl cardExConstraint = new CardExConstraintImpl();
+		return cardExConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operator createOperator() {
+		OperatorImpl operator = new OperatorImpl();
+		return operator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AndOperator createAndOperator() {
+		AndOperatorImpl andOperator = new AndOperatorImpl();
+		return andOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OrOperator createOrOperator() {
+		OrOperatorImpl orOperator = new OrOperatorImpl();
+		return orOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ValueOperation createValueOperation() {
+		ValueOperationImpl valueOperation = new ValueOperationImpl();
+		return valueOperation;
 	}
 
 	/**
