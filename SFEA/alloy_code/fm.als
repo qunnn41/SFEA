@@ -7,7 +7,9 @@ sig FeatureModel {
 	formulas: set Formula
 }
 
-sig Name {}
+sig Name {
+	card: Int
+}
 
 sig Relation {
 	parent: Name,
@@ -26,7 +28,8 @@ abstract sig Formula {
 }
 
 sig NameF extends Formula {
-	name: Name
+	name: Name,
+	value: Int
 }
 
 sig Form extends Formula {
@@ -59,7 +62,7 @@ fact FormulaConstruction {
 }
 
 fun welltypedName(f: NameF, fm: FeatureModel): Bool {
-	f.name in fm.features implies True else False
+	(f.name in fm.features and f.value >= f.name.card) implies True else False
 }
 
 fun welltypedFormula(f: Form, fm: FeatureModel): Bool {
@@ -137,6 +140,11 @@ fact elements {
 	fm1.features = mobilephone+earphone+mp3+camera
 	fm1.relations=r1+r2
 	fm1.formulas=f1+f4
+
+	mobilephone.card = 1
+	earphone.card = 1
+	mp3.card = 2
+	camera.card = 1
 }
 
 fact relations{
@@ -159,6 +167,9 @@ fact formulas {
 
 	f2.name = earphone
 	f3.name = mp3
+
+	f2.value = 1
+	f3.value = 2
 
 	f4.op = ImpliesF
 	f4.left = f3
