@@ -51,7 +51,7 @@ public interface CardExConstraint extends Constraints {
 
 	/**
 	 * Returns the value of the '<em><b>Condition</b></em>' containment reference list.
-	 * The list contents are of type {@link moon.nju.edu.cn.fm.model.ValueOperation}.
+	 * The list contents are of type {@link moon.nju.edu.cn.fm.model.Operation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Condition</em>' containment reference list isn't clear,
@@ -63,7 +63,7 @@ public interface CardExConstraint extends Constraints {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<ValueOperation> getCondition();
+	EList<Operation> getCondition();
 
 	/**
 	 * Returns the value of the '<em><b>Operator</b></em>' containment reference.

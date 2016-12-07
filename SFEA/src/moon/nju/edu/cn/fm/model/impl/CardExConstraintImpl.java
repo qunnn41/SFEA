@@ -8,7 +8,6 @@ import moon.nju.edu.cn.fm.model.CardExConstraint;
 import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.Operator;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
-import moon.nju.edu.cn.fm.model.ValueOperation;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -57,7 +56,7 @@ public class CardExConstraintImpl extends ConstraintsImpl implements CardExConst
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ValueOperation> condition;
+	protected EList<Operation> condition;
 
 	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' containment reference.
@@ -136,9 +135,9 @@ public class CardExConstraintImpl extends ConstraintsImpl implements CardExConst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ValueOperation> getCondition() {
+	public EList<Operation> getCondition() {
 		if (condition == null) {
-			condition = new EObjectContainmentEList<ValueOperation>(ValueOperation.class, this, SFEAPackage.CARD_EX_CONSTRAINT__CONDITION);
+			condition = new EObjectContainmentEList<Operation>(Operation.class, this, SFEAPackage.CARD_EX_CONSTRAINT__CONDITION);
 		}
 		return condition;
 	}
@@ -236,7 +235,7 @@ public class CardExConstraintImpl extends ConstraintsImpl implements CardExConst
 				return;
 			case SFEAPackage.CARD_EX_CONSTRAINT__CONDITION:
 				getCondition().clear();
-				getCondition().addAll((Collection<? extends ValueOperation>)newValue);
+				getCondition().addAll((Collection<? extends Operation>)newValue);
 				return;
 			case SFEAPackage.CARD_EX_CONSTRAINT__OPERATOR:
 				setOperator((Operator)newValue);

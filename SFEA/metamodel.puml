@@ -40,16 +40,15 @@ BooleanConstraint <|-- Excludes
 Constraint <|-- CardExConstraint
 
 CardExConstraint *--> "1" Operation : Action
-CardExConstraint *--> "1..*" ValueOperation : Condition
+CardExConstraint *--> "1..*" Operation : Condition
 
-class ValueOperation {
+class Operation {
 value: int
 }
 
 CardExConstraint *--> Operator
 Operator <|-- And
 Operator <|-- Or
-Operation <|-- ValueOperation
 Operation --> Feature
 
 @enduml

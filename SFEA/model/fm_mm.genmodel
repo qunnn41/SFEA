@@ -44,9 +44,7 @@
     <genClasses ecoreClass="fm_mm.ecore#//OrOperator"/>
     <genClasses ecoreClass="fm_mm.ecore#//Operation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Operation/feature"/>
-    </genClasses>
-    <genClasses ecoreClass="fm_mm.ecore#//ValueOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//ValueOperation/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Operation/value"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//BooleanConstraints">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/from"/>

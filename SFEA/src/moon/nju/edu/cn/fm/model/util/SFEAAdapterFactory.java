@@ -124,10 +124,6 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 				return createOperationAdapter();
 			}
 			@Override
-			public Adapter caseValueOperation(ValueOperation object) {
-				return createValueOperationAdapter();
-			}
-			@Override
 			public Adapter caseBooleanConstraints(BooleanConstraints object) {
 				return createBooleanConstraintsAdapter();
 			}
@@ -344,20 +340,6 @@ public class SFEAAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link moon.nju.edu.cn.fm.model.ValueOperation <em>Value Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see moon.nju.edu.cn.fm.model.ValueOperation
-	 * @generated
-	 */
-	public Adapter createValueOperationAdapter() {
 		return null;
 	}
 

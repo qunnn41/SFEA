@@ -701,13 +701,22 @@ public interface SFEAPackage extends EPackage {
 	int OPERATION__FEATURE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__VALUE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = 1;
+	int OPERATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Operation</em>' class.
@@ -719,52 +728,6 @@ public interface SFEAPackage extends EPackage {
 	int OPERATION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ValueOperationImpl <em>Value Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see moon.nju.edu.cn.fm.model.impl.ValueOperationImpl
-	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getValueOperation()
-	 * @generated
-	 */
-	int VALUE_OPERATION = 14;
-
-	/**
-	 * The feature id for the '<em><b>Feature</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_OPERATION__FEATURE = OPERATION__FEATURE;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_OPERATION__VALUE = OPERATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Value Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Value Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_OPERATION_OPERATION_COUNT = OPERATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl <em>Boolean Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -772,7 +735,7 @@ public interface SFEAPackage extends EPackage {
 	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getBooleanConstraints()
 	 * @generated
 	 */
-	int BOOLEAN_CONSTRAINTS = 15;
+	int BOOLEAN_CONSTRAINTS = 14;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -1128,25 +1091,15 @@ public interface SFEAPackage extends EPackage {
 	EReference getOperation_Feature();
 
 	/**
-	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.ValueOperation <em>Value Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value Operation</em>'.
-	 * @see moon.nju.edu.cn.fm.model.ValueOperation
-	 * @generated
-	 */
-	EClass getValueOperation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link moon.nju.edu.cn.fm.model.ValueOperation#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link moon.nju.edu.cn.fm.model.Operation#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see moon.nju.edu.cn.fm.model.ValueOperation#getValue()
-	 * @see #getValueOperation()
+	 * @see moon.nju.edu.cn.fm.model.Operation#getValue()
+	 * @see #getOperation()
 	 * @generated
 	 */
-	EAttribute getValueOperation_Value();
+	EAttribute getOperation_Value();
 
 	/**
 	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.BooleanConstraints <em>Boolean Constraints</em>}'.
@@ -1472,22 +1425,12 @@ public interface SFEAPackage extends EPackage {
 		EReference OPERATION__FEATURE = eINSTANCE.getOperation_Feature();
 
 		/**
-		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.ValueOperationImpl <em>Value Operation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see moon.nju.edu.cn.fm.model.impl.ValueOperationImpl
-		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getValueOperation()
-		 * @generated
-		 */
-		EClass VALUE_OPERATION = eINSTANCE.getValueOperation();
-
-		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VALUE_OPERATION__VALUE = eINSTANCE.getValueOperation_Value();
+		EAttribute OPERATION__VALUE = eINSTANCE.getOperation_Value();
 
 		/**
 		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl <em>Boolean Constraints</em>}' class.

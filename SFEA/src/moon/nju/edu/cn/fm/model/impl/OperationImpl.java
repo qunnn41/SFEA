@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link moon.nju.edu.cn.fm.model.impl.OperationImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link moon.nju.edu.cn.fm.model.impl.OperationImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,6 +38,26 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
 	 * @ordered
 	 */
 	protected Feature feature;
+
+	/**
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int VALUE_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected int value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,12 +121,35 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(int newValue) {
+		int oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SFEAPackage.OPERATION__VALUE, oldValue, value));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SFEAPackage.OPERATION__FEATURE:
 				if (resolve) return getFeature();
 				return basicGetFeature();
+			case SFEAPackage.OPERATION__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,6 +164,9 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
 		switch (featureID) {
 			case SFEAPackage.OPERATION__FEATURE:
 				setFeature((Feature)newValue);
+				return;
+			case SFEAPackage.OPERATION__VALUE:
+				setValue((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,6 +183,9 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
 			case SFEAPackage.OPERATION__FEATURE:
 				setFeature((Feature)null);
 				return;
+			case SFEAPackage.OPERATION__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -150,8 +200,26 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
 		switch (featureID) {
 			case SFEAPackage.OPERATION__FEATURE:
 				return feature != null;
+			case SFEAPackage.OPERATION__VALUE:
+				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (value: ");
+		result.append(value);
+		result.append(')');
+		return result.toString();
 	}
 
 } //OperationImpl

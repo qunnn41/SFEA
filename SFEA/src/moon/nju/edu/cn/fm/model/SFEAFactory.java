@@ -148,15 +148,6 @@ public interface SFEAFactory extends EFactory {
 	Operation createOperation();
 
 	/**
-	 * Returns a new object of class '<em>Value Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Value Operation</em>'.
-	 * @generated
-	 */
-	ValueOperation createValueOperation();
-
-	/**
 	 * Returns a new object of class '<em>Boolean Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

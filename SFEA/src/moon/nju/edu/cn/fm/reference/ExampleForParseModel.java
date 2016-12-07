@@ -1,6 +1,7 @@
 package moon.nju.edu.cn.fm.reference;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -9,9 +10,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import moon.nju.edu.cn.fm.model.AndOperator;
+import moon.nju.edu.cn.fm.model.BooleanConstraints;
+import moon.nju.edu.cn.fm.model.CardExConstraint;
 import moon.nju.edu.cn.fm.model.Constraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureModel;
+import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -81,13 +86,29 @@ public class ExampleForParseModel {
 			}
 		}
 		
-//		// TODO handle complex constraint, a^b->c
-//		for (Constraints constraint: constraints) {
-//			if (constraint instanceof Operation) {
-//				Operation operation = (Operation) constraint;
-//				System.out.println(operation.getFrom().getFeature().getName() + "->" + operation.getTo().getFeature().getName());
-//			}
-//		}
+		for (Constraints constraint: constraints) {
+			if (constraint instanceof BooleanConstraints) {
+				BooleanConstraints booleanConstraints = (BooleanConstraints) constraint;
+				System.out.println(booleanConstraints.getFrom().getName() + "\t" + booleanConstraints.getTo().getName());
+			} else {
+				CardExConstraint cardExConstraint = (CardExConstraint) constraint;
+				Operation action = cardExConstraint.getAction();
+				List<Operation> conditions = cardExConstraint.getCondition();
+				if (cardExConstraint.getOperator() instanceof AndOperator) {
+					for (Operation valueOperation: conditions) {
+						System.out.print(valueOperation.getValue() + valueOperation.getFeature().getName() + " and\t");
+					}
+					
+					System.out.println("->" + action.getFeature().getName());
+				} else {
+					for (Operation valueOperation: conditions) {
+						System.out.print(valueOperation.getValue() + valueOperation.getFeature().getName() + "or\t");
+					}
+					
+					System.out.println("->" + action.getFeature().getName());
+				}
+			}
+		}
 
 	}
 	

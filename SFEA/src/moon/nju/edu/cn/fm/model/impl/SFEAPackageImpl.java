@@ -18,7 +18,6 @@ import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.OrOperator;
 import moon.nju.edu.cn.fm.model.SFEAFactory;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
-import moon.nju.edu.cn.fm.model.ValueOperation;
 import moon.nju.edu.cn.fm.model.XorFeature;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -132,13 +131,6 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * @generated
 	 */
 	private EClass operationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass valueOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -483,17 +475,8 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getValueOperation() {
-		return valueOperationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getValueOperation_Value() {
-		return (EAttribute)valueOperationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getOperation_Value() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -594,9 +577,7 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__FEATURE);
-
-		valueOperationEClass = createEClass(VALUE_OPERATION);
-		createEAttribute(valueOperationEClass, VALUE_OPERATION__VALUE);
+		createEAttribute(operationEClass, OPERATION__VALUE);
 
 		booleanConstraintsEClass = createEClass(BOOLEAN_CONSTRAINTS);
 		createEReference(booleanConstraintsEClass, BOOLEAN_CONSTRAINTS__FROM);
@@ -638,7 +619,6 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 		cardExConstraintEClass.getESuperTypes().add(this.getConstraints());
 		andOperatorEClass.getESuperTypes().add(this.getOperator());
 		orOperatorEClass.getESuperTypes().add(this.getOperator());
-		valueOperationEClass.getESuperTypes().add(this.getOperation());
 		booleanConstraintsEClass.getESuperTypes().add(this.getConstraints());
 
 		// Initialize classes, features, and operations; add parameters
@@ -674,7 +654,7 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		initEClass(cardExConstraintEClass, CardExConstraint.class, "CardExConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCardExConstraint_Action(), this.getOperation(), null, "action", null, 1, 1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCardExConstraint_Condition(), this.getValueOperation(), null, "condition", null, 1, -1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCardExConstraint_Condition(), this.getOperation(), null, "condition", null, 1, -1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCardExConstraint_Operator(), this.getOperator(), null, "operator", null, 1, 1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operatorEClass, Operator.class, "Operator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -685,9 +665,7 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Feature(), this.getFeature(), null, "feature", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(valueOperationEClass, ValueOperation.class, "ValueOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getValueOperation_Value(), ecorePackage.getEInt(), "value", null, 0, 1, ValueOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_Value(), ecorePackage.getEInt(), "value", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanConstraintsEClass, BooleanConstraints.class, "BooleanConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBooleanConstraints_From(), this.getFeature(), null, "from", null, 1, 1, BooleanConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

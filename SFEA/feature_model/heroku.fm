@@ -10,6 +10,10 @@
     <subFeatures xsi:type="fm:XorFeature" name="Language">
       <featureCardinality min="1" max="1"/>
       <variants name="Scala"/>
+      <variants name="Ruby"/>
+      <variants name="Javascript"/>
+      <variants name="Java"/>
+      <variants name="Ruby"/>
       <variants name="Python"/>
       <variants name="PHP"/>
       <variants name="Go"/>
@@ -17,6 +21,10 @@
     </subFeatures>
     <subFeatures xsi:type="fm:XorFeature" name="Framework">
       <featureCardinality max="1"/>
+      <variants name="Nodejs"/>
+      <variants name="Spring"/>
+      <variants name="Play"/>
+      <variants name="Rails"/>
       <groupCardinality min="1" max="1"/>
     </subFeatures>
     <subFeatures name="Service">
@@ -56,40 +64,9 @@
       <featureCardinality max="1"/>
     </subFeatures>
   </root>
-  <constraints xsi:type="fm:Operation">
-    <from value="1">
-      <feature name="Node.js"/>
-    </from>
-    <to value="1">
-      <feature name="Javascript"/>
-    </to>
-    <op xsi:type="fm:ImpliesOperator"/>
-  </constraints>
-  <constraints xsi:type="fm:Operation">
-    <from value="1">
-      <feature name="Spring"/>
-    </from>
-    <to value="1">
-      <feature name="Java"/>
-    </to>
-    <op xsi:type="fm:ImpliesOperator"/>
-  </constraints>
-  <constraints xsi:type="fm:Operation">
-    <from value="1">
-      <feature name="Play"/>
-    </from>
-    <to value="1">
-      <feature name="Java"/>
-    </to>
-    <op xsi:type="fm:ImpliesOperator"/>
-  </constraints>
-  <constraints xsi:type="fm:Operation">
-    <from value="1">
-      <feature name="Rails"/>
-    </from>
-    <to value="1">
-      <feature name="Ruby"/>
-    </to>
-    <op xsi:type="fm:ImpliesOperator"/>
+  <constraints xsi:type="fm:CardExConstraint">
+    <action feature="//@root/@subFeatures.1/@variants.3"/>
+    <condition feature="//@root/@subFeatures.1/@variants.2" value="1"/>
+    <operator xsi:type="fm:AndOperator"/>
   </constraints>
 </fm:FeatureModel>

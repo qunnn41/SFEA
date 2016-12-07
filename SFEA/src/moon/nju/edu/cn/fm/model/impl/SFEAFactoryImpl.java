@@ -70,7 +70,6 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 			case SFEAPackage.AND_OPERATOR: return createAndOperator();
 			case SFEAPackage.OR_OPERATOR: return createOrOperator();
 			case SFEAPackage.OPERATION: return createOperation();
-			case SFEAPackage.VALUE_OPERATION: return createValueOperation();
 			case SFEAPackage.BOOLEAN_CONSTRAINTS: return createBooleanConstraints();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -215,16 +214,6 @@ public class SFEAFactoryImpl extends EFactoryImpl implements SFEAFactory {
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
 		return operation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ValueOperation createValueOperation() {
-		ValueOperationImpl valueOperation = new ValueOperationImpl();
-		return valueOperation;
 	}
 
 	/**
