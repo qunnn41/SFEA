@@ -34,10 +34,24 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraints"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CardExConstraint" eSuperTypes="#//Constraints">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        upperBound="-1" eType="#//Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//Operator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AndOperator" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrOperator" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanConstraints" eSuperTypes="#//Constraints">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Feature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Feature"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImpliesConstraints" eSuperTypes="#//BooleanConstraints"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExcludesConstraints" eSuperTypes="#//BooleanConstraints"/>
 </ecore:EPackage>

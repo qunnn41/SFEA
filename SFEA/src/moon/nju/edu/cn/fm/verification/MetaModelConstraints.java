@@ -17,7 +17,7 @@ public class MetaModelConstraints {
 	
 	// Relation
 	public static Relation rFeatures, rRoot, rRelations, rFormulas, rParent, rChild, rType, rMin, rMax;
-	public static Relation rSatisfy, rWelltyped, rName, rLeft, rRight, rOp, rValue;
+	public static Relation rSatisfy, rWelltyped, rName, rLeft, rRight, rOp, rValue, rCard, rSize;
 	
 	private List<Formula> formulas = new LinkedList<Formula>();
 	
@@ -67,6 +67,8 @@ public class MetaModelConstraints {
 		rType = Relation.binary("type");
 		rMin = Relation.binary("min");
 		rMax = Relation.binary("max");
+		rCard = Relation.binary("card");
+		rSize = Relation.binary("size");
 		
 		rSatisfy = Relation.ternary("satisfy");
 		rWelltyped = Relation.ternary("welltyped");
@@ -86,15 +88,18 @@ public class MetaModelConstraints {
 	 * 		formulas: set Formula
 	 * 	}
 	 * 
-	 * 	sig Name {}
+	 * 	sig Name {
+	 * 		card: Int
+	 * 	}
 	 */
 	private Formula setupSigFeatureModelDeclarations() {
 		final Formula f1 = rFeatures.in(sigFeatureModel.product(sigName));
 		final Formula f2 = rRoot.function(sigFeatureModel, sigName);
 		final Formula f3 = rRelations.in(sigFeatureModel.product(sigRelation));
 		final Formula f4 = rFormulas.in(sigFeatureModel.product(sigFormula));
+		final Formula f5 = rCard.in(sigName.product(Expression.INTS));
 		
-		return Formula.and(f1, f2, f3, f4);
+		return Formula.and(f1, f2, f3, f4, f5);
 	}
 	
 	/**
@@ -127,7 +132,8 @@ public class MetaModelConstraints {
 	 *	}
 	 *
 	 * 	sig NameF extends Formula {
-	 * 		name: Name
+	 * 		name: Name,
+	 * 		size: Int
 	 * 	}
 	 * 
 	 * 	sig Form extends Formula {
@@ -150,8 +156,9 @@ public class MetaModelConstraints {
 		final Formula f6 = rOp.in(sigForm.product(sigOperation));
 		
 		final Formula f7 = Formula.and(sigAndF.one(), sigOrF.one(), sigImpliesF.one(), sigNotF.one());
+		final Formula f8 = rSize.in(sigNameF.product(Expression.INTS));
 		
-		return Formula.and(f1, f2, f3, f4, f5, f6, f7);
+		return Formula.and(f1, f2, f3, f4, f5, f6, f7, f8);
 	}
 	
 	/**
@@ -230,8 +237,9 @@ public class MetaModelConstraints {
 	 * 	}
 	 */
 	private Expression wellTypedName(Expression f, Expression fm) {
-		Formula formula = f.join(rName).in(fm.join(rFeatures));
-		return formula.thenElse(BooleanExpression.TRUE, BooleanExpression.FALSE);
+		Formula f1 = f.join(rName).in(fm.join(rFeatures));
+		Formula f2 = f.join(rSize).count().gte(f.join(rName).join(rCard).count());
+		return Formula.and(f1, f2).thenElse(BooleanExpression.TRUE, BooleanExpression.FALSE);
 	}
 	
 	/**

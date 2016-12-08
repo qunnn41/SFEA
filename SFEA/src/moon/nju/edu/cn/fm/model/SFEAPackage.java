@@ -543,6 +543,191 @@ public interface SFEAPackage extends EPackage {
 	int CONSTRAINTS_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.CardExConstraintImpl <em>Card Ex Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see moon.nju.edu.cn.fm.model.impl.CardExConstraintImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getCardExConstraint()
+	 * @generated
+	 */
+	int CARD_EX_CONSTRAINT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARD_EX_CONSTRAINT__ACTION = CONSTRAINTS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARD_EX_CONSTRAINT__CONDITION = CONSTRAINTS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARD_EX_CONSTRAINT__OPERATOR = CONSTRAINTS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Card Ex Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARD_EX_CONSTRAINT_FEATURE_COUNT = CONSTRAINTS_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Card Ex Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CARD_EX_CONSTRAINT_OPERATION_COUNT = CONSTRAINTS_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.OperatorImpl <em>Operator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see moon.nju.edu.cn.fm.model.impl.OperatorImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getOperator()
+	 * @generated
+	 */
+	int OPERATOR = 10;
+
+	/**
+	 * The number of structural features of the '<em>Operator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATOR_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Operator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATOR_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.AndOperatorImpl <em>And Operator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see moon.nju.edu.cn.fm.model.impl.AndOperatorImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getAndOperator()
+	 * @generated
+	 */
+	int AND_OPERATOR = 11;
+
+	/**
+	 * The number of structural features of the '<em>And Operator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND_OPERATOR_FEATURE_COUNT = OPERATOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>And Operator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND_OPERATOR_OPERATION_COUNT = OPERATOR_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.OrOperatorImpl <em>Or Operator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see moon.nju.edu.cn.fm.model.impl.OrOperatorImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getOrOperator()
+	 * @generated
+	 */
+	int OR_OPERATOR = 12;
+
+	/**
+	 * The number of structural features of the '<em>Or Operator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR_OPERATOR_FEATURE_COUNT = OPERATOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Or Operator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR_OPERATOR_OPERATION_COUNT = OPERATOR_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.OperationImpl <em>Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see moon.nju.edu.cn.fm.model.impl.OperationImpl
+	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getOperation()
+	 * @generated
+	 */
+	int OPERATION = 13;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__FEATURE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl <em>Boolean Constraints</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -550,7 +735,7 @@ public interface SFEAPackage extends EPackage {
 	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getBooleanConstraints()
 	 * @generated
 	 */
-	int BOOLEAN_CONSTRAINTS = 9;
+	int BOOLEAN_CONSTRAINTS = 14;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -587,98 +772,6 @@ public interface SFEAPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_CONSTRAINTS_OPERATION_COUNT = CONSTRAINTS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl <em>Implies Constraints</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl
-	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getImpliesConstraints()
-	 * @generated
-	 */
-	int IMPLIES_CONSTRAINTS = 10;
-
-	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLIES_CONSTRAINTS__FROM = BOOLEAN_CONSTRAINTS__FROM;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLIES_CONSTRAINTS__TO = BOOLEAN_CONSTRAINTS__TO;
-
-	/**
-	 * The number of structural features of the '<em>Implies Constraints</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLIES_CONSTRAINTS_FEATURE_COUNT = BOOLEAN_CONSTRAINTS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Implies Constraints</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLIES_CONSTRAINTS_OPERATION_COUNT = BOOLEAN_CONSTRAINTS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl <em>Excludes Constraints</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl
-	 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getExcludesConstraints()
-	 * @generated
-	 */
-	int EXCLUDES_CONSTRAINTS = 11;
-
-	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCLUDES_CONSTRAINTS__FROM = BOOLEAN_CONSTRAINTS__FROM;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCLUDES_CONSTRAINTS__TO = BOOLEAN_CONSTRAINTS__TO;
-
-	/**
-	 * The number of structural features of the '<em>Excludes Constraints</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCLUDES_CONSTRAINTS_FEATURE_COUNT = BOOLEAN_CONSTRAINTS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Excludes Constraints</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCLUDES_CONSTRAINTS_OPERATION_COUNT = BOOLEAN_CONSTRAINTS_OPERATION_COUNT + 0;
 
 
 	/**
@@ -904,6 +997,111 @@ public interface SFEAPackage extends EPackage {
 	EClass getConstraints();
 
 	/**
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.CardExConstraint <em>Card Ex Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Card Ex Constraint</em>'.
+	 * @see moon.nju.edu.cn.fm.model.CardExConstraint
+	 * @generated
+	 */
+	EClass getCardExConstraint();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link moon.nju.edu.cn.fm.model.CardExConstraint#getAction <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Action</em>'.
+	 * @see moon.nju.edu.cn.fm.model.CardExConstraint#getAction()
+	 * @see #getCardExConstraint()
+	 * @generated
+	 */
+	EReference getCardExConstraint_Action();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link moon.nju.edu.cn.fm.model.CardExConstraint#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Condition</em>'.
+	 * @see moon.nju.edu.cn.fm.model.CardExConstraint#getCondition()
+	 * @see #getCardExConstraint()
+	 * @generated
+	 */
+	EReference getCardExConstraint_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link moon.nju.edu.cn.fm.model.CardExConstraint#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operator</em>'.
+	 * @see moon.nju.edu.cn.fm.model.CardExConstraint#getOperator()
+	 * @see #getCardExConstraint()
+	 * @generated
+	 */
+	EReference getCardExConstraint_Operator();
+
+	/**
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.Operator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operator</em>'.
+	 * @see moon.nju.edu.cn.fm.model.Operator
+	 * @generated
+	 */
+	EClass getOperator();
+
+	/**
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.AndOperator <em>And Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>And Operator</em>'.
+	 * @see moon.nju.edu.cn.fm.model.AndOperator
+	 * @generated
+	 */
+	EClass getAndOperator();
+
+	/**
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.OrOperator <em>Or Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Or Operator</em>'.
+	 * @see moon.nju.edu.cn.fm.model.OrOperator
+	 * @generated
+	 */
+	EClass getOrOperator();
+
+	/**
+	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation</em>'.
+	 * @see moon.nju.edu.cn.fm.model.Operation
+	 * @generated
+	 */
+	EClass getOperation();
+
+	/**
+	 * Returns the meta object for the reference '{@link moon.nju.edu.cn.fm.model.Operation#getFeature <em>Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Feature</em>'.
+	 * @see moon.nju.edu.cn.fm.model.Operation#getFeature()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EReference getOperation_Feature();
+
+	/**
+	 * Returns the meta object for the attribute '{@link moon.nju.edu.cn.fm.model.Operation#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see moon.nju.edu.cn.fm.model.Operation#getValue()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_Value();
+
+	/**
 	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.BooleanConstraints <em>Boolean Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -934,26 +1132,6 @@ public interface SFEAPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBooleanConstraints_To();
-
-	/**
-	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.ImpliesConstraints <em>Implies Constraints</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Implies Constraints</em>'.
-	 * @see moon.nju.edu.cn.fm.model.ImpliesConstraints
-	 * @generated
-	 */
-	EClass getImpliesConstraints();
-
-	/**
-	 * Returns the meta object for class '{@link moon.nju.edu.cn.fm.model.ExcludesConstraints <em>Excludes Constraints</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Excludes Constraints</em>'.
-	 * @see moon.nju.edu.cn.fm.model.ExcludesConstraints
-	 * @generated
-	 */
-	EClass getExcludesConstraints();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1165,6 +1343,96 @@ public interface SFEAPackage extends EPackage {
 		EClass CONSTRAINTS = eINSTANCE.getConstraints();
 
 		/**
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.CardExConstraintImpl <em>Card Ex Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see moon.nju.edu.cn.fm.model.impl.CardExConstraintImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getCardExConstraint()
+		 * @generated
+		 */
+		EClass CARD_EX_CONSTRAINT = eINSTANCE.getCardExConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CARD_EX_CONSTRAINT__ACTION = eINSTANCE.getCardExConstraint_Action();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CARD_EX_CONSTRAINT__CONDITION = eINSTANCE.getCardExConstraint_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CARD_EX_CONSTRAINT__OPERATOR = eINSTANCE.getCardExConstraint_Operator();
+
+		/**
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.OperatorImpl <em>Operator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see moon.nju.edu.cn.fm.model.impl.OperatorImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getOperator()
+		 * @generated
+		 */
+		EClass OPERATOR = eINSTANCE.getOperator();
+
+		/**
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.AndOperatorImpl <em>And Operator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see moon.nju.edu.cn.fm.model.impl.AndOperatorImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getAndOperator()
+		 * @generated
+		 */
+		EClass AND_OPERATOR = eINSTANCE.getAndOperator();
+
+		/**
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.OrOperatorImpl <em>Or Operator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see moon.nju.edu.cn.fm.model.impl.OrOperatorImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getOrOperator()
+		 * @generated
+		 */
+		EClass OR_OPERATOR = eINSTANCE.getOrOperator();
+
+		/**
+		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.OperationImpl <em>Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see moon.nju.edu.cn.fm.model.impl.OperationImpl
+		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getOperation()
+		 * @generated
+		 */
+		EClass OPERATION = eINSTANCE.getOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__FEATURE = eINSTANCE.getOperation_Feature();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__VALUE = eINSTANCE.getOperation_Value();
+
+		/**
 		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.BooleanConstraintsImpl <em>Boolean Constraints</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1189,26 +1457,6 @@ public interface SFEAPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BOOLEAN_CONSTRAINTS__TO = eINSTANCE.getBooleanConstraints_To();
-
-		/**
-		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl <em>Implies Constraints</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see moon.nju.edu.cn.fm.model.impl.ImpliesConstraintsImpl
-		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getImpliesConstraints()
-		 * @generated
-		 */
-		EClass IMPLIES_CONSTRAINTS = eINSTANCE.getImpliesConstraints();
-
-		/**
-		 * The meta object literal for the '{@link moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl <em>Excludes Constraints</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see moon.nju.edu.cn.fm.model.impl.ExcludesConstraintsImpl
-		 * @see moon.nju.edu.cn.fm.model.impl.SFEAPackageImpl#getExcludesConstraints()
-		 * @generated
-		 */
-		EClass EXCLUDES_CONSTRAINTS = eINSTANCE.getExcludesConstraints();
 
 	}
 

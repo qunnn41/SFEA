@@ -103,6 +103,51 @@ public interface SFEAFactory extends EFactory {
 	Constraints createConstraints();
 
 	/**
+	 * Returns a new object of class '<em>Card Ex Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Card Ex Constraint</em>'.
+	 * @generated
+	 */
+	CardExConstraint createCardExConstraint();
+
+	/**
+	 * Returns a new object of class '<em>Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operator</em>'.
+	 * @generated
+	 */
+	Operator createOperator();
+
+	/**
+	 * Returns a new object of class '<em>And Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>And Operator</em>'.
+	 * @generated
+	 */
+	AndOperator createAndOperator();
+
+	/**
+	 * Returns a new object of class '<em>Or Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Or Operator</em>'.
+	 * @generated
+	 */
+	OrOperator createOrOperator();
+
+	/**
+	 * Returns a new object of class '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation</em>'.
+	 * @generated
+	 */
+	Operation createOperation();
+
+	/**
 	 * Returns a new object of class '<em>Boolean Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,24 +155,6 @@ public interface SFEAFactory extends EFactory {
 	 * @generated
 	 */
 	BooleanConstraints createBooleanConstraints();
-
-	/**
-	 * Returns a new object of class '<em>Implies Constraints</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Implies Constraints</em>'.
-	 * @generated
-	 */
-	ImpliesConstraints createImpliesConstraints();
-
-	/**
-	 * Returns a new object of class '<em>Excludes Constraints</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Excludes Constraints</em>'.
-	 * @generated
-	 */
-	ExcludesConstraints createExcludesConstraints();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -2,17 +2,20 @@
  */
 package moon.nju.edu.cn.fm.model.impl;
 
+import moon.nju.edu.cn.fm.model.AndOperator;
 import moon.nju.edu.cn.fm.model.Attribute;
 import moon.nju.edu.cn.fm.model.BooleanConstraints;
+import moon.nju.edu.cn.fm.model.CardExConstraint;
 import moon.nju.edu.cn.fm.model.Cardinality;
 import moon.nju.edu.cn.fm.model.Constraints;
-import moon.nju.edu.cn.fm.model.ExcludesConstraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureCardinality;
 import moon.nju.edu.cn.fm.model.FeatureModel;
 import moon.nju.edu.cn.fm.model.GroupCardinality;
-import moon.nju.edu.cn.fm.model.ImpliesConstraints;
+import moon.nju.edu.cn.fm.model.Operation;
+import moon.nju.edu.cn.fm.model.Operator;
 import moon.nju.edu.cn.fm.model.OrFeature;
+import moon.nju.edu.cn.fm.model.OrOperator;
 import moon.nju.edu.cn.fm.model.SFEAFactory;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -99,21 +102,42 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass cardExConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass andOperatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass orOperatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass booleanConstraintsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass impliesConstraintsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass excludesConstraintsEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -370,6 +394,96 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCardExConstraint() {
+		return cardExConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCardExConstraint_Action() {
+		return (EReference)cardExConstraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCardExConstraint_Condition() {
+		return (EReference)cardExConstraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCardExConstraint_Operator() {
+		return (EReference)cardExConstraintEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperator() {
+		return operatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAndOperator() {
+		return andOperatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOrOperator() {
+		return orOperatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperation() {
+		return operationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_Feature() {
+		return (EReference)operationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_Value() {
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBooleanConstraints() {
 		return booleanConstraintsEClass;
 	}
@@ -390,24 +504,6 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 	 */
 	public EReference getBooleanConstraints_To() {
 		return (EReference)booleanConstraintsEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getImpliesConstraints() {
-		return impliesConstraintsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getExcludesConstraints() {
-		return excludesConstraintsEClass;
 	}
 
 	/**
@@ -468,13 +564,24 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		constraintsEClass = createEClass(CONSTRAINTS);
 
+		cardExConstraintEClass = createEClass(CARD_EX_CONSTRAINT);
+		createEReference(cardExConstraintEClass, CARD_EX_CONSTRAINT__ACTION);
+		createEReference(cardExConstraintEClass, CARD_EX_CONSTRAINT__CONDITION);
+		createEReference(cardExConstraintEClass, CARD_EX_CONSTRAINT__OPERATOR);
+
+		operatorEClass = createEClass(OPERATOR);
+
+		andOperatorEClass = createEClass(AND_OPERATOR);
+
+		orOperatorEClass = createEClass(OR_OPERATOR);
+
+		operationEClass = createEClass(OPERATION);
+		createEReference(operationEClass, OPERATION__FEATURE);
+		createEAttribute(operationEClass, OPERATION__VALUE);
+
 		booleanConstraintsEClass = createEClass(BOOLEAN_CONSTRAINTS);
 		createEReference(booleanConstraintsEClass, BOOLEAN_CONSTRAINTS__FROM);
 		createEReference(booleanConstraintsEClass, BOOLEAN_CONSTRAINTS__TO);
-
-		impliesConstraintsEClass = createEClass(IMPLIES_CONSTRAINTS);
-
-		excludesConstraintsEClass = createEClass(EXCLUDES_CONSTRAINTS);
 	}
 
 	/**
@@ -509,9 +616,10 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 		xorFeatureEClass.getESuperTypes().add(this.getOrFeature());
 		featureCardinalityEClass.getESuperTypes().add(this.getCardinality());
 		groupCardinalityEClass.getESuperTypes().add(this.getCardinality());
+		cardExConstraintEClass.getESuperTypes().add(this.getConstraints());
+		andOperatorEClass.getESuperTypes().add(this.getOperator());
+		orOperatorEClass.getESuperTypes().add(this.getOperator());
 		booleanConstraintsEClass.getESuperTypes().add(this.getConstraints());
-		impliesConstraintsEClass.getESuperTypes().add(this.getBooleanConstraints());
-		excludesConstraintsEClass.getESuperTypes().add(this.getBooleanConstraints());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(featureModelEClass, FeatureModel.class, "FeatureModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -544,13 +652,24 @@ public class SFEAPackageImpl extends EPackageImpl implements SFEAPackage {
 
 		initEClass(constraintsEClass, Constraints.class, "Constraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(cardExConstraintEClass, CardExConstraint.class, "CardExConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCardExConstraint_Action(), this.getOperation(), null, "action", null, 1, 1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCardExConstraint_Condition(), this.getOperation(), null, "condition", null, 1, -1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCardExConstraint_Operator(), this.getOperator(), null, "operator", null, 1, 1, CardExConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operatorEClass, Operator.class, "Operator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(andOperatorEClass, AndOperator.class, "AndOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(orOperatorEClass, OrOperator.class, "OrOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperation_Feature(), this.getFeature(), null, "feature", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperation_Value(), ecorePackage.getEInt(), "value", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(booleanConstraintsEClass, BooleanConstraints.class, "BooleanConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBooleanConstraints_From(), this.getFeature(), null, "from", null, 1, 1, BooleanConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBooleanConstraints_To(), this.getFeature(), null, "to", null, 1, 1, BooleanConstraints.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(impliesConstraintsEClass, ImpliesConstraints.class, "ImpliesConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(excludesConstraintsEClass, ExcludesConstraints.class, "ExcludesConstraints", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

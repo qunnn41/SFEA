@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import moon.nju.edu.cn.fm.model.BooleanConstraints;
 import moon.nju.edu.cn.fm.model.Constraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureModel;
-import moon.nju.edu.cn.fm.model.ImpliesConstraints;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -135,6 +135,7 @@ public class CloudVerification {
 			signMap.put(feature, relation);
 			relationNameMap.put(relation, name);
 			signList.add(relation);
+			formulas.add(relation.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
 			if (feature instanceof XorFeature) {
 				XorFeature xorFeature = (XorFeature) feature;
 				for (Feature subFeature: xorFeature.getVariants()) {
@@ -237,8 +238,8 @@ public class CloudVerification {
 
 	private void loadFormula() {
 		for (Constraints constraint : constraints) {
-			if (constraint instanceof ImpliesConstraints) {
-				ImpliesConstraints impliesConstraint = (ImpliesConstraints) constraint;
+			if (constraint instanceof BooleanConstraints) {
+				BooleanConstraints impliesConstraint = (BooleanConstraints) constraint;
 				Feature fromFeature = impliesConstraint.getFrom();
 				Feature toFeature = impliesConstraint.getTo();
 				
@@ -256,6 +257,8 @@ public class CloudVerification {
 				
 				formulas.add(fromRelation.join(MetaModelConstraints.rName).eq(signMap.get(fromFeature)));
 				formulas.add(toRelation.join(MetaModelConstraints.rName).eq(signMap.get(toFeature)));
+				formulas.add(fromRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
+				formulas.add(toRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
 				
 				formulas.add(impliesRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
 				formulas.add(impliesRelation.join(MetaModelConstraints.rLeft).eq(fromRelation));
@@ -411,6 +414,8 @@ public class CloudVerification {
 		bounds.bound(MetaModelConstraints.rRight, formTuple.product(formulaTuple));
 		bounds.bound(MetaModelConstraints.rOp, formTuple.product(operationTuple));
 		bounds.bound(MetaModelConstraints.rValue, configurationTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rCard, nameTuple.product(intTuple));
+		bounds.bound(MetaModelConstraints.rSize, nameFTuple.product(intTuple));
 		
 		for (int i = 0; i < 10; ++i) {
 			bounds.boundExactly(i, factory.setOf(Integer.valueOf(i)));

@@ -2,7 +2,7 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/SFEA/src" modelPluginID="SFEA" modelName="Fm_mm"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+    complianceLevel="6.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>fm_mm.ecore</foreignModel>
   <genPackages prefix="SFEA" basePackage="moon.nju.edu.cn" disposableProviderFactory="true"
       interfacePackageSuffix="model" metaDataPackageSuffix="model" classPackageSuffix="model.impl"
@@ -34,11 +34,21 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Attribute/value"/>
     </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//Constraints"/>
+    <genClasses ecoreClass="fm_mm.ecore#//CardExConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//CardExConstraint/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//CardExConstraint/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fm_mm.ecore#//CardExConstraint/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="fm_mm.ecore#//Operator"/>
+    <genClasses ecoreClass="fm_mm.ecore#//AndOperator"/>
+    <genClasses ecoreClass="fm_mm.ecore#//OrOperator"/>
+    <genClasses ecoreClass="fm_mm.ecore#//Operation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//Operation/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fm_mm.ecore#//Operation/value"/>
+    </genClasses>
     <genClasses ecoreClass="fm_mm.ecore#//BooleanConstraints">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/from"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fm_mm.ecore#//BooleanConstraints/to"/>
     </genClasses>
-    <genClasses ecoreClass="fm_mm.ecore#//ImpliesConstraints"/>
-    <genClasses ecoreClass="fm_mm.ecore#//ExcludesConstraints"/>
   </genPackages>
 </genmodel:GenModel>
