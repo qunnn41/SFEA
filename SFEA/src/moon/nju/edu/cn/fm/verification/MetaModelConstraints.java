@@ -238,8 +238,7 @@ public class MetaModelConstraints {
 	 */
 	private Expression wellTypedName(Expression f, Expression fm) {
 		Formula f1 = f.join(rName).in(fm.join(rFeatures));
-		Formula f2 = f.join(rSize).count().gte(f.join(rName).join(rCard).count());
-		return Formula.and(f1, f2).thenElse(BooleanExpression.TRUE, BooleanExpression.FALSE);
+		return f1.thenElse(BooleanExpression.TRUE, BooleanExpression.FALSE);
 	}
 	
 	/**
@@ -349,12 +348,13 @@ public class MetaModelConstraints {
 	
 	/**
 	 * 	fun satisfyName(f: NameF, c: Configuration): Bool {
-	 * 		f.name in c.value implies True else False
+	 * 		(f.name in c.value and f.size <= f.name.card) implies True else False
 	 * 	}
 	 */
 	private Expression satisfyName(Expression f, Expression c) {
-		Formula formula = f.join(rName).in(c.join(rValue));
-		return formula.thenElse(BooleanExpression.TRUE, BooleanExpression.FALSE);
+		Formula f1 = f.join(rName).in(c.join(rValue));
+		Formula f2 = f.join(rSize).sum().lte(f.join(rName).join(rCard).sum());
+		return Formula.and(f1, f2).thenElse(BooleanExpression.TRUE, BooleanExpression.FALSE);
 	}
 	
 	/**

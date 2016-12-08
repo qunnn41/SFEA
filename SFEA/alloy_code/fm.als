@@ -62,7 +62,7 @@ fact FormulaConstruction {
 }
 
 fun welltypedName(f: NameF, fm: FeatureModel): Bool {
-	(f.name in fm.features and f.size >= f.name.card) implies True else False
+	f.name in fm.features implies True else False
 }
 
 fun welltypedFormula(f: Form, fm: FeatureModel): Bool {
@@ -116,7 +116,7 @@ fact FormulaSatisfaction {
 }
 
 fun satisfyName(f: NameF, c: Configuration): Bool {
-	f.name in c.value implies True else False
+	(f.name in c.value and f.size <= f.name.card) implies True else False
 }
 
 fun satisfyFormula(f: Form, c: Configuration): Bool {
@@ -169,7 +169,7 @@ fact formulas {
 	f3.name = mp3
 
 	f2.size = 1
-	f3.size = 2
+	f3.size = 1
 
 	f4.op = ImpliesF
 	f4.left = f3
@@ -178,7 +178,7 @@ fact formulas {
 
 //instance
 one sig Config1 extends Configuration{} {
-	value = mobilephone+camera
+	value = mobilephone+camera+mp3+earphone
 }
 
 assert validConfig {
