@@ -75,6 +75,11 @@ public class ExampleForFeatureModel {
 		formulas.add(Formula.and(fm1.one(), r1.one(), r2.one()));
 		formulas.add(Formula.and(f1.one(), f2.one(), f3.one(), f4.one()));
 		
+		formulas.add(mobilePhone.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+		formulas.add(earphone.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+		formulas.add(mp3.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(2)));
+		formulas.add(camera.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+		
 		formulas.add(fm1.join(MetaModelConstraints.rRoot).eq(mobilePhone));
 		formulas.add(fm1.join(MetaModelConstraints.rFeatures).eq(Expression.union(mobilePhone, earphone, mp3, camera)));
 		formulas.add(fm1.join(MetaModelConstraints.rRelations).eq(Expression.union(r1, r2)));
@@ -107,6 +112,12 @@ public class ExampleForFeatureModel {
 		formulas.add(f3.join(MetaModelConstraints.rName).eq(mp3));
 		formulas.add(f2.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
 		formulas.add(f3.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(2)));
+		
+		formulas.add(f2.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
+		formulas.add(f3.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(2)));
+		
+//		this line will not satisfy
+//		formulas.add(f3.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
 		
 		formulas.add(f4.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
 		formulas.add(f4.join(MetaModelConstraints.rLeft).eq(f3));
