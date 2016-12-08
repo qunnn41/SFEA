@@ -102,10 +102,10 @@ public class ExampleForParseModel {
 					System.out.println("->" + action.getFeature().getName());
 				} else {
 					for (Operation valueOperation: conditions) {
-						System.out.print(valueOperation.getValue() + valueOperation.getFeature().getName() + "or\t");
+						System.out.print(valueOperation.getValue() + valueOperation.getFeature().getName() + " or\t");
 					}
 					
-					System.out.println("->" + action.getFeature().getName());
+					System.out.println("->" + action.getValue() + action.getFeature().getName());
 				}
 			}
 		}

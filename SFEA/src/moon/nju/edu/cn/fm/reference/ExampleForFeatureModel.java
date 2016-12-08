@@ -80,6 +80,11 @@ public class ExampleForFeatureModel {
 		formulas.add(fm1.join(MetaModelConstraints.rRelations).eq(Expression.union(r1, r2)));
 		formulas.add(fm1.join(MetaModelConstraints.rFormulas).eq(Expression.union(f1, f4)));
 		
+		formulas.add(mobilePhone.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+		formulas.add(earphone.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+		formulas.add(mp3.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(2)));
+		formulas.add(camera.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+		
 		formulas.add(r1.join(MetaModelConstraints.rType).eq(MetaModelConstraints.sigOptional));
 		formulas.add(r1.join(MetaModelConstraints.rParent).eq(mobilePhone));
 		formulas.add(r1.join(MetaModelConstraints.rChild).eq(earphone));
@@ -100,6 +105,8 @@ public class ExampleForFeatureModel {
 		
 		formulas.add(f2.join(MetaModelConstraints.rName).eq(earphone));
 		formulas.add(f3.join(MetaModelConstraints.rName).eq(mp3));
+		formulas.add(f2.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
+		formulas.add(f3.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(2)));
 		
 		formulas.add(f4.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
 		formulas.add(f4.join(MetaModelConstraints.rLeft).eq(f3));
@@ -212,6 +219,8 @@ public class ExampleForFeatureModel {
 		bounds.bound(MetaModelConstraints.rRight, formTuple.product(formulaTuple));
 		bounds.bound(MetaModelConstraints.rOp, formTuple.product(operationTuple));
 		bounds.bound(MetaModelConstraints.rValue, configurationTuple.product(nameTuple));
+		bounds.bound(MetaModelConstraints.rCard, nameTuple.product(intTuple));
+		bounds.bound(MetaModelConstraints.rSize, nameFTuple.product(intTuple));
 		
 		for (int i = 0; i < 10; ++i) {
 			bounds.boundExactly(i, factory.setOf(Integer.valueOf(i)));

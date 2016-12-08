@@ -19,6 +19,12 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		this.downLatch = downLatch;
 		this.callback = callback;
 	}
+	
+	public HerokuFM(String[] feature) {
+		super("feature_model/heroku.fm");
+		this.feature = feature;
+		this.createInstance(feature);
+	}
 
 	@Override
 	public void createInstance(String[] string) {
@@ -27,6 +33,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		
 		Expression featureSelection = signMap.get(rootFeature);
 		for (String str : string) {
+			System.out.println(str);
 			for (Feature feature: signMap.keySet()) {
 				if (str.equals(feature.getName())) {
 					featureSelection = featureSelection == null ? signMap.get(feature) : featureSelection.union(signMap.get(feature));
@@ -36,6 +43,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		}
 		
 		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
+		System.out.println(featureSelection);
 		this.validConfiguration();
 	}
 	
@@ -49,5 +57,14 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		}
 		
 		downLatch.countDown();
+	}
+	
+	public static void main(String[] args) {
+		HerokuFM herokuFM = new HerokuFM(new String[]{"Java", "Language"});
+		if (herokuFM.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
 	}
 }

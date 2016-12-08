@@ -48,12 +48,6 @@
         </variants>
         <groupCardinality min="1" max="2"/>
       </subFeatures>
-      <subFeatures xsi:type="fm:OrFeature" name="Caching">
-        <featureCardinality max="1"/>
-        <variants name="Ironcache"/>
-        <variants name="Memcache"/>
-        <groupCardinality min="1" max="2"/>
-      </subFeatures>
       <subFeatures xsi:type="fm:OrFeature" name="Monitoring">
         <featureCardinality max="1"/>
         <variants name="Scout"/>
@@ -65,8 +59,11 @@
     </subFeatures>
   </root>
   <constraints xsi:type="fm:CardExConstraint">
-    <action feature="//@root/@subFeatures.1/@variants.3"/>
-    <condition feature="//@root/@subFeatures.1/@variants.2" value="1"/>
-    <operator xsi:type="fm:AndOperator"/>
+    <action feature="//@root/@subFeatures.1/@variants.3" value="1"/>
+    <condition feature="//@root/@subFeatures.2/@variants.2" value="1"/>
+    <condition feature="//@root/@subFeatures.2/@variants.1" value="1"/>
+    <operator xsi:type="fm:OrOperator"/>
   </constraints>
+  <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.2/@variants.0" to="//@root/@subFeatures.1/@variants.2"/>
+  <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.1"/>
 </fm:FeatureModel>
