@@ -168,8 +168,13 @@ fact formulas {
 	f2.name = earphone
 	f3.name = mp3
 
+<<<<<<< HEAD
+	f2.value = 1
+	f3.value = 2
+=======
 	f2.size = 1
 	f3.size = 2
+>>>>>>> 0eee57aa68ec861f7d975d3680010974417f002b
 
 	f4.op = ImpliesF
 	f4.left = f3

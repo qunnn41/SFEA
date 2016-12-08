@@ -16,8 +16,8 @@ public class MetaModelConstraints {
 	public static final Relation sigConfiguration;
 	
 	// Relation
-	public static Relation rFeatures, rRoot, rRelations, rFormulas, rParent, rChild, rType, rMin, rMax, rCard, rSize;
-	public static Relation rSatisfy, rWelltyped, rName, rLeft, rRight, rOp, rValue;
+	public static Relation rFeatures, rRoot, rRelations, rFormulas, rParent, rChild, rType, rMin, rMax;
+	public static Relation rSatisfy, rWelltyped, rName, rLeft, rRight, rOp, rValue, rCard, rSize;
 	
 	private List<Formula> formulas = new LinkedList<Formula>();
 	
@@ -90,7 +90,11 @@ public class MetaModelConstraints {
 	 * 
 	 * 	sig Name {
 	 * 		card: Int
+<<<<<<< HEAD
 	 *  }
+=======
+	 * 	}
+>>>>>>> 0eee57aa68ec861f7d975d3680010974417f002b
 	 */
 	private Formula setupSigFeatureModelDeclarations() {
 		final Formula f1 = rFeatures.in(sigFeatureModel.product(sigName));
@@ -156,7 +160,6 @@ public class MetaModelConstraints {
 		final Formula f6 = rOp.in(sigForm.product(sigOperation));
 		
 		final Formula f7 = Formula.and(sigAndF.one(), sigOrF.one(), sigImpliesF.one(), sigNotF.one());
-		
 		final Formula f8 = rSize.in(sigNameF.product(Expression.INTS));
 		
 		return Formula.and(f1, f2, f3, f4, f5, f6, f7, f8);

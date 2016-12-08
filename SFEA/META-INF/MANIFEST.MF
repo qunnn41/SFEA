@@ -13,6 +13,11 @@ Export-Package: moon.nju.edu.cn.fm.model,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.swt,
+<<<<<<< HEAD
  org.eclipse.emf.ecore.xmi,
  org.eclipse.jface
+=======
+ org.eclipse.emf.ecore.xmi;bundle-version="2.12.0",
+ org.eclipse.jface;bundle-version="3.7.0"
+>>>>>>> 0eee57aa68ec861f7d975d3680010974417f002b
 Bundle-ActivationPolicy: lazy

@@ -33,7 +33,6 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		
 		Expression featureSelection = signMap.get(rootFeature);
 		for (String str : string) {
-			System.out.println(str);
 			for (Feature feature: signMap.keySet()) {
 				if (str.equals(feature.getName())) {
 					featureSelection = featureSelection == null ? signMap.get(feature) : featureSelection.union(signMap.get(feature));
@@ -43,7 +42,6 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		}
 		
 		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-		System.out.println(featureSelection);
 		this.validConfiguration();
 	}
 	
