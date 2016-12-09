@@ -11,11 +11,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import moon.nju.edu.cn.fm.model.AndOperator;
 import moon.nju.edu.cn.fm.model.BooleanConstraints;
 import moon.nju.edu.cn.fm.model.CardExConstraint;
 import moon.nju.edu.cn.fm.model.Constraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureModel;
+import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -48,6 +50,7 @@ public class CloudVerification {
 	private List<Relation> signList = new LinkedList<Relation>(); 
 	private List<Relation> relationList = new LinkedList<Relation>();
 	private List<Relation> formList = new LinkedList<Relation>();
+	private List<Relation> fakeList = new LinkedList<Relation>(); 
 	private List<Relation> nameFList = new LinkedList<Relation>();
 	private Map<Relation, String> relationNameMap = new LinkedHashMap<Relation, String>();
 	private int mRelationIndex = 0;
@@ -113,7 +116,9 @@ public class CloudVerification {
 		Expression forms = null;
 		for (Relation form : formList) {
 			formulas.add(form.one());
-			forms = forms == null ? form : forms.union(form);
+			if (!fakeList.contains(form)) {
+				forms = forms == null ? form : forms.union(form);
+			}
 		}
 		
 		if (forms != null) {
@@ -136,7 +141,9 @@ public class CloudVerification {
 			signMap.put(feature, relation);
 			relationNameMap.put(relation, name);
 			signList.add(relation);
+			
 			formulas.add(relation.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
+			formulas.add(relation.join(MetaModelConstraints.rCard).sum().eq(IntConstant.constant(1)));
 			if (feature instanceof XorFeature) {
 				XorFeature xorFeature = (XorFeature) feature;
 				for (Feature subFeature: xorFeature.getVariants()) {
@@ -153,6 +160,8 @@ public class CloudVerification {
 				}
 			}
 		}
+		
+		
 	}
 	
 	private void loadRelation() {
@@ -258,6 +267,8 @@ public class CloudVerification {
 				
 				formulas.add(fromRelation.join(MetaModelConstraints.rName).eq(signMap.get(fromFeature)));
 				formulas.add(toRelation.join(MetaModelConstraints.rName).eq(signMap.get(toFeature)));
+				formulas.add(fromRelation.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(1)));
+				formulas.add(toRelation.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(1)));
 				formulas.add(fromRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
 				formulas.add(toRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
 				
@@ -269,8 +280,69 @@ public class CloudVerification {
 				nameFList.add(toRelation);
 				
 				formList.add(impliesRelation);
-			} else if (constraint instanceof CardExConstraint){
-//				CardExConstraint cardExConstraint = (CardExConstraint) constraint;
+			} else if (constraint instanceof CardExConstraint) {
+				CardExConstraint cardExConstraint = (CardExConstraint) constraint;
+				Operation action = cardExConstraint.getAction();
+				List<Operation> conditionList = cardExConstraint.getCondition();
+				Operation left_condition = conditionList.get(0);
+				Operation right_condition = conditionList.get(1);
+				
+				Feature leftFeature = left_condition.getFeature();
+				Feature rightFeature = right_condition.getFeature();
+				Feature actionFeature = action.getFeature();
+				
+				String conditionName = "f" + (++ mFormIndex);
+				Relation conditionRelation = Relation.unary(conditionName);
+				relationNameMap.put(conditionRelation, conditionName);
+				
+				String impliesName = "f" + (++ mFormIndex);
+				Relation impliesRelation = Relation.unary(impliesName);
+				relationNameMap.put(impliesRelation, impliesName);
+				
+				String leftName = "nf" + (++ mNameFIndex);
+				Relation leftRelation = Relation.unary(leftName);
+				relationNameMap.put(leftRelation, leftName);
+				
+				String rightName = "nf" + (++ mNameFIndex);
+				Relation rightRelation = Relation.unary(rightName);
+				relationNameMap.put(rightRelation, rightName);
+				
+				String actionName = "nf" + (++ mNameFIndex);
+				Relation actionRelation = Relation.unary(actionName);
+				relationNameMap.put(actionRelation, actionName);
+				
+				formulas.add(leftRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
+				formulas.add(rightRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
+				formulas.add(actionRelation.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
+				formulas.add(leftRelation.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(left_condition.getValue())));
+				formulas.add(rightRelation.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(right_condition.getValue())));
+				formulas.add(actionRelation.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(action.getValue())));
+				formulas.add(leftRelation.join(MetaModelConstraints.rName).eq(signMap.get(leftFeature)));
+				formulas.add(rightRelation.join(MetaModelConstraints.rName).eq(signMap.get(rightFeature)));
+				formulas.add(actionRelation.join(MetaModelConstraints.rName).eq(signMap.get(actionFeature)));
+				
+				if (cardExConstraint.getOperator() instanceof AndOperator) {
+					formulas.add(conditionRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigAndF));
+				} else {
+					formulas.add(conditionRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigOrF));
+				}
+				
+				formulas.add(conditionRelation.join(MetaModelConstraints.rLeft).eq(leftRelation));
+				formulas.add(conditionRelation.join(MetaModelConstraints.rRight).eq(rightRelation));
+				formulas.add(impliesRelation.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
+				formulas.add(impliesRelation.join(MetaModelConstraints.rLeft).eq(conditionRelation));
+				formulas.add(impliesRelation.join(MetaModelConstraints.rRight).eq(actionRelation));
+				
+				nameFList.add(leftRelation);
+				nameFList.add(rightRelation);
+				nameFList.add(actionRelation);
+				
+				// conditionRelation should not be one of the formulas, add it in fake list
+				// e.g. a^b->c
+				// conditionRelation is a^b, it could not be satisfied
+				formList.add(conditionRelation);
+				fakeList.add(conditionRelation);
+				formList.add(impliesRelation);
 			}
 		}
 	}

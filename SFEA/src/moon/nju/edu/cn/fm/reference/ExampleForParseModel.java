@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import moon.nju.edu.cn.fm.model.AndOperator;
 import moon.nju.edu.cn.fm.model.BooleanConstraints;
 import moon.nju.edu.cn.fm.model.CardExConstraint;
 import moon.nju.edu.cn.fm.model.Constraints;
@@ -85,31 +84,23 @@ public class ExampleForParseModel {
 				}
 			}
 		}
-		
-		for (Constraints constraint: constraints) {
+
+		for (Constraints constraint : constraints) {
 			if (constraint instanceof BooleanConstraints) {
 				BooleanConstraints booleanConstraints = (BooleanConstraints) constraint;
 				System.out.println(booleanConstraints.getFrom().getName() + "\t" + booleanConstraints.getTo().getName());
-			} else {
+			} else if (constraint instanceof CardExConstraint){
 				CardExConstraint cardExConstraint = (CardExConstraint) constraint;
 				Operation action = cardExConstraint.getAction();
-				List<Operation> conditions = cardExConstraint.getCondition();
-				if (cardExConstraint.getOperator() instanceof AndOperator) {
-					for (Operation valueOperation: conditions) {
-						System.out.print(valueOperation.getValue() + valueOperation.getFeature().getName() + " and\t");
-					}
-					
-					System.out.println("->" + action.getFeature().getName());
-				} else {
-					for (Operation valueOperation: conditions) {
-						System.out.print(valueOperation.getValue() + valueOperation.getFeature().getName() + " or\t");
-					}
-					
-					System.out.println("->" + action.getValue() + action.getFeature().getName());
+				List<Operation> condition = cardExConstraint.getCondition();
+				
+				for (Operation operation : condition) {
+					System.out.print(operation.getValue() + operation.getFeature().getName() + "\t");
 				}
+				
+				System.out.println(cardExConstraint.getOperator() + "\t" + action.getValue() + action.getFeature().getName());
 			}
 		}
-
 	}
 	
 	public static void main(String[] args) {

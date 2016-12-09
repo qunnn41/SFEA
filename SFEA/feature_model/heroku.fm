@@ -57,6 +57,12 @@
       <featureCardinality max="1"/>
     </subFeatures>
   </root>
+  <constraints xsi:type="fm:CardExConstraint">
+    <action feature="//@root/@subFeatures.1/@variants.0" value="1"/>
+    <condition feature="//@root/@subFeatures.2/@variants.0" value="1"/>
+    <condition feature="//@root/@subFeatures.2/@variants.2" value="1"/>
+    <operator xsi:type="fm:OrOperator"/>
+  </constraints>
   <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.2/@variants.3" to="//@root/@subFeatures.1/@variants.4"/>
   <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.2/@variants.1" to="//@root/@subFeatures.1/@variants.3"/>
 </fm:FeatureModel>
