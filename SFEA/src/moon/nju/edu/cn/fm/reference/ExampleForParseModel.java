@@ -1,6 +1,7 @@
 package moon.nju.edu.cn.fm.reference;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -9,9 +10,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import moon.nju.edu.cn.fm.model.BooleanConstraints;
+import moon.nju.edu.cn.fm.model.CardExConstraint;
 import moon.nju.edu.cn.fm.model.Constraints;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.fm.model.FeatureModel;
+import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
@@ -78,6 +82,23 @@ public class ExampleForParseModel {
 					
 					queue.add(subFeature);
 				}
+			}
+		}
+		
+		for (Constraints constraint : constraints) {
+			if (constraint instanceof BooleanConstraints) {
+				BooleanConstraints booleanConstraints = (BooleanConstraints) constraint;
+				System.out.println(booleanConstraints.getFrom().getName() + "\t" + booleanConstraints.getTo().getName());
+			} else if (constraint instanceof CardExConstraint){
+				CardExConstraint cardExConstraint = (CardExConstraint) constraint;
+				Operation action = cardExConstraint.getAction();
+				List<Operation> condition = cardExConstraint.getCondition();
+				
+				for (Operation operation : condition) {
+					System.out.print(operation.getValue() + operation.getFeature().getName() + "\t");
+				}
+				
+				System.out.println(cardExConstraint.getOperator() + "\t" + action.getValue() + action.getFeature().getName());
 			}
 		}
 		

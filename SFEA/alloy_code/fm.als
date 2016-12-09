@@ -178,7 +178,7 @@ fact formulas {
 
 //instance
 one sig Config1 extends Configuration{} {
-	value = mobilephone+camera+mp3+earphone
+	value = mobilephone+camera//+mp3+earphone
 }
 
 assert validConfig {
