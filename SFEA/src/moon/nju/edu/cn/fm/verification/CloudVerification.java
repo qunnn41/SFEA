@@ -142,8 +142,10 @@ public class CloudVerification {
 			relationNameMap.put(relation, name);
 			signList.add(relation);
 			
+			// TODO calculate cardinality from non-functional requirements
 			formulas.add(relation.join(MetaModelConstraints.rCard).count().eq(IntConstant.constant(1)));
 			formulas.add(relation.join(MetaModelConstraints.rCard).sum().eq(IntConstant.constant(1)));
+			
 			if (feature instanceof XorFeature) {
 				XorFeature xorFeature = (XorFeature) feature;
 				for (Feature subFeature: xorFeature.getVariants()) {
@@ -160,8 +162,6 @@ public class CloudVerification {
 				}
 			}
 		}
-		
-		
 	}
 	
 	private void loadRelation() {
