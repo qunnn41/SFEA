@@ -17,8 +17,8 @@ min: int
 max: int
 }
 
-Cardinality <|-- GroupCardinality
-Cardinality <|-- FeatureCardinality
+Cardinality <|-- Group\nCardinality
+Cardinality <|-- Feature\nCardinality
 
 class Attribute {
 name: string
@@ -26,17 +26,17 @@ value: string
 }
 
 Feature *--> "0..*" Attribute: attributes
-Feature *--> "1" FeatureCardinality
+Feature *--> "1" Feature\nCardinality
 OrFeature *--> "2..*" Feature : variants
-OrFeature --> GroupCardinality
+OrFeature --> Group\nCardinality
 
 FeatureModel *--> "0..*" Constraint
 
-Constraint <|-- BooleanConstraint
-BooleanConstraint --> "1" Feature : from
-BooleanConstraint --> "1" Feature : to
-BooleanConstraint <|-- Implies
-BooleanConstraint <|-- Excludes
+Constraint <|-- Boolean\nConstraint
+Boolean\nConstraint --> "1" Feature : from
+Boolean\nConstraint --> "1" Feature : to
+Boolean\nConstraint <|-- Implies
+Boolean\nConstraint <|-- Excludes
 Constraint <|-- CardExConstraint
 
 CardExConstraint *--> "1" Operation : Action

@@ -1,0 +1,48 @@
+@startuml
+
+(Thing) <|-- (Countable\nConcept)
+(Thing) <|-- (Technical\nElement)
+(Thing) <|-- (Quantifiable\nConcept)
+(Thing) <|-- (Provisioning)
+
+(Technical\nElement) <|-- (Framework)
+(Technical\nElement) <|-- (Provider)
+(Technical\nElement) <|-- (Cache)
+(Technical\nElement) <|-- (Database)
+(Technical\nElement) <|-- (OS)
+(Technical\nElement) <|-- (Search\nEngine)
+(Technical\nElement) <|-- (Application\nServer)
+(Technical\nElement) <|-- (Language)
+(Technical\nElement) <|-- (Provider)
+
+(Framework) <|-- (Spring)
+(Framework) <|-- (Rails)
+(Framework) <|-- (Play)
+(Framework) <|-- (Node.js)
+
+(Language) <|-- (Java)
+(Language) <|-- (Ruby)
+(Language) <|-- (Python)
+(Language) <|-- (Go)
+(Language) <|-- (JavaScript)
+(Language) <|-- (Clojure)
+(Language) <|-- (C)
+
+(Provisioning) <|-- (Resource)
+(Resource) <|-- (Memory)
+(Resource) <|-- (CPU Cores)
+(Resource) <|-- (Bandwidth)
+(Resource) <|-- (Storage)
+
+(Quantifiable\nConcept) <|-- (Bandwidth)
+(Quantifiable\nConcept) <|-- (Storage)
+(Quantifiable\nConcept) <|-- (Memory)
+(Countable\nConcept) <|-- (CPU Cores)
+(Countable\nConcept) <|-- (Virtual\nMachine)
+
+(Virtual\nMachine) ..> (Resource)
+(Virtual\nMachine) ..> (OS)
+(OS) <|-- (Ubuntu\nServer)
+(OS) <|-- (Windows\nServer)
+
+@enduml
