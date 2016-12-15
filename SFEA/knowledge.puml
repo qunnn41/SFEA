@@ -4,13 +4,32 @@
 (Thing) <|-- (Technical\nElement)
 (Thing) <|-- (Quantifiable\nConcept)
 (Thing) <|-- (Provisioning)
+(Thing) <|-- (Unit)
+
+(Unit) <|-- (Frequency\nUnit)
+(Unit) <|-- (Stockage\nUnit)
+(Unit) <|-- (Transfer Rate\nUnit)
+
+(Frequency\nUnit) <|-- (MHz)
+(Frequency\nUnit) <|-- (GHz)
+(Stockage\nUnit) <|-- (MB)
+(Stockage\nUnit) <|-- (GB)
+(Stockage\nUnit) <|-- (TB)
+(Stockage\nUnit) <|-- (KB)
+(Transfer Rate\nUnit) <|-- (BitPerSecond)
+(Transfer Rate\nUnit) <|-- (KBPerSecond)
+(Transfer Rate\nUnit) <|-- (MBPerSecond)
+(Transfer Rate\nUnit) <|-- (GBPerSecond)
 
 (Technical\nElement) <|-- (Framework)
 (Technical\nElement) <|-- (Provider)
-(Technical\nElement) <|-- (Cache)
+(Technical\nElement) <|-- (Caching)
+(Technical\nElement) <|-- (Monitoring)
+(Technical\nElement) <|-- (Protocol)
+(Technical\nElement) <|-- (Network)
+(Technical\nElement) <|-- (Security)
 (Technical\nElement) <|-- (Database)
 (Technical\nElement) <|-- (OS)
-(Technical\nElement) <|-- (Search\nEngine)
 (Technical\nElement) <|-- (Application\nServer)
 (Technical\nElement) <|-- (Language)
 (Technical\nElement) <|-- (Provider)
@@ -44,5 +63,36 @@
 (Virtual\nMachine) ..> (OS)
 (OS) <|-- (Ubuntu\nServer)
 (OS) <|-- (Windows\nServer)
+
+(Provider) <|-- (Heroku)
+(Provider) <|-- (Google App\nEngine)
+(Provider) <|-- (AmazonEC2)
+
+(Database) <|-- (SQL)
+(Database) <|-- (NoSQL)
+(SQL) <|-- (Postgres)
+(SQL) <|-- (ClearDB)
+(NoSQL) <|-- (Redis)
+(NoSQL) <|-- (MongoDB)
+
+(Postgres) ..> (DatabaseSize)
+(ClearDB) ..> (DatabaseSize)
+(Redis) ..> (DatabaseSize)
+(MongoDB) ..> (DatabaseSize)
+
+(Quantifiable\nConcept) <|-- (DatabaseSize)
+
+(Monitoring) <|-- (Fixie)
+(Monitoring) <|-- (Proximo)
+(Monitoring) <|-- (PointDNS)
+
+(Caching) <|-- (Memcache)
+(Caching) <|-- (Ironcache)
+
+(Application\nSerer) <|-- (Tomcat)
+(Application\nSerer) <|-- (Jetty)
+
+(Countable\nConcept) <|-- (Tomcat)
+(Countable\nConcept) <|-- (Jetty)
 
 @enduml

@@ -14,4 +14,12 @@
             genModel="model/fm_mm.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated km -->
+      <package
+            uri="www.example.com/km"
+            class="moon.nju.edu.cn.km.km.KMPackage"
+            genModel="model/km.genmodel"/>
+   </extension>
+
 </plugin>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<km:KnowledgeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:km="www.example.com/km">
+  <concepts name="Thing"/>
+  <concepts name="Provisioning">
+    <subConcepts name="Resource">
+      <subConcepts xsi:type="km:QuantifiableElement" name="Bandwidth"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="Storage"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="Memory"/>
+      <subConcepts xsi:type="km:CountableElement" name="CPU"/>
+      <subConcepts xsi:type="km:CountableElement" hasConcepts="//@concepts.2/@subConcepts.2" name="VirtualMachine"/>
+    </subConcepts>
+  </concepts>
+  <concepts name="TechnicalElement">
+    <subConcepts name="Language">
+      <subConcepts name="Java"/>
+      <subConcepts name="Ruby"/>
+      <subConcepts name="Python"/>
+      <subConcepts name="Go"/>
+      <subConcepts name="JavaScript"/>
+    </subConcepts>
+    <subConcepts name="ApplicationServer">
+      <subConcepts xsi:type="km:CountableElement" name="Tomcat"/>
+      <subConcepts xsi:type="km:CountableElement" name="Jetty"/>
+    </subConcepts>
+    <subConcepts name="OS"/>
+  </concepts>
+</km:KnowledgeModel>
