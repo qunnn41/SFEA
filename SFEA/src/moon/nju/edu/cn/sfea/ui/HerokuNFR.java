@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.ui;
+package moon.nju.edu.cn.sfea.ui;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
 
-import moon.nju.edu.cn.fm.script.HerokuScript;
+import moon.nju.edu.cn.sfea.script.HerokuScript;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;

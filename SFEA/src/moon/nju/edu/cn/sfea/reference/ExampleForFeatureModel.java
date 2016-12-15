@@ -1,10 +1,10 @@
-package moon.nju.edu.cn.fm.reference;
+package moon.nju.edu.cn.sfea.reference;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import moon.nju.edu.cn.fm.verification.BooleanExpression;
-import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
+import moon.nju.edu.cn.sfea.verification.BooleanExpression;
+import moon.nju.edu.cn.sfea.verification.MetaModelConstraints;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;

@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.script;
+package moon.nju.edu.cn.sfea.script;
 
 import java.io.FileWriter;
 import java.io.IOException;

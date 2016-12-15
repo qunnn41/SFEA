@@ -1,23 +1,29 @@
-package moon.nju.edu.cn.fm.platform;
+package moon.nju.edu.cn.sfea.platform;
 
 import java.util.concurrent.CountDownLatch;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
-import moon.nju.edu.cn.fm.verification.CloudVerification;
-import moon.nju.edu.cn.fm.verification.MetaModelConstraints;
+import moon.nju.edu.cn.sfea.verification.CloudVerification;
+import moon.nju.edu.cn.sfea.verification.MetaModelConstraints;
 
-public class GoogleAppEngineFM extends CloudVerification implements FMInterface, Runnable {
+public class HerokuFM extends CloudVerification implements FMInterface, Runnable {
 	private CountDownLatch downLatch;
 	private String[] feature;
 	private ValidConfigCallback callback;
 	
-	public GoogleAppEngineFM(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
-		super("feature_model/gae.fm");
+	public HerokuFM(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
+		super("feature_model/heroku.fm");
 		this.feature = feature;
 		this.downLatch = downLatch;
 		this.callback = callback;
+	}
+	
+	public HerokuFM(String[] feature) {
+		super("feature_model/heroku.fm");
+		this.feature = feature;
+		this.createInstance(feature);
 	}
 
 	@Override
@@ -49,5 +55,14 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 		}
 		
 		downLatch.countDown();
+	}
+	
+	public static void main(String[] args) {
+		HerokuFM herokuFM = new HerokuFM(new String[]{"Java", "Language", "Spring", "Framework"});
+		if (herokuFM.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
 	}
 }

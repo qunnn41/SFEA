@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.reference;
+package moon.nju.edu.cn.sfea.reference;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;

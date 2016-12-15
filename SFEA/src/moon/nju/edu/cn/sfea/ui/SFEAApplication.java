@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.fm.ui;
+package moon.nju.edu.cn.sfea.ui;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -7,9 +7,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import moon.nju.edu.cn.fm.platform.GoogleAppEngineFM;
-import moon.nju.edu.cn.fm.platform.HerokuFM;
-import moon.nju.edu.cn.fm.platform.ValidConfigCallback;
+import moon.nju.edu.cn.sfea.platform.GoogleAppEngineFM;
+import moon.nju.edu.cn.sfea.platform.HerokuFM;
+import moon.nju.edu.cn.sfea.platform.ValidConfigCallback;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;

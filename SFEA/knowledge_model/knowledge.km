@@ -7,7 +7,7 @@
       <subConcepts xsi:type="km:QuantifiableElement" name="Storage"/>
       <subConcepts xsi:type="km:QuantifiableElement" name="Memory"/>
       <subConcepts xsi:type="km:CountableElement" name="CPU"/>
-      <subConcepts xsi:type="km:CountableElement" hasConcepts="//@concepts.2/@subConcepts.2" name="VirtualMachine"/>
+      <subConcepts xsi:type="km:CountableElement" hasConcepts="//@concepts.2/@subConcepts.2 //@concepts.1/@subConcepts.0" name="VirtualMachine"/>
     </subConcepts>
   </concepts>
   <concepts name="TechnicalElement">
@@ -23,5 +23,30 @@
       <subConcepts xsi:type="km:CountableElement" name="Jetty"/>
     </subConcepts>
     <subConcepts name="OS"/>
+    <subConcepts name="Framework">
+      <subConcepts name="Play"/>
+      <subConcepts name="Spring"/>
+      <subConcepts name="Rails"/>2
+      <subConcepts name="Django"/>
+      <subConcepts name="Node.js"/>
+    </subConcepts>
+  </concepts>
+  <concepts name="Unit">
+    <subConcepts name="Frequency">
+      <subConcepts xsi:type="km:QuantifiableElement" name="MHz"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="GHz"/>
+    </subConcepts>
+    <subConcepts name="Storage">
+      <subConcepts xsi:type="km:QuantifiableElement" name="GB"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="TB"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="KB"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="MB"/>
+    </subConcepts>
+    <subConcepts name="TransferRate">
+      <subConcepts xsi:type="km:QuantifiableElement" name="BitPerSecond"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="KBPerSecond"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="MBPerSecond"/>
+      <subConcepts xsi:type="km:QuantifiableElement" name="GBPerSecond"/>
+    </subConcepts>
   </concepts>
 </km:KnowledgeModel>
