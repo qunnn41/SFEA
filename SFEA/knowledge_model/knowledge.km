@@ -26,9 +26,23 @@
     <subConcepts name="Framework">
       <subConcepts name="Play"/>
       <subConcepts name="Spring"/>
-      <subConcepts name="Rails"/>2
+      <subConcepts name="Rails"/>
       <subConcepts name="Django"/>
       <subConcepts name="Node.js"/>
+    </subConcepts>
+    <subConcepts name="Monitoring">
+      <subConcepts name="Scout"/>
+      <subConcepts name="Librato"/>
+      <subConcepts name="Pingdom"/>
+    </subConcepts>
+    <subConcepts name="Security">
+      <subConcepts name="SSL"/>
+      <subConcepts name="SecurityKey"/>
+    </subConcepts>
+    <subConcepts name="Network">
+      <subConcepts name="Fixie"/>
+      <subConcepts name="Proximo"/>
+      <subConcepts name="PointDNS"/>
     </subConcepts>
   </concepts>
   <concepts name="Unit">

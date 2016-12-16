@@ -58,7 +58,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	}
 	
 	public static void main(String[] args) {
-		HerokuFM herokuFM = new HerokuFM(new String[]{"Java", "Language", "Spring", "Framework"});
+		HerokuFM herokuFM = new HerokuFM(new String[]{"Ruby", "Language", "Spring", "Framework"});
 		if (herokuFM.check()) {
 			System.out.println("yes");
 		} else {

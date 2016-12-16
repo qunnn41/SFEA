@@ -33,6 +33,20 @@
 (Technical\nElement) <|-- (Application\nServer)
 (Technical\nElement) <|-- (Language)
 (Technical\nElement) <|-- (Provider)
+(Technical\nElement) <|-- (Monitoring)
+(Technical\nElement) <|-- (Security)
+(Technical\nElement) <|-- (Network)
+
+(Monitoring) <|-- (Scout)
+(Monitoring) <|-- (Librato)
+(Monitoring) <|-- (Pingdom)
+
+(Security) <|-- (SSL)
+(Security) <|-- (SecurityKey)
+
+(Network) <|-- (Fixie)
+(Network) <|-- (Proximo)
+(Network) <|-- (PointDNS)
 
 (Framework) <|-- (Spring)
 (Framework) <|-- (Rails)
