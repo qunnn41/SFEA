@@ -1,12 +1,11 @@
-package moon.nju.edu.cn.sfea.platform;
+package moon.nju.edu.cn.sfea.search;
 
 import java.util.concurrent.CountDownLatch;
 
 import kodkod.ast.Expression;
-import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
-import moon.nju.edu.cn.sfea.verification.CloudVerification;
-import moon.nju.edu.cn.sfea.verification.MetaModelConstraints;
+import moon.nju.edu.cn.sfea.app.FMInterface;
+import moon.nju.edu.cn.sfea.app.ValidConfigCallback;
 
 public class HerokuFM extends CloudVerification implements FMInterface, Runnable {
 	private CountDownLatch downLatch;
@@ -28,9 +27,6 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 
 	@Override
 	public void createInstance(String[] string) {
-		config1 = Relation.unary("Config1");
-		formulas.add(config1.one());
-		
 		Expression featureSelection = signMap.get(rootFeature);
 		for (String str : string) {
 			for (Feature feature: signMap.keySet()) {
@@ -41,8 +37,8 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 			}
 		}
 		
-		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-		this.validConfiguration();
+//		formulas.add(config1.join(MetaModelConstraints.rValue).in(featureSelection));
+		this.searchSimilarConfig(featureSelection);
 	}
 	
 	@Override

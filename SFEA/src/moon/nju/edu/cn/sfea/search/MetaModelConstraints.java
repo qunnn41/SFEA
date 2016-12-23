@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.sfea.verification;
+package moon.nju.edu.cn.sfea.search;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -215,6 +215,8 @@ public class MetaModelConstraints {
 	 *			all v1: NameF | v1.welltyped[fm] = welltypedName[v1, fm]
 	 *			all v2: Form | v2.welltyped[fm] = welltypedFormula[v2, fm]
 	 *		}
+	 *
+	 *		all disj c1, c2: Configuration | c1.value != c2.value
 	 *	} 
 	 */
 	private Formula formulaConstruction() {
@@ -228,7 +230,29 @@ public class MetaModelConstraints {
 		final Formula f3 = (fm.join(v2.join(rWelltyped)).eq(wellTypedFormula(v2, fm))).forAll(v2.oneOf(sigForm));
 		final Formula f4 = Formula.and(f2, f3).forAll(fm.oneOf(sigFeatureModel));
 		
-		return Formula.and(f1, f4);
+		final Variable c1 = Variable.unary("c1");
+		final Variable c2 = Variable.unary("c2");
+		
+		final Formula f5 = c1.join(rValue).eq(c2.join(rValue)).not();
+		final Formula f6 = c1.eq(c2).not().implies(f5);
+		
+		final Formula f7 = f6.forAll(c1.oneOf(sigConfiguration).and(c2.oneOf(sigConfiguration)));
+		
+		return Formula.and(f1, f4, f7);
+	}
+	
+	
+	/**
+	 * pred searchingConfig(instance: set Name, fm: FeatureModel) {
+	 * 		all c: Configuration | some (c.value & instance) && c in semantics[fm]
+	 * }
+	 */
+	public Formula searchingConfiguration(Expression instance, Expression fm) {
+		final Variable c = Variable.unary("c");
+		final Formula f1 = c.join(rValue).intersection(instance).some();
+		final Formula f2 = c.in(semantics(fm));
+		
+		return Formula.and(f1, f2).forSome(c.oneOf(sigConfiguration));
 	}
 	
 	/**
@@ -276,7 +300,7 @@ public class MetaModelConstraints {
 	 * 			r.type = Optional implies (r.child in c.value implies r.parent in c.value)
 	 * 			r.type = Mandatory implies (r.child in c.value <=> r.parent in c.value)
 	 * 
-	 * 			//r.type = OrFeature implies (r.parent in c.value implies (one n : r.child | n in c.value))
+	 * 			//r.type = XorFeature implies (r.parent in c.value implies (one n : r.child | n in c.value))
 	 * 			//r.type = OrFeature implies (r.parent in c.value implies (some n : r.child | n in c.value))
 	 * 			r.type = OrFeature implies (r.parent in c.value implies #{n1: r.child | n1 in c.value} >= r.min and #{n2: r.child | n2 in c.value} <= r.max)
 	 * 			r.type = XorFeature implies (r.parent in c.value implies #{n3: r.child | n3 in c.value} >= r.min and #{n4: r.child | n4 in c.value} <= r.max)
@@ -290,6 +314,7 @@ public class MetaModelConstraints {
 		
 		final Variable n = Variable.unary("n");
 		final Expression e = n.in(c.join(rValue)).comprehension(n.oneOf(r.join(rChild)));
+		// final Expression e = r.join(rChild).intersection(c.join(rValue));
 
 		final Formula f3 = Formula.and(e.count().gte(r.join(rMin).sum()), e.count().lte(r.join(rMax).sum()));
 		final Formula f4 = r.join(rParent).in(c.join(rValue)).implies(f3);

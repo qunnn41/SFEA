@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.sfea.ui;
+package moon.nju.edu.cn.sfea.app;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -7,9 +7,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import moon.nju.edu.cn.sfea.platform.GoogleAppEngineFM;
-import moon.nju.edu.cn.sfea.platform.HerokuFM;
-import moon.nju.edu.cn.sfea.platform.ValidConfigCallback;
+import moon.nju.edu.cn.sfea.consistency.GoogleAppEngineConsist;
+import moon.nju.edu.cn.sfea.consistency.HerokuConsist;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
@@ -605,7 +604,7 @@ public class SFEAApplication {
 		CountDownLatch latch = new CountDownLatch(2);
 		
 		final LinkedList<String> avaliablePlatform = new LinkedList<String>(); 
-		HerokuFM herokuFM = new HerokuFM(latch, feature, new ValidConfigCallback() {
+		HerokuConsist herokuFM = new HerokuConsist(latch, feature, new ValidConfigCallback() {
 			
 			@Override
 			public void onValid() {
@@ -617,7 +616,7 @@ public class SFEAApplication {
 			}
 		});
 		
-		GoogleAppEngineFM gaeFM = new GoogleAppEngineFM(latch, feature, new ValidConfigCallback() {
+		GoogleAppEngineConsist gaeFM = new GoogleAppEngineConsist(latch, feature, new ValidConfigCallback() {
 			
 			@Override
 			public void onValid() {

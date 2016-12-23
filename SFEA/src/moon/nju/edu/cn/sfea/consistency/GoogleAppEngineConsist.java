@@ -1,19 +1,19 @@
-package moon.nju.edu.cn.sfea.platform;
+package moon.nju.edu.cn.sfea.consistency;
 
 import java.util.concurrent.CountDownLatch;
 
 import kodkod.ast.Expression;
-import kodkod.ast.Relation;
-import moon.nju.edu.cn.fm.model.Feature;
-import moon.nju.edu.cn.sfea.verification.CloudVerification;
-import moon.nju.edu.cn.sfea.verification.MetaModelConstraints;
 
-public class GoogleAppEngineFM extends CloudVerification implements FMInterface, Runnable {
+import moon.nju.edu.cn.fm.model.Feature;
+import moon.nju.edu.cn.sfea.app.FMInterface;
+import moon.nju.edu.cn.sfea.app.ValidConfigCallback;
+
+public class GoogleAppEngineConsist extends PlatformConstraints implements FMInterface, Runnable {
 	private CountDownLatch downLatch;
 	private String[] feature;
 	private ValidConfigCallback callback;
 	
-	public GoogleAppEngineFM(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
+	public GoogleAppEngineConsist(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
 		super("feature_model/gae.fm");
 		this.feature = feature;
 		this.downLatch = downLatch;
@@ -22,9 +22,6 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 
 	@Override
 	public void createInstance(String[] string) {
-		config1 = Relation.unary("Config1");
-		formulas.add(config1.one());
-		
 		Expression featureSelection = signMap.get(rootFeature);
 		for (String str : string) {
 			for (Feature feature: signMap.keySet()) {
@@ -35,8 +32,7 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 			}
 		}
 		
-		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-		this.validConfiguration();
+		this.semantics(featureSelection);
 	}
 	
 	@Override

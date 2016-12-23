@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.sfea.verification;
+package moon.nju.edu.cn.sfea.search;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -40,8 +40,6 @@ public class CloudVerification {
 	private MetaModelConstraints metamodel;
 	
 	private Relation fm1;
-	protected Relation config1;
-	
 	private FeatureModel cloudFeatureModel;
 	protected Feature rootFeature;
 	private LinkedList<Constraints> constraints = new LinkedList<Constraints>();
@@ -385,8 +383,6 @@ public class CloudVerification {
 			}
 		}
 		
-		atoms.add("config1");
-		
 		int configurationSize = Math.min(63, (int) Math.pow(2, signMap.size()) - 1);
 		for (int i = 0; i <= configurationSize; ++i) {
 			atoms.add("Configuration" + i);
@@ -447,8 +443,6 @@ public class CloudVerification {
 		
 		
 		bounds.boundExactly(fm1, factory.range(factory.tuple("fm1"), factory.tuple("fm1")));
-		bounds.bound(config1, configurationTuple);
-		
 		bounds.boundExactly(MetaModelConstraints.sigOptional, factory.range(factory.tuple("Optional"), factory.tuple("Optional")));
 		bounds.boundExactly(MetaModelConstraints.sigMandatory, factory.range(factory.tuple("Mandatory"), factory.tuple("Mandatory")));
 		bounds.boundExactly(MetaModelConstraints.sigOrFeature, factory.range(factory.tuple("OrFeature"), factory.tuple("OrFeature")));
@@ -512,8 +506,8 @@ public class CloudVerification {
 		}
 	}
 	
-	protected void validConfiguration() {
+	protected void searchSimilarConfig(Expression instance) {
 		formulas.add(metamodel.wellFormed(fm1));
-		formulas.add(config1.in(metamodel.semantics(fm1)));
+		formulas.add(metamodel.searchingConfiguration(instance, fm1));
 	}
 }

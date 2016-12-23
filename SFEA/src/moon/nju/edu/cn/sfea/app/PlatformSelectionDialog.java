@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.sfea.ui;
+package moon.nju.edu.cn.sfea.app;
 
 import java.util.List;
 

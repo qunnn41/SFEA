@@ -1,4 +1,4 @@
-package moon.nju.edu.cn.sfea.verification;
+package moon.nju.edu.cn.sfea.search;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;

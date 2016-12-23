@@ -3,8 +3,8 @@ package moon.nju.edu.cn.sfea.reference;
 import java.util.LinkedList;
 import java.util.List;
 
-import moon.nju.edu.cn.sfea.verification.BooleanExpression;
-import moon.nju.edu.cn.sfea.verification.MetaModelConstraints;
+import moon.nju.edu.cn.sfea.search.BooleanExpression;
+import moon.nju.edu.cn.sfea.search.MetaModelConstraints;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;
@@ -113,7 +113,7 @@ public class ExampleForFeatureModel {
 		formulas.add(f2.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
 		formulas.add(f2.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(1)));
 		formulas.add(f3.join(MetaModelConstraints.rSize).count().eq(IntConstant.constant(1)));
-		formulas.add(f3.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(2)));
+		formulas.add(f3.join(MetaModelConstraints.rSize).sum().eq(IntConstant.constant(1)));
 		
 		formulas.add(f4.join(MetaModelConstraints.rOp).eq(MetaModelConstraints.sigImpliesF));
 		formulas.add(f4.join(MetaModelConstraints.rLeft).eq(f3));
@@ -251,12 +251,14 @@ public class ExampleForFeatureModel {
 	public void createInstance() {
 		config1 = Relation.unary("Config1");
 		formulas.add(config1.one());
-		formulas.add(config1.join(MetaModelConstraints.rValue).eq(Expression.union(mobilePhone, camera, mp3, earphone)));
+
+//		formulas.add(config1.join(MetaModelConstraints.rValue).eq(Expression.union(mobilePhone, camera, mp3, earphone)));
 	}
 	
 	public void validConfiguration() {
 		formulas.add(basic.wellFormed(fm1));
-		formulas.add(config1.in(basic.semantics(fm1)));
+		formulas.add(basic.searchingConfiguration(mobilePhone, fm1));
+//		formulas.add(config1.in(basic.semantics(fm1)));
 	}
 	
 	public static void main(String[] args) {
