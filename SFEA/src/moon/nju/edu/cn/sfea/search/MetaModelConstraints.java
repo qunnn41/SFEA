@@ -215,8 +215,6 @@ public class MetaModelConstraints {
 	 *			all v1: NameF | v1.welltyped[fm] = welltypedName[v1, fm]
 	 *			all v2: Form | v2.welltyped[fm] = welltypedFormula[v2, fm]
 	 *		}
-	 *
-	 *		all disj c1, c2: Configuration | c1.value != c2.value
 	 *	} 
 	 */
 	private Formula formulaConstruction() {
@@ -230,6 +228,21 @@ public class MetaModelConstraints {
 		final Formula f3 = (fm.join(v2.join(rWelltyped)).eq(wellTypedFormula(v2, fm))).forAll(v2.oneOf(sigForm));
 		final Formula f4 = Formula.and(f2, f3).forAll(fm.oneOf(sigFeatureModel));
 		
+		return Formula.and(f1, f4);
+	}
+	
+	/**
+	 * pred searchingConfig(instance: set Name, fm: FeatureModel) {
+	 * 		some c: Configuration | some (c.value & instance) && c in semantics[fm]
+	 *		all disj c1, c2: Configuration | c1.value != c2.value
+	 * }
+	 */
+	public Formula searchingConfiguration(Expression instance, Expression fm, int size) {
+		final Variable c = Variable.unary("c");
+		final Formula f2 = c.in(semantics(fm));
+		final Formula f3 = (c.join(rValue).intersection(instance)).count().gte(IntConstant.constant(size));
+		final Formula f4 = Formula.and(f2, f3).forSome(c.oneOf(sigConfiguration));
+		
 		final Variable c1 = Variable.unary("c1");
 		final Variable c2 = Variable.unary("c2");
 		
@@ -238,21 +251,7 @@ public class MetaModelConstraints {
 		
 		final Formula f7 = f6.forAll(c1.oneOf(sigConfiguration).and(c2.oneOf(sigConfiguration)));
 		
-		return Formula.and(f1, f4, f7);
-	}
-	
-	
-	/**
-	 * pred searchingConfig(instance: set Name, fm: FeatureModel) {
-	 * 		all c: Configuration | some (c.value & instance) && c in semantics[fm]
-	 * }
-	 */
-	public Formula searchingConfiguration(Expression instance, Expression fm) {
-		final Variable c = Variable.unary("c");
-		final Formula f1 = c.join(rValue).intersection(instance).some();
-		final Formula f2 = c.in(semantics(fm));
-		
-		return Formula.and(f1, f2).forSome(c.oneOf(sigConfiguration));
+		return Formula.and(f4, f7);
 	}
 	
 	/**
@@ -312,12 +311,11 @@ public class MetaModelConstraints {
 		final Formula f1 = r.join(rChild).in(c.join(rValue)).implies(r.join(rParent).in(c.join(rValue)));
 		final Formula f2 = r.join(rChild).in(c.join(rValue)).iff(r.join(rParent).in(c.join(rValue)));
 		
-		final Variable n = Variable.unary("n");
-		final Expression e = n.in(c.join(rValue)).comprehension(n.oneOf(r.join(rChild)));
-		// final Expression e = r.join(rChild).intersection(c.join(rValue));
-
+//		final Variable n = Variable.unary("n");
+//		final Expression e = n.in(c.join(rValue)).comprehension(n.oneOf(r.join(rChild)));
+		final Expression e = r.join(rChild).intersection(c.join(rValue));
 		final Formula f3 = Formula.and(e.count().gte(r.join(rMin).sum()), e.count().lte(r.join(rMax).sum()));
-		final Formula f4 = r.join(rParent).in(c.join(rValue)).implies(f3);
+		final Formula f4 = r.join(rParent).in(c.join(rValue)).iff(f3);
 		
 		final Formula f5 = r.join(rType).eq(sigOptional).implies(f1);
 		final Formula f6 = r.join(rType).eq(sigMandatory).implies(f2);

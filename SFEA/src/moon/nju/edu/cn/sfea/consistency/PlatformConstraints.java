@@ -195,12 +195,12 @@ public class PlatformConstraints {
 				Feature rightFeature = right_condition.getFeature();
 				Feature actionFeature = action.getFeature();
 				
-				Formula left = signMap.get(leftFeature).in(conf).and(IntConstant.constant(left_condition.getValue())
-						.lte(signMap.get(leftFeature).join(FMConstraints.rCard).sum()));
-				Formula right = signMap.get(rightFeature).in(conf).and(IntConstant.constant(right_condition.getValue())
-						.lte(signMap.get(rightFeature).join(FMConstraints.rCard).sum()));;
-				Formula result = signMap.get(actionFeature).in(conf).and(IntConstant.constant(action.getValue())
-						.lte(signMap.get(actionFeature).join(FMConstraints.rCard).sum()));;
+				Formula left = signMap.get(leftFeature).in(conf)
+						.and(IntConstant.constant(left_condition.getValue()).lte(signMap.get(leftFeature).join(FMConstraints.rCard).sum()));
+				Formula right = signMap.get(rightFeature).in(conf)
+						.and(IntConstant.constant(right_condition.getValue()).lte(signMap.get(rightFeature).join(FMConstraints.rCard).sum()));;
+				Formula result = signMap.get(actionFeature).in(conf)
+						.and(IntConstant.constant(action.getValue()).lte(signMap.get(actionFeature).join(FMConstraints.rCard).sum()));;
 				
 				if (cardExConstraint.getOperator() instanceof AndOperator) {
 					formulas.add((left.and(right)).implies(result));
@@ -253,10 +253,10 @@ public class PlatformConstraints {
 		solver.options().setSolver(SATFactory.MiniSat);
 		final Solution solution = solver.solve(getFormulas(), bounds());
 		if (solution.unsat()) {
-			System.out.println("unsat");
+//			System.out.println("unsat");
 			return false;
 		} else {
-			System.out.println(solution);
+//			System.out.println(solution);
 		}
 		
 		return true;

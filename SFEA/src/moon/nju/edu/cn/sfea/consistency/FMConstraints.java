@@ -71,7 +71,7 @@ public class FMConstraints {
 	
 	/**
 	 * pred orFeature(A: Name, children: set Name, conf: set Name) {
-	 * 		A in conf => (some c: children | c in conf and #children & conf >= min && children & conf <= max)
+	 * 		A in conf <=> (some c: children | c in conf and #children & conf >= min && children & conf <= max)
 	 * }
 	 */
 	public static Formula orFeature(Expression A, Expression children, Expression conf, int min, int max) {
@@ -80,7 +80,7 @@ public class FMConstraints {
 		
 		IntExpression e = (children.intersection(conf)).count();
 		Formula f2 = e.gte(IntConstant.constant(min)).and(e.lte(IntConstant.constant(max)));
-		Formula f3 = A.in(conf).implies(f1.and(f2));
+		Formula f3 = A.in(conf).iff(f1.and(f2));
 
 		Formula f4 = children.count().gt(IntConstant.constant(1));
 		return Formula.and(f3, f4);
@@ -88,7 +88,7 @@ public class FMConstraints {
 	
 	/**
 	 * pred alternative(A: Name, children: set Name, conf: set Name) {
-	 * 		A in conf => some c: children | c in conf and (#children & conf >= min && children & conf <= max)
+	 * 		A in conf <=> some c: children | c in conf and (#children & conf >= min && children & conf <= max)
 	 * }
 	 */
 	public static Formula xorFeature(Expression A, Expression children, Expression conf, int min, int max) {

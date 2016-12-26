@@ -31,7 +31,7 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 			}
 		}
 		
-		this.searchSimilarConfig(featureSelection);
+		this.searchSimilarConfig(featureSelection, string.length);
 	}
 	
 	@Override

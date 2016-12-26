@@ -20,7 +20,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	}
 	
 	public HerokuFM(String[] feature) {
-		super("feature_model/heroku.fm");
+		super("feature_model/cloud.fm");
 		this.feature = feature;
 		this.createInstance(feature);
 	}
@@ -38,7 +38,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		}
 		
 //		formulas.add(config1.join(MetaModelConstraints.rValue).in(featureSelection));
-		this.searchSimilarConfig(featureSelection);
+		this.searchSimilarConfig(featureSelection, string.length / 3);
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	}
 	
 	public static void main(String[] args) {
-		HerokuFM herokuFM = new HerokuFM(new String[]{"Ruby", "Language", "Spring", "Framework"});
+		HerokuFM herokuFM = new HerokuFM(new String[]{"Java", "Language", "Rails", "Framework"});
 		if (herokuFM.check()) {
 			System.out.println("yes");
 		} else {

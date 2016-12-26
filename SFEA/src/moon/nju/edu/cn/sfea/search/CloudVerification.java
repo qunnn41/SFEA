@@ -1,5 +1,7 @@
 package moon.nju.edu.cn.sfea.search;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +23,7 @@ import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
+import moon.nju.edu.cn.sfea.consistency.HerokuConsist;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;
@@ -30,6 +33,7 @@ import kodkod.engine.Solution;
 import kodkod.engine.Solver;
 import kodkod.engine.satlab.SATFactory;
 import kodkod.instance.Bounds;
+import kodkod.instance.Instance;
 import kodkod.instance.Tuple;
 import kodkod.instance.TupleFactory;
 import kodkod.instance.TupleSet;
@@ -502,12 +506,101 @@ public class CloudVerification {
 			return false;
 		} else {
 			System.out.println(solution);
+			Instance instance = solution.instance();
+			
+			//get Formulas
+			List<String> allFormulas = new LinkedList<String>();
+			TupleSet tupleSet = instance.tuples(MetaModelConstraints.rFormulas);
+			Iterator<Tuple> iterator = tupleSet.iterator();
+			while (iterator.hasNext()) {
+				Tuple tuple = iterator.next();
+				allFormulas.add(tuple.atom(1).toString());
+			}
+			
+			//get Valid Configuration
+			List<String> config = new LinkedList<String>();
+			tupleSet = instance.tuples(MetaModelConstraints.rSatisfy);
+			iterator = tupleSet.iterator();
+			Map<String, LinkedList<String>> configSat = new HashMap<String, LinkedList<String>>();
+			while (iterator.hasNext()) {
+				Tuple tuple = iterator.next();
+				if (tuple.atom(2).equals(BooleanExpression.TRUE.toString() )
+						&& allFormulas.contains(tuple.atom(0).toString())) {
+					if (configSat.containsKey(tuple.atom(1))) {
+						configSat.get(tuple.atom(1).toString()).add(tuple.atom(0).toString());
+					} else {
+						LinkedList<String> list = new LinkedList<String>();
+						list.add(tuple.atom(0).toString());
+						configSat.put(tuple.atom(1).toString(), list);
+					}
+				}
+			}
+			
+			for (String key: configSat.keySet()) {
+				boolean flag = true;
+				for (String form : allFormulas) {
+					if (!configSat.get(key).remove(form)) {
+						flag = false;
+						break;
+					}
+				}
+				
+				if (configSat.get(key).size() == 0 && flag) {
+					config.add(key);
+				}
+			}
+			
+			Map<String, List<String>> configMap = new HashMap<String, List<String>>();
+			tupleSet = instance.tuples(MetaModelConstraints.rValue);
+			iterator = tupleSet.iterator();
+			while (iterator.hasNext()) {
+				Tuple tuple = iterator.next();
+				String configName = tuple.atom(0).toString();
+				String valueName = tuple.atom(1).toString();
+				if (config.contains(configName)) {
+					if (configMap.containsKey(configName)) {
+						configMap.get(configName).add(getFeatureName(valueName));
+					} else {
+						LinkedList<String> list = new LinkedList<String>();
+						list.add(getFeatureName(valueName));
+						configMap.put(configName, list);
+					}
+				}
+			}
+			
+			for (String key: configMap.keySet()) {
+//				System.out.println(key + "\t" + configMap.get(key));
+				if (!configMap.get(key).contains(rootFeature.getName())) {
+					configMap.get(key).add(0, rootFeature.getName());
+				}
+				
+				String[] featureSet = new String[configMap.get(key).size()];
+				configMap.get(key).toArray(featureSet);
+				HerokuConsist consist = new HerokuConsist(featureSet);
+				if (consist.check()) {
+					System.out.println(configMap.get(key));
+				}
+			}
+			
 			return true;
 		}
 	}
 	
-	protected void searchSimilarConfig(Expression instance) {
+	private String getFeatureName(String index) {
+		for (Map.Entry<Feature, Relation> entry : signMap.entrySet()) {
+			Feature feature = entry.getKey();
+			Relation relation = entry.getValue();
+			
+			if (relation.toString().equals(index)) {
+				return feature.getName();
+			}
+		}
+		
+		return null;
+	}
+	
+	protected void searchSimilarConfig(Expression instance, int size) {
 		formulas.add(metamodel.wellFormed(fm1));
-		formulas.add(metamodel.searchingConfiguration(instance, fm1));
+		formulas.add(metamodel.searchingConfiguration(instance, fm1, size));
 	}
 }

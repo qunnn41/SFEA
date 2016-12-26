@@ -10,9 +10,10 @@
     <subFeatures xsi:type="fm:XorFeature" name="Language">
       <featureCardinality min="1" max="1"/>
       <variants name="Java"/>
-      <variants name="Python"/>
+      <variants name="Ruby"/>
       <groupCardinality min="1" max="1"/>
     </subFeatures>
   </root>
   <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.0/@variants.1" to="//@root/@subFeatures.1/@variants.0"/>
+  <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.0/@variants.0" to="//@root/@subFeatures.1/@variants.1"/>
 </fm:FeatureModel>
