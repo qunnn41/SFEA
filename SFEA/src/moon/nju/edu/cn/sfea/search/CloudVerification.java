@@ -387,12 +387,12 @@ public class CloudVerification {
 			}
 		}
 		
-		int configurationSize = Math.min(63, (int) Math.pow(2, signMap.size()) - 1);
+		int configurationSize = Math.min(50, (int) Math.pow(2, signMap.size()) - 1);
 		for (int i = 0; i <= configurationSize; ++i) {
 			atoms.add("Configuration" + i);
 		}
 		
-		for (int i = 0; i < 10; ++i) {
+		for (int i = 0; i < 20; ++i) {
 			atoms.add(Integer.valueOf(i));
 		}
 		
@@ -490,7 +490,7 @@ public class CloudVerification {
 		bounds.bound(MetaModelConstraints.rCard, nameTuple.product(intTuple));
 		bounds.bound(MetaModelConstraints.rSize, nameFTuple.product(intTuple));
 		
-		for (int i = 0; i < 10; ++i) {
+		for (int i = 0; i < 20; ++i) {
 			bounds.boundExactly(i, factory.setOf(Integer.valueOf(i)));
 		}
 		
@@ -599,8 +599,10 @@ public class CloudVerification {
 		return null;
 	}
 	
-	protected void searchSimilarConfig(Expression instance, int size) {
+	//TODO tradeoff
+	protected void searchSimilarConfig(Expression instance, Expression important, int diff, int size, int value) {
 		formulas.add(metamodel.wellFormed(fm1));
-		formulas.add(metamodel.searchingConfiguration(instance, fm1, size));
+		formulas.add(metamodel.semantics(fm1, instance, important, diff, size, value).count()
+				.gte(IntConstant.constant(7)));
 	}
 }

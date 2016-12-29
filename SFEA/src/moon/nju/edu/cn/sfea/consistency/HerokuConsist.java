@@ -21,7 +21,7 @@ public class HerokuConsist extends PlatformConstraints implements FMInterface, R
 	}
 	
 	public HerokuConsist(String[] feature) {
-		super("feature_model/cloud.fm");
+		super("feature_model/heroku.fm");
 		createInstance(feature);
 	}
 	

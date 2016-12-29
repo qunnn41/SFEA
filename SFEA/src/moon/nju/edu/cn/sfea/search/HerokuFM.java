@@ -1,8 +1,10 @@
 package moon.nju.edu.cn.sfea.search;
 
+import java.util.Map.Entry;
 import java.util.concurrent.CountDownLatch;
 
 import kodkod.ast.Expression;
+import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.sfea.app.FMInterface;
 import moon.nju.edu.cn.sfea.app.ValidConfigCallback;
@@ -20,7 +22,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	}
 	
 	public HerokuFM(String[] feature) {
-		super("feature_model/cloud.fm");
+		super("feature_model/heroku.fm");
 		this.feature = feature;
 		this.createInstance(feature);
 	}
@@ -37,8 +39,17 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 			}
 		}
 		
-//		formulas.add(config1.join(MetaModelConstraints.rValue).in(featureSelection));
-		this.searchSimilarConfig(featureSelection, string.length / 3);
+		Expression importantFeature = null;
+		for (Entry<Feature, Relation> entry: signMap.entrySet()) {
+			Feature feature = entry.getKey();
+			Relation relation = entry.getValue();
+			if (feature.getName().endsWith("Java")) {
+				importantFeature = importantFeature == null ? relation : importantFeature.union(relation);
+			}
+		}
+		
+		//TODO tradeoff
+		this.searchSimilarConfig(featureSelection, importantFeature, string.length * 3 / 4, string.length, 3);
 	}
 	
 	@Override
@@ -54,7 +65,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	}
 	
 	public static void main(String[] args) {
-		HerokuFM herokuFM = new HerokuFM(new String[]{"Java", "Language", "Rails", "Framework"});
+		HerokuFM herokuFM = new HerokuFM(new String[]{"Language", "Framework", "Rails", "Java"});
 		if (herokuFM.check()) {
 			System.out.println("yes");
 		} else {

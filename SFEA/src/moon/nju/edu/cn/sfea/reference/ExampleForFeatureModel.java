@@ -252,12 +252,11 @@ public class ExampleForFeatureModel {
 		config1 = Relation.unary("Config1");
 		formulas.add(config1.one());
 
-//		formulas.add(config1.join(MetaModelConstraints.rValue).eq(Expression.union(mobilePhone, camera, mp3, earphone)));
+		formulas.add(config1.join(MetaModelConstraints.rValue).eq(Expression.union(mobilePhone, camera, mp3, earphone)));
 	}
 	
 	public void validConfiguration() {
 		formulas.add(basic.wellFormed(fm1));
-		formulas.add(basic.searchingConfiguration(mobilePhone, fm1, 2));
 //		formulas.add(config1.in(basic.semantics(fm1)));
 	}
 	

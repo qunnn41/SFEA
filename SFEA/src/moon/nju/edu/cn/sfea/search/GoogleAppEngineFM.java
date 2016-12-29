@@ -1,8 +1,10 @@
 package moon.nju.edu.cn.sfea.search;
 
+import java.util.Map.Entry;
 import java.util.concurrent.CountDownLatch;
 
 import kodkod.ast.Expression;
+import kodkod.ast.Relation;
 import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.sfea.app.FMInterface;
 import moon.nju.edu.cn.sfea.app.ValidConfigCallback;
@@ -31,7 +33,16 @@ public class GoogleAppEngineFM extends CloudVerification implements FMInterface,
 			}
 		}
 		
-		this.searchSimilarConfig(featureSelection, string.length);
+		Expression importantFeature = null;
+		for (Entry<Feature, Relation> entry: signMap.entrySet()) {
+			Feature feature = entry.getKey();
+			Relation relation = entry.getValue();
+			if (feature.getName().endsWith("Java")) {
+				importantFeature = importantFeature == null ? relation : importantFeature.union(relation);
+			}
+		}
+		
+		this.searchSimilarConfig(featureSelection, importantFeature, string.length / 3, string.length, 2);
 	}
 	
 	@Override
