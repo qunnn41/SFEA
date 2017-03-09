@@ -142,16 +142,17 @@ fun satisfyFormula(f: Form, c: Configuration): Bool {
 
 
 one sig Cloud, Framework, Language, Java, Javascript, Nodejs, Spring extends Name {}
+one sig Database, Redis, Mysql extends Name{}
 one sig fm1 extends FeatureModel{}
-one sig r1, r2, r4, r5 extends Relation{}
+one sig r1, r2, r3, r4, r5, r6 extends Relation{}
 one sig f1, f4 extends Form{}
 one sig f2, f3, f5, f6 extends NameF{}
 
 fact {
 	fm1.root = Cloud
-	fm1.features = Cloud+Framework+Language+Java+Javascript+Nodejs+Spring
+	fm1.features = Cloud+Framework+Language+Java+Javascript+Nodejs+Spring+Database+Redis+Mysql
 
-	fm1.relations = r1+r2+r4+r5
+	fm1.relations = r1+r2+r4+r5+r3+r6
 	fm1.formulas = f1+f4
 
 	Cloud.card = 1
@@ -161,6 +162,9 @@ fact {
 	Javascript.card = 1
   Nodejs.card = 1
   Spring.card = 1
+	Database.card = 1
+	Redis.card = 1
+	Mysql.card = 1
 }
 
 fact {
@@ -172,6 +176,10 @@ fact {
 	r2.parent = Cloud
 	r2.child = Language
 
+	r3.type = Optional
+	r3.parent = Cloud
+	r3.child = Database
+
 	r4.type = XorFeature
 	r4.parent = Framework
 	r4.child = Nodejs+Spring
@@ -179,6 +187,10 @@ fact {
 	r5.type = XorFeature
 	r5.parent = Language
 	r5.child = Java+Javascript
+
+	r6.type = OrFeature
+	r6.parent = Database
+	r6.child = Mysql+Redis
 }
 
 fact {
@@ -208,7 +220,7 @@ assert validConfig1 {
 	Config1 in semantics[fm1]
 }
 
-check validConfig1 for 1 FeatureModel, 7 Name, 4 Relation, 6 Formula, 128 Configuration
+check validConfig1 for 1 FeatureModel, 10 Name, 6 Relation, 6 Formula, 1024 Configuration
 
 one sig Config2 extends Configuration{} {
 	value = Cloud+Framework+Spring
@@ -219,7 +231,7 @@ assert validConfig2 {
 	Config2 in semantics[fm1]
 }
 
-check validConfig2 for 1 FeatureModel, 7 Name, 4 Relation, 6 Formula, 128 Configuration
+check validConfig2 for 1 FeatureModel, 10 Name, 6 Relation, 6 Formula, 1024 Configuration
 
 fun showConfig(): set Configuration {
 	semantics[fm1]
