@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fm:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="www.example.com/fm">
+  <root name="f1">
+    <subFeatures xsi:type="fm:OrFeature" name="f2">
+      <featureCardinality min="1" max="1"/>
+      <variants name="f3"/>
+      <variants name="f4"/>
+      <groupCardinality min="1" max="2"/>
+    </subFeatures>
+    <subFeatures name="f5">
+      <featureCardinality min="1" max="1"/>
+    </subFeatures>
+    <featureCardinality max="1"/>
+  </root>
+  <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.1" to="//@root/@subFeatures.0/@variants.0"/>
+</fm:FeatureModel>

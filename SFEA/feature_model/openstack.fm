@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fm:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="www.example.com/fm">
+  <root name="Openstack">
+    <subFeatures name="Docker">
+      <subFeatures name="LocalRegistry">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Mountflag">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <featureCardinality min="1" max="1"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:XorFeature" name="OS">
+      <featureCardinality min="1" max="1"/>
+      <variants name="CentOS"/>
+      <variants name="Ubuntu"/>
+      <groupCardinality min="1" max="1"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:XorFeature" name="infrastructure">
+      <featureCardinality min="1" max="1"/>
+      <variants name="BareMachine"/>
+      <variants name="VirtualMachine"/>
+      <groupCardinality min="1" max="1"/>
+    </subFeatures>
+    <subFeatures xsi:type="fm:XorFeature" name="DeployTool">
+      <featureCardinality min="1" max="1"/>
+      <variants name="Chef"/>
+      <variants name="Puppet"/>
+      <variants name="Ansible"/>
+      <groupCardinality min="1" max="1"/>
+    </subFeatures>
+    <subFeatures name="Service">
+      <subFeatures xsi:type="fm:XorFeature" name="Hypervisor">
+        <featureCardinality max="1"/>
+        <variants name="QEMU"/>
+        <variants name="KVM"/>
+        <groupCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="HAProxy">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="HardwareAcceleration">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="FloatingIP">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Communication">
+        <subFeatures name="NTP">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="RabbitMQ">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Neutron">
+        <subFeatures name="neutron-server">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="agent">
+          <subFeatures name="metadata">
+            <featureCardinality min="1" max="1"/>
+          </subFeatures>
+          <subFeatures name="dhcp">
+            <featureCardinality min="1" max="1"/>
+          </subFeatures>
+          <subFeatures name="l3">
+            <featureCardinality max="1"/>
+          </subFeatures>
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures xsi:type="fm:XorFeature" name="plugin">
+          <featureCardinality min="1" max="1"/>
+          <variants name="OVS"/>
+          <variants name="Bridge"/>
+          <groupCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Glance">
+        <subFeatures name="glance-registry">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="glance-api">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Keystone">
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Ceilometer">
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Cinder">
+        <subFeatures name="cinder-api">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="cinder-scheduler">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality max="1"/>
+      </subFeatures>
+      <subFeatures name="Nova">
+        <subFeatures name="nova-api">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="nova-compute">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="nova-scheduler">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Node">
+        <subFeatures name="Controller">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="Compute">
+          <featureCardinality max="1"/>
+        </subFeatures>
+        <subFeatures name="Network">
+          <featureCardinality max="1"/>
+        </subFeatures>
+        <subFeatures name="Object">
+          <featureCardinality max="1"/>
+        </subFeatures>
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <subFeatures name="Database">
+        <subFeatures name="Mysql">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <subFeatures name="MariaDB">
+          <featureCardinality min="1" max="1"/>
+        </subFeatures>
+        <featureCardinality min="1" max="1"/>
+      </subFeatures>
+      <featureCardinality min="1" max="1"/>
+    </subFeatures>
+  </root>
+  <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.4/@subFeatures.3" to="//@root/@subFeatures.4/@subFeatures.5/@subFeatures.1/@subFeatures.2"/>
+  <constraints xsi:type="fm:BooleanConstraints" from="//@root/@subFeatures.3/@variants.2" to="//@root/@subFeatures.0/@subFeatures.1"/>
+  <constraints xsi:type="fm:CardExConstraint">
+    <action feature="//@root/@subFeatures.4/@subFeatures.1" value="1"/>
+    <condition feature="//@root/@subFeatures.4/@subFeatures.11/@subFeatures.0" value="2"/>
+  </constraints>
+  <constraints xsi:type="fm:CardExConstraint">
+    <action feature="//@root/@subFeatures.4/@subFeatures.0/@variants.0" value="1"/>
+    <condition feature="//@root/@subFeatures.4/@subFeatures.2" value="-1"/>
+  </constraints>
+</fm:FeatureModel>

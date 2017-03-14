@@ -9,20 +9,20 @@ import moon.nju.edu.cn.fm.model.Feature;
 import moon.nju.edu.cn.sfea.app.FMInterface;
 import moon.nju.edu.cn.sfea.app.ValidConfigCallback;
 
-public class HerokuFM extends CloudVerification implements FMInterface, Runnable {
+public class ExperimenTTest extends CloudVerification implements FMInterface, Runnable {
 	private CountDownLatch downLatch;
 	private String[] feature;
 	private ValidConfigCallback callback;
 	
-	public HerokuFM(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
-		super("feature_model/heroku.fm");
+	public ExperimenTTest(CountDownLatch downLatch, String[] feature, ValidConfigCallback callback) {
+		super("feature_model/openstack.fm");
 		this.feature = feature;
 		this.downLatch = downLatch;
 		this.callback = callback;
 	}
 	
-	public HerokuFM(String[] feature) {
-		super("feature_model/heroku.fm");
+	public ExperimenTTest(String[] feature) {
+		super("feature_model/openstack.fm");
 		this.feature = feature;
 		this.createInstance(feature);
 	}
@@ -43,7 +43,7 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		for (Entry<Feature, Relation> entry: signMap.entrySet()) {
 			Feature feature = entry.getKey();
 			Relation relation = entry.getValue();
-			if (feature.getName().endsWith("Java")) {
+			if (feature.getName().endsWith("Ansible")) {
 				importantFeature = importantFeature == null ? relation : importantFeature.union(relation);
 			}
 		}
@@ -51,8 +51,12 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 		//TODO tradeoff
 		this.searchSimilarConfig(featureSelection, importantFeature, string.length * 3 / 4, string.length, 3);
 		
-		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-		this.checkConfig();
+		
+//		
+//		config1 = Relation.unary("config1");
+//		formulas.add(config1.one());
+//		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
+//		this.checkConfig();
 	}
 	
 	@Override
@@ -68,8 +72,11 @@ public class HerokuFM extends CloudVerification implements FMInterface, Runnable
 	}
 	
 	public static void main(String[] args) {
-		HerokuFM herokuFM = new HerokuFM(new String[]{"Language", "Framework", "Rails", "Java"});
-		if (herokuFM.check()) {
+		ExperimenTTest heroku = new ExperimenTTest(new String[]{
+				"Openstack", "Docker","OS","infrastructure","Service","DeployTool","Ubuntu","VirtualMachine","Ansible",
+				"Node","Controller","Nova","nova-api","nova-compute","nova-scheduler","Keystone","Glance","glance-api","glance-registry",
+				"Neutron","plugin","Bridge","neutron-server","agent","metadata","dhcp","Communication","NTP","RabbitMQ","Database","Mysql","MariaDB"});
+		if (heroku.check()) {
 			System.out.println("yes");
 		} else {
 			System.out.println("no");

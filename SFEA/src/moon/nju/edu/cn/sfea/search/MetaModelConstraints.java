@@ -290,6 +290,14 @@ public class MetaModelConstraints {
 		return Formula.and(f1, f2, f3).comprehension(c.oneOf(sigConfiguration));
 	}
 	
+	public Expression semantics(Expression fm) {
+		final Variable c = Variable.unary("c");
+		final Formula f1 = Formula.and(satisfyRelations(fm, c), 
+				satisfyImplicitConstraints(fm, c), 
+				satisfyExplicitConstraints(fm, c));
+		return f1.comprehension(c.oneOf(sigConfiguration));
+	}
+	
 	/**
 	 * 	pred satisfyRelations(fm: FeatureModel, c: Configuration) {
 	 * 		all r: fm.relations | {

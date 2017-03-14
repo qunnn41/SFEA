@@ -38,7 +38,7 @@ public class ExampleForParseModel {
 		map.put("fm", new XMIResourceFactoryImpl());
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createURI("feature_model/cloud.fm"), true);
+		Resource resource = resourceSet.getResource(URI.createURI("feature_model/openstack.fm"), true);
 		this.cloudFeatureModel = (FeatureModel) resource.getContents().get(0);
 		this.rootFeature = cloudFeatureModel.getRoot();
 		this.constraints.addAll(cloudFeatureModel.getConstraints());

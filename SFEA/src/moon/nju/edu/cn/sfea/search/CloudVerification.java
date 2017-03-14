@@ -23,7 +23,7 @@ import moon.nju.edu.cn.fm.model.Operation;
 import moon.nju.edu.cn.fm.model.OrFeature;
 import moon.nju.edu.cn.fm.model.SFEAPackage;
 import moon.nju.edu.cn.fm.model.XorFeature;
-import moon.nju.edu.cn.sfea.consistency.HerokuConsist;
+import moon.nju.edu.cn.sfea.consistency.ExperimentTest;
 
 import kodkod.ast.Expression;
 import kodkod.ast.Formula;
@@ -46,6 +46,8 @@ public class CloudVerification {
 	private Relation fm1;
 	private FeatureModel cloudFeatureModel;
 	protected Feature rootFeature;
+	protected Relation config1;
+	private boolean check = true;
 	private LinkedList<Constraints> constraints = new LinkedList<Constraints>();
 	
 	protected Map<Feature, Relation> signMap = new LinkedHashMap<Feature, Relation>();
@@ -287,6 +289,11 @@ public class CloudVerification {
 				Operation action = cardExConstraint.getAction();
 				List<Operation> conditionList = cardExConstraint.getCondition();
 				Operation left_condition = conditionList.get(0);
+				
+				if (conditionList.size() == 1) {
+					continue;
+				}
+				
 				Operation right_condition = conditionList.get(1);
 				
 				Feature leftFeature = left_condition.getFeature();
@@ -387,12 +394,13 @@ public class CloudVerification {
 			}
 		}
 		
-		int configurationSize = Math.min(50, (int) Math.pow(2, signMap.size()) - 1);
+		int configurationSize = Math.min(128, (int) Math.pow(2, signMap.size()) - 1);
+//		int configurationSize = (int) (/*Math.min(50, (int) */Math.pow(2, signMap.size()) - 1);//);
 		for (int i = 0; i <= configurationSize; ++i) {
 			atoms.add("Configuration" + i);
 		}
 		
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0; i < 50; ++i) {
 			atoms.add(Integer.valueOf(i));
 		}
 		
@@ -403,7 +411,7 @@ public class CloudVerification {
 		final TupleSet typeTuple = factory.range(factory.tuple("Optional"), factory.tuple("XorFeature"));
 		final TupleSet operationTuple = factory.range(factory.tuple("AndF"), factory.tuple("NotF"));
 		final TupleSet configurationTuple = factory.range(factory.tuple("Configuration0"), factory.tuple("Configuration" + configurationSize));
-		final TupleSet intTuple = factory.range(factory.tuple(Integer.valueOf(0)), factory.tuple(Integer.valueOf(9)));
+		final TupleSet intTuple = factory.range(factory.tuple(Integer.valueOf(0)), factory.tuple(Integer.valueOf(49)));
 		final TupleSet booleanTuple = factory.range(factory.tuple("True"), factory.tuple("False"));
 
 		final TupleSet fmTuple = factory.range(factory.tuple("fm1"), factory.tuple("fm1"));
@@ -443,6 +451,10 @@ public class CloudVerification {
 		for (Relation relation: nameFList) {
 			Tuple tuple = factory.tuple(relationNameMap.get(relation));
 			bounds.boundExactly(relation, factory.range(tuple, tuple));
+		}
+		
+		if (check) {
+			bounds.bound(config1, configurationTuple);
 		}
 		
 		
@@ -490,7 +502,7 @@ public class CloudVerification {
 		bounds.bound(MetaModelConstraints.rCard, nameTuple.product(intTuple));
 		bounds.bound(MetaModelConstraints.rSize, nameFTuple.product(intTuple));
 		
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0; i < 50; ++i) {
 			bounds.boundExactly(i, factory.setOf(Integer.valueOf(i)));
 		}
 		
@@ -501,11 +513,10 @@ public class CloudVerification {
 		final Solver solver = new Solver();
 		solver.options().setSolver(SATFactory.MiniSat);
 		final Solution solution = solver.solve(getFormulas(), bounds());
+		System.out.println(solution);
 		if (solution.unsat()) {
-			System.out.println("unsat");
 			return false;
 		} else {
-			System.out.println(solution);
 			Instance instance = solution.instance();
 			
 			//get Formulas
@@ -576,9 +587,10 @@ public class CloudVerification {
 				
 				String[] featureSet = new String[configMap.get(key).size()];
 				configMap.get(key).toArray(featureSet);
-				HerokuConsist consist = new HerokuConsist(featureSet);
+				ExperimentTest consist = new ExperimentTest(featureSet);
 				if (consist.check()) {
 					System.out.println(configMap.get(key));
+				} else {
 				}
 			}
 			
@@ -602,7 +614,15 @@ public class CloudVerification {
 	//TODO tradeoff
 	protected void searchSimilarConfig(Expression instance, Expression important, int diff, int size, int value) {
 		formulas.add(metamodel.wellFormed(fm1));
-		formulas.add(metamodel.semantics(fm1, instance, important, diff, size, value).count()
-				.gte(IntConstant.constant(7)));
+//		formulas.add(metamodel.semantics(fm1, instance, important, diff, size, value).count()
+//				.gte(IntConstant.constant(7)));
+		formulas.add(metamodel.semantics(fm1, instance, important, diff, size, value).some());
+		check = false;
+	}
+	
+	protected void checkConfig() {
+		formulas.add(metamodel.wellFormed(fm1));
+		formulas.add(config1.in(metamodel.semantics(fm1)));
+		check = true;
 	}
 }

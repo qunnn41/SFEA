@@ -182,13 +182,17 @@ public class PlatformConstraints {
 				BooleanConstraints implieConstraints = (BooleanConstraints) constraint;
 				Feature fromFeature = implieConstraints.getFrom();
 				Feature toFeature = implieConstraints.getTo();
-				
 				formulas.add((signMap.get(fromFeature).in(conf)).implies(signMap.get(toFeature).in(conf)));
 			} else if (constraint instanceof CardExConstraint) {
 				CardExConstraint cardExConstraint = (CardExConstraint) constraint;
 				Operation action = cardExConstraint.getAction();
 				List<Operation> conditionList = cardExConstraint.getCondition();
 				Operation left_condition = conditionList.get(0);
+				
+				if (conditionList.size() == 1) {
+					continue;
+				}
+				
 				Operation right_condition = conditionList.get(1);
 				
 				Feature leftFeature = left_condition.getFeature();
@@ -254,6 +258,7 @@ public class PlatformConstraints {
 		final Solution solution = solver.solve(getFormulas(), bounds());
 		if (solution.unsat()) {
 //			System.out.println("unsat");
+//			System.out.println(solution);
 			return false;
 		} else {
 //			System.out.println(solution);
