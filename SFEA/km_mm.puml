@@ -1,0 +1,25 @@
+@startuml
+
+DomainKnowledge *--> "1..*" Concept
+
+class Concept {
+    name: String
+    selected: boolean
+}
+
+Concept <|-- CountableElement
+Concept <|-- QuantifiableElement
+
+class CountableElement {
+    amount: int
+}
+
+class QuantifiableElement {
+    quantity: double
+    unit: String
+}
+
+Concept *--> "0..*" Concept : subConcepts
+Concept *--> "0..*" Concept : hasConcepts
+
+@enduml
