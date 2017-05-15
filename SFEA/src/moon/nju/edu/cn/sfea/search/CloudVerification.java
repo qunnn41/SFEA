@@ -394,13 +394,14 @@ public class CloudVerification {
 			}
 		}
 		
-		int configurationSize = Math.min(128, (int) Math.pow(2, signMap.size()) - 1);
-//		int configurationSize = (int) (/*Math.min(50, (int) */Math.pow(2, signMap.size()) - 1);//);
+//		int configurationSize = Math.min(50, (int) Math.pow(2, signMap.size()) - 1);
+		int intSize = signMap.size();
+		int configurationSize = (int) (/*Math.min(50, (int) */Math.pow(2, signMap.size()) - 1);//);
 		for (int i = 0; i <= configurationSize; ++i) {
 			atoms.add("Configuration" + i);
 		}
 		
-		for (int i = 0; i < 50; ++i) {
+		for (int i = 0; i < intSize; ++i) {
 			atoms.add(Integer.valueOf(i));
 		}
 		
@@ -411,7 +412,7 @@ public class CloudVerification {
 		final TupleSet typeTuple = factory.range(factory.tuple("Optional"), factory.tuple("XorFeature"));
 		final TupleSet operationTuple = factory.range(factory.tuple("AndF"), factory.tuple("NotF"));
 		final TupleSet configurationTuple = factory.range(factory.tuple("Configuration0"), factory.tuple("Configuration" + configurationSize));
-		final TupleSet intTuple = factory.range(factory.tuple(Integer.valueOf(0)), factory.tuple(Integer.valueOf(49)));
+		final TupleSet intTuple = factory.range(factory.tuple(Integer.valueOf(0)), factory.tuple(Integer.valueOf(intSize - 1)));
 		final TupleSet booleanTuple = factory.range(factory.tuple("True"), factory.tuple("False"));
 
 		final TupleSet fmTuple = factory.range(factory.tuple("fm1"), factory.tuple("fm1"));
@@ -502,7 +503,7 @@ public class CloudVerification {
 		bounds.bound(MetaModelConstraints.rCard, nameTuple.product(intTuple));
 		bounds.bound(MetaModelConstraints.rSize, nameFTuple.product(intTuple));
 		
-		for (int i = 0; i < 50; ++i) {
+		for (int i = 0; i < intSize; ++i) {
 			bounds.boundExactly(i, factory.setOf(Integer.valueOf(i)));
 		}
 		
@@ -511,7 +512,7 @@ public class CloudVerification {
 	
 	public boolean check() {
 		final Solver solver = new Solver();
-		solver.options().setSolver(SATFactory.MiniSat);
+		solver.options().setSolver(SATFactory.MiniSatProver);
 		final Solution solution = solver.solve(getFormulas(), bounds());
 		System.out.println(solution);
 		if (solution.unsat()) {

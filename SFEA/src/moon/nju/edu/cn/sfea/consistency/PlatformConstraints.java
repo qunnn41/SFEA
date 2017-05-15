@@ -261,7 +261,7 @@ public class PlatformConstraints {
 //			System.out.println(solution);
 			return false;
 		} else {
-//			System.out.println(solution);
+			System.out.println(solution);
 		}
 		
 		return true;

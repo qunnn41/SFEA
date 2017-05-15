@@ -22,7 +22,7 @@ public class ExperimenTTest extends CloudVerification implements FMInterface, Ru
 	}
 	
 	public ExperimenTTest(String[] feature) {
-		super("feature_model/openstack.fm");
+		super("feature_model/ex11.fm");
 		this.feature = feature;
 		this.createInstance(feature);
 	}
@@ -49,14 +49,13 @@ public class ExperimenTTest extends CloudVerification implements FMInterface, Ru
 		}
 		
 		//TODO tradeoff
-		this.searchSimilarConfig(featureSelection, importantFeature, string.length * 3 / 4, string.length, 3);
+//		this.searchSimilarConfig(featureSelection, importantFeature, string.length * 3 / 4, string.length, 3);
 		
 		
-//		
-//		config1 = Relation.unary("config1");
-//		formulas.add(config1.one());
-//		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
-//		this.checkConfig();
+		config1 = Relation.unary("config1");
+		formulas.add(config1.one());
+		formulas.add(config1.join(MetaModelConstraints.rValue).eq(featureSelection));
+		this.checkConfig();
 	}
 	
 	@Override
@@ -72,11 +71,53 @@ public class ExperimenTTest extends CloudVerification implements FMInterface, Ru
 	}
 	
 	public static void main(String[] args) {
-		ExperimenTTest heroku = new ExperimenTTest(new String[]{
-				"Openstack", "Docker","OS","infrastructure","Service","DeployTool","Ubuntu","VirtualMachine","Ansible",
-				"Node","Controller","Nova","nova-api","nova-compute","nova-scheduler","Keystone","Glance","glance-api","glance-registry",
-				"Neutron","plugin","Bridge","neutron-server","agent","metadata","dhcp","Communication","NTP","RabbitMQ","Database","Mysql","MariaDB"});
+//		ExperimenTTest heroku = new ExperimenTTest(new String[]{
+//				"Openstack", "Docker","OS","infrastructure","Service","DeployTool","Ubuntu","VirtualMachine","Ansible",
+//				"Node","Controller","Nova","nova-api","nova-compute","nova-scheduler","Keystone","Glance","glance-api","glance-registry",
+//				"Neutron","plugin","Bridge","neutron-server","agent","metadata","dhcp","Communication","NTP","RabbitMQ","Database","Mysql","MariaDB"});
+//		if (heroku.check()) {
+//			System.out.println("yes");
+//		} else {
+//			System.out.println("no");
+//		}
+		
+		ExperimenTTest heroku = new ExperimenTTest(new String[]{"f1","f2"});
 		if (heroku.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
+		
+		ExperimenTTest heroku1 = new ExperimenTTest(new String[]{"f1","f2","f3","f4","f5"});
+		if (heroku1.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
+		
+		ExperimenTTest heroku2 = new ExperimenTTest(new String[]{"f1","f3","f9","f40","f45","f41"});
+		if (heroku2.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
+		
+		ExperimenTTest heroku3 = new ExperimenTTest(new String[]{"f1","f2","f40","f46"});
+		if (heroku3.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
+		
+		ExperimenTTest heroku4 = new ExperimenTTest(new String[]{"f1","f2","f11"});
+		if (heroku4.check()) {
+			System.out.println("yes");
+		} else {
+			System.out.println("no");
+		}
+		
+		ExperimenTTest heroku5 = new ExperimenTTest(new String[]{"f1","f2"});
+		if (heroku5.check()) {
 			System.out.println("yes");
 		} else {
 			System.out.println("no");

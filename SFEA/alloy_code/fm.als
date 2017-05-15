@@ -237,4 +237,4 @@ fun showConfig(): set Configuration {
 	semantics[fm1]
 }
 
-run showConfig for 1 FeatureModel, 7 Name, 4 Relation, 6 Formula, 128 Configuration
+//run showConfig for 1 FeatureModel, 7 Name, 4 Relation, 6 Formula, 128 Configuration
